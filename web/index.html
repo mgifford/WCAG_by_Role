@@ -39,7 +39,7 @@
         </div>
         <p id="data-status" class="meta" role="status">Loading W3C data...</p>
       </div>
-      <form id="filters" class="filter-panel" role="search">
+      <form id="filters" class="filter-panel" role="search" aria-label="Filter success criteria and ARRM tasks" aria-describedby="filter-help">
         <div class="filter-grid">
           <div class="field"><label for="role">Role</label><select id="role" name="role"><option value="">All roles</option></select></div>
           <div class="field"><label for="ownership">Responsibility</label><select id="ownership" name="ownership">
@@ -52,14 +52,14 @@
         <label class="checkbox"><input id="show-all" name="show-all" type="checkbox"> Include criteria with no matching task (show the full WCAG context)</label>
         <div class="filter-actions"><button type="reset">Reset filters</button><a href="https://www.w3.org/TR/WCAG22/">Read normative WCAG 2.2</a></div>
       </form>
-      <p class="filter-help">A role filter changes what is displayed, not what WCAG requires. Shareable URL filters are updated as you browse.</p>
+      <p id="filter-help" class="filter-help">A role filter changes what is displayed, not what WCAG requires. Shareable URL filters are updated as you browse.</p>
       <div class="results-head"><h3 id="results-heading">Results</h3><p id="result-count" class="meta" aria-live="polite"></p></div>
       <div id="results" class="results"><p>Loading data...</p></div>
       <noscript><p>JavaScript is required for filtering. You can still use the <a href="https://www.w3.org/TR/WCAG22/">full WCAG 2.2 Recommendation</a> and <a href="https://www.w3.org/WAI/planning/arrm/tasks/">ARRM task listing</a> directly.</p></noscript>
     </section>
     <section id="method" class="text-section" aria-labelledby="method-heading">
       <h2 id="method-heading">How this works</h2>
-      <p><strong>Task-level ownership</strong> comes from the ARRM task CSV. Primary, secondary and contributor labels describe each role's relationship to a specific task. A separate summary of roles per criterion comes from ARRM's success-criterion responsibility CSV. These are related but not interchangeable.</p>
+      <p><strong>Task-level ownership</strong> comes from the ARRM task CSV. Primary, secondary and contributor labels describe each role's relationship to a specific task. A separate summary of roles per criterion comes from ARRM's success-criterion responsibility CSV. These are related but not interchangeable: one criterion can have different tasks owned by different roles.</p>
       <p>Understanding documents are informative. When available, the unchanged W3C “In Brief” text is included with an explicit source link. The complete Understanding document stays at W3C. Links to WCAG 2.2 point to the normative W3C Recommendation. An unmapped criterion is not an exemption. ARRM's task inventory is not exhaustive.</p>
       <p>Known legacy records for the removed success criterion 4.1.1 Parsing are omitted from current results and listed in a downloadable <a href="./data/import-audit.json">import audit</a>. New or unrecognized criterion IDs are also reported, not silently assigned.</p>
     </section>

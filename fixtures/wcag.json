@@ -5,7 +5,8 @@
         {"num":"1.1.1","id":"non-text-content","handle":"Non-text Content","title":"All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for specified situations.","level":"A","versions":["2.0","2.1","2.2"]}]},
       {"num":"1.4","handle":"Distinguishable","successcriteria":[
         {"num":"1.4.3","id":"contrast-minimum","handle":"Contrast (Minimum)","title":"Text and images of text have a contrast ratio of at least 4.5:1, with specified exceptions.","level":"AA","versions":["2.0","2.1","2.2"]},
-        {"num":"1.4.11","id":"non-text-contrast","handle":"Non-text Contrast","title":"Visual information needed to identify user interface components and graphical objects has sufficient contrast.","level":"AA","versions":["2.1","2.2"]}]}]},
+        {"num":"1.4.11","id":"non-text-contrast","handle":"Non-text Contrast","title":"Visual information needed to identify user interface components and graphical objects has sufficient contrast.","level":"AA","versions":["2.1","2.2"]},
+        {"num":"1.4.12","id":"text-spacing","handle":"Text Spacing","title":"In content implemented using markup languages that support text style properties, no loss of content or functionality occurs when users adjust text spacing.","level":"AA","versions":["2.1","2.2"]}]}]},
     {"num":"2","handle":"Operable","guidelines":[
       {"num":"2.1","handle":"Keyboard Accessible","successcriteria":[
         {"num":"2.1.1","id":"keyboard","handle":"Keyboard","title":"All functionality is operable through a keyboard interface without requiring specific timings for individual keystrokes.","level":"A","versions":["2.0","2.1","2.2"]}]},

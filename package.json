@@ -1,0 +1,15 @@
+{
+  "name": "wcag-by-role-browser-tests",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Browser and accessibility regression tests for the static WCAG by Role site.",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:list": "playwright test --list"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.65.0"
+  },
+  "type": "module"
+}

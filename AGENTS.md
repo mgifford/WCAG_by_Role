@@ -20,10 +20,13 @@ Maintain an independent role-filtered navigation tool for WCAG 2.2. The authorit
 ```sh
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm test:e2e
 python3 -m http.server 8000 --directory dist
 ```
 
-Production integration requires network: `python3 scripts/pipeline.py --mode production`.
+Production integration requires network: `python3 scripts/pipeline.py --mode production`. Automated browser tests are regression evidence, not a conformance claim.
 
 ## Edit boundaries
 
@@ -31,8 +34,9 @@ Production integration requires network: `python3 scripts/pipeline.py --mode pro
 - `scripts/pipeline.py` : source retrieval, transformation and audit; Python stdlib only.
 - `fixtures/` : representative mock records, *never* complete WCAG or ARRM.
 - `tests/` : import normalization and business-rule regression tests.
+- `tests/e2e/` : Playwright and axe-core browser regressions for filtering, keyboard, reflow and forced colours.
 - `docs/` : governance, architecture, road map and AI policy.
 
 ## Quality bar
 
-When changing data shape, update browser code, fixtures, tests, schemaVersion and docs. For source changes, review the published ARRM CSV headers and WCAG JSON schema and create a specific regression test. Do not claim browser or assistive technology testing unless you performed it. If live external verification is unavailable, document that limitation.
+When changing data shape, update browser code, fixtures, tests, schemaVersion and docs. For source changes, review the published ARRM CSV headers and WCAG JSON schema and create a specific regression test. Role spelling normalization must go through the explicit `ROLE_ALIASES` manifest and be reported in `roleNormalizations`; never fuzzy-match an ARRM assignment. Do not claim browser or assistive technology testing unless you performed it. If live external verification is unavailable, document that limitation.
