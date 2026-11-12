@@ -1,0 +1,9 @@
+ID,WCAG SC,Level,Business,Content Authoring,Visual Design,User Experience (UX) Design,Front-End Development
+1,1.1.1,A,,"P, S",,S,P
+2,1.4.3,AA,,,P,,
+3,2.4.7,AA,,,"P, S",S,P
+4,2.5.8,AA,,,"P, S","P, C",P
+5,2.4.11,AA,,,C,P,S
+6,4.1.1,A,,,,P
+7,4.1.2,A,,,,P
+8,3.3.2,A,,S,,P,C

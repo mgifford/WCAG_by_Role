@@ -1,0 +1,25 @@
+{
+  "principles": [
+    {"num":"1","handle":"Perceivable","guidelines":[
+      {"num":"1.1","handle":"Text Alternatives","successcriteria":[
+        {"num":"1.1.1","id":"non-text-content","handle":"Non-text Content","title":"All non-text content that is presented to the user has a text alternative that serves the equivalent purpose, except for specified situations.","level":"A","versions":["2.0","2.1","2.2"]}]},
+      {"num":"1.4","handle":"Distinguishable","successcriteria":[
+        {"num":"1.4.3","id":"contrast-minimum","handle":"Contrast (Minimum)","title":"Text and images of text have a contrast ratio of at least 4.5:1, with specified exceptions.","level":"AA","versions":["2.0","2.1","2.2"]},
+        {"num":"1.4.11","id":"non-text-contrast","handle":"Non-text Contrast","title":"Visual information needed to identify user interface components and graphical objects has sufficient contrast.","level":"AA","versions":["2.1","2.2"]}]}]},
+    {"num":"2","handle":"Operable","guidelines":[
+      {"num":"2.1","handle":"Keyboard Accessible","successcriteria":[
+        {"num":"2.1.1","id":"keyboard","handle":"Keyboard","title":"All functionality is operable through a keyboard interface without requiring specific timings for individual keystrokes.","level":"A","versions":["2.0","2.1","2.2"]}]},
+      {"num":"2.4","handle":"Navigable","successcriteria":[
+        {"num":"2.4.7","id":"focus-visible","handle":"Focus Visible","title":"Any keyboard operable user interface has a mode of operation where the keyboard focus indicator is visible.","level":"AA","versions":["2.0","2.1","2.2"]},
+        {"num":"2.4.11","id":"focus-not-obscured-minimum","handle":"Focus Not Obscured (Minimum)","title":"When a user interface component receives keyboard focus, it is not entirely hidden due to author-created content.","level":"AA","versions":["2.2"]}]},
+      {"num":"2.5","handle":"Input Modalities","successcriteria":[
+        {"num":"2.5.8","id":"target-size-minimum","handle":"Target Size (Minimum)","title":"Targets for pointer inputs are at least 24 by 24 CSS pixels, or meet an exception.","level":"AA","versions":["2.2"]}]}]},
+    {"num":"3","handle":"Understandable","guidelines":[
+      {"num":"3.3","handle":"Input Assistance","successcriteria":[
+        {"num":"3.3.2","id":"labels-or-instructions","handle":"Labels or Instructions","title":"Labels or instructions are provided when content requires user input.","level":"A","versions":["2.0","2.1","2.2"]}]}]},
+    {"num":"4","handle":"Robust","guidelines":[
+      {"num":"4.1","handle":"Compatible","successcriteria":[
+        {"num":"4.1.1","id":"parsing","handle":"Parsing (Obsolete and removed)","title":"This criterion has been removed from WCAG 2.2.","level":"","versions":["2.0","2.1"]},
+        {"num":"4.1.2","id":"name-role-value","handle":"Name, Role, Value","title":"UI components expose appropriate names, roles, states and values to assistive technologies.","level":"A","versions":["2.0","2.1","2.2"]}]}]}
+  ]
+}

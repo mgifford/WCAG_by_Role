@@ -1,0 +1,82 @@
+:root {color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-synthesis:none; line-height:1.55; background:#f5f7f8; color:#1c2c38; --surface:#fff; --border:#bdcad1; --muted:#455f6c; --accent:#175d7c; --focus:#bc4618;}
+* {box-sizing:border-box}
+body {margin:0}
+a {color:#135f84; text-underline-offset:.16em}
+a:hover {text-decoration-thickness:.16em}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible {outline:3px solid var(--focus);outline-offset:3px}
+.skip {position:absolute;top:-200px;left:1rem;background:#fff;color:#000;z-index:10;padding:.6rem 1rem}
+.skip:focus {top:1rem}
+.shell {max-width:72rem;margin:auto;padding:0 1.4rem}
+.masthead {background:#112e42;color:#fff;padding:2rem 0 1.4rem}
+.masthead a {color:#fff}
+.masthead h1 {margin:.25rem 0;font-size:clamp(2.2rem,5.5vw,3.5rem);letter-spacing:-.045em}
+.masthead h1 span {color:#90e6dd}
+.eyebrow {font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;font-weight:750;margin:0;color:#96c8df}
+.intro {max-width:49rem;font-size:1.1rem}
+.topnav {display:flex;gap:1.6rem;flex-wrap:wrap;padding:.4rem 0}
+main.shell {padding-top:1.8rem;padding-bottom:3rem}
+.notice {border-left:5px solid #176886;background:#e6f3f8;padding:.8rem 1.4rem;margin-bottom:2rem}
+.notice h2 {font-size:1.12rem;margin:0}
+.notice p {margin:.5rem 0}
+h2 {font-size:1.65rem;line-height:1.24}
+h3 {font-size:1.2rem}
+h4 {font-size:1.08rem;line-height:1.35}
+h5 {font-size:1rem}
+.section-heading {display:flex;justify-content:space-between;align-items:end;gap:1rem;flex-wrap:wrap}
+.section-heading h2 {margin:.35rem 0 1rem}
+.meta,.subtle,.filter-help {color:var(--muted)}
+.meta {font-size:.9rem}
+.demo-notice {background:#fff1cd;border:1px solid #c2a34d;padding:.8rem 1rem;border-radius:.3rem}
+.filter-panel {background:var(--surface);border:1px solid var(--border);padding:1.4rem;border-radius:.55rem;box-shadow:0 1px 8px #00000010}
+.filter-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.field {display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem}
+.field label {font-weight:650}
+input,select,button {font:inherit}
+input[type="search"],select {width:100%;min-height:2.65rem;border-radius:.35rem;background:var(--surface);color:inherit;border:1px solid #829aa5;padding:.55rem .65rem}
+.checkbox {display:flex;align-items:flex-start;gap:.6rem}
+.checkbox input {width:1.2rem;height:1.2rem;flex:none;accent-color:#095579;margin-top:.25rem}
+.filter-actions {display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+button {border:1px solid #075474;background:#075474;color:#fff;padding:.55rem 1rem;border-radius:.3rem;cursor:pointer;min-height:2.65rem}
+button:hover {background:#04364b}
+.filter-help {font-size:.92rem}
+.results-head {display:flex;align-items:baseline;flex-wrap:wrap;justify-content:space-between;gap:.6rem;margin:1.6rem 0 .8rem}
+.results-head h3,.results-head p {margin:0}
+.results {display:grid;gap:1rem}
+.criterion {padding:1.25rem 1.5rem;border:1px solid var(--border);border-radius:.55rem;background:var(--surface)}
+.criterion-heading {margin:0;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+.level-pill {display:inline-block;background:#e8f0f4;color:#174059;border:1px solid #b0c6d0;border-radius:999px;font-weight:650;font-size:.75rem;padding:.15rem .55rem}
+.criterion .subtle {font-size:.85rem;margin:.4rem 0}
+.source-links {font-size:.9rem;margin:.4rem 0 1rem}
+.summary-note {border-left:3px solid #7a98a7;background:#f3f6f8;padding:.6rem .75rem;font-size:.88rem}
+.brief {margin:.8rem 0;background:#f3f7f9;border-radius:.3rem;padding:.6rem .85rem;border:1px solid #dae4e9}
+.brief summary {cursor:pointer;font-weight:650}
+.brief-grid {display:grid;grid-template-columns:7.5rem 1fr;gap:.4rem 1rem;font-size:.9rem}
+.brief-grid dt {font-weight:700}
+.brief-grid dd {margin:0}
+.tasks-heading {margin:1.25rem 0 .5rem}
+.task-list {padding:0;list-style:none;display:grid;gap:.65rem;margin:.5rem 0 0}
+.task {border-left:3px solid #85aab9;background:#f4f7f8;padding:.65rem .8rem}
+.task-top {display:flex;justify-content:space-between;gap:.7rem;flex-wrap:wrap}
+.task-id {font:650 .85rem ui-monospace,Consolas,monospace}
+.starter {font-size:.75rem;color:#095579;font-weight:700}
+.task-description {margin:.3rem 0 .5rem}
+.ownership {list-style:none;padding:0;display:flex;gap:.4rem;flex-wrap:wrap;margin:0}
+.ownership li {font-size:.79rem;border:1px solid #9cb0ba;padding:.15rem .4rem;border-radius:.25rem;background:#fff}
+.ownership .ownership-primary {border-color:#256080;color:#134d6a}
+.ownership .ownership-secondary {border-color:#826a27;color:#6d5615}
+.ownership .ownership-contributor {border-color:#63737a;color:#42535a}
+.no-tasks {font-size:.9rem;color:#5b6267;font-style:italic}
+.empty,.error {padding:1.5rem;background:#fff;border:1px solid var(--border)}
+.text-section {max-width:61rem;margin-top:3rem}
+footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
+@media (max-width:55rem) {.filter-grid {grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:37rem) {.filter-grid {grid-template-columns:1fr}.criterion {padding:1rem}.brief-grid {grid-template-columns:1fr}.brief-grid dd {margin-bottom:.5rem}}
+@media (prefers-color-scheme:dark) {
+  :root {background:#121b21;color:#edf4f7;--surface:#202d35;--border:#718794;--muted:#b6c7d1;--accent:#b3e5fa;--focus:#ffd27d}
+  a {color:#a8e2ff}.notice {background:#163745}.demo-notice {background:#48370e;border-color:#d4ac54}
+  .criterion,.filter-panel {box-shadow:none}.summary-note,.task,.brief {background:#2a3942}.ownership li {background:#263b46;color:#eef3f5}
+  .ownership .ownership-primary,.ownership .ownership-secondary,.ownership .ownership-contributor {color:#eef3f5}
+  .level-pill {background:#24435b;color:#fff;border-color:#6790a8}
+  footer {background:#1b303b}
+}
+@media print {.masthead {background:none;color:#000}.masthead h1 span {color:#000}.topnav,.filter-panel,.filter-help {display:none!important}.criterion {break-inside:avoid}a {color:inherit}.notice {background:none}}

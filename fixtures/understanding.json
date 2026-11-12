@@ -1,0 +1,3 @@
+{
+  "2.4.7": {"goal":"Users know which element has keyboard focus.", "whatToDo":"Ensure each item receiving focus has a visible indicator.", "whyImportant":"Without a focus indicator, sighted keyboard users cannot operate the page."}
+}

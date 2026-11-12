@@ -1,0 +1,14 @@
+ID,WCAG SC,Level,Task,Main Role,Starter List,Primary Ownership,Secondary Ownership,Contributor
+IMG-001,1.1.1,A,"Informative alternate text is provided for images (i.e. not ""spacer"" or image file name).",Author,,Content Authoring,User Experience (UX) Design,none
+IMG-003,1.1.1,A,Purely decorative images are provided with null alt attribute values (or other equivalent means).,Development,,Front-End Development,Content Authoring,none
+CSS-011,1.4.3,AA,"Regular-sized text is sufficiently contrasted against its background, with a luminosity ratio of at least 4.5:1.",Design,x,Visual Design,none,none
+INP-017,2.4.7,AA,Every element that receives keyboard focus is designed to display a visible focus indicator.,Design,x,Visual Design,User Experience (UX) Design,none
+INP-018,2.4.7,AA,Every element that receives keyboard focus displays a visible focus indicator.,Development,x,Front-End Development,Visual Design,none
+CSS-022,2.4.7,AA,The CSS outline property of objects that receive keyboard focus are not set to zero or none.,Development,,Front-End Development,Visual Design,none
+INP-025,2.5.8,AA,Any programmatic grouping of controls has a target area of at least 24 by 24 CSS pixels.,Development,,Front-End Development,Visual Design,User Experience (UX) Design
+CSS-028,2.5.8,AA,A minimum height and width of 24 CSS pixels is provided for each interactive target that is not an inline link or control.,Design,,Visual Design,none,none
+CSS-029,2.5.8,AA,"For any control that is less than 24 by 24 CSS pixels, add padding so that the target area is at least 24 by 24 CSS pixels.",Design,,Visual Design,none,none
+DYN-001,2.4.11,AA,Fixed-position content does not fully cover focused elements.,Design,,User Experience (UX) Design,Front-End Development,Visual Design
+SEM-024,4.1.1,A,"Source code is properly nested, according to its specification.",Development,,Front-End Development,none,none
+TXT-001,3.3.2,A,Forms display clear labels and instructions.,Design,,User Experience (UX) Design,Content Authoring,Front-End Development
+SEM-100,4.1.2,A,Custom controls expose name and role.,Development,,Front-End Development,User Experience (UX) Design,none
