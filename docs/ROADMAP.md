@@ -30,12 +30,14 @@ Done in the Phase 1 change set ([PHASE1-PR.md](PHASE1-PR.md)):
 - Understanding extraction checked against all 86 live pages, including the `Author task` label variant on 1.4.12 and 2.2.6.
 - Source schema fingerprints, SHA-256 input hashes, header validation and fail-closed production gates.
 - ARRM mapping gaps, unknown criteria, task-level level disagreements and explicit role-label normalisations surfaced in the audit.
+- GitHub Actions updated to current Node 24 runtimes, with a post-deploy smoke test of the live production artefact.
+- A manual-test record template and ready-to-file upstream ARRM issue drafts.
 
 Still open for Phase 1:
 
 - Pinned upstream commit SHAs and immutable source archives (the current audit records hashes, not pinned commits).
-- Recorded manual screen-reader, real forced-colours, 200%/400% zoom and print evidence with reviewer, OS and AT versions.
-- Deciding, with maintainers, whether the 3.2.7–3.2.9 and 3.3.7–3.3.9 findings should be filed upstream or already have issues.
+- Completed manual screen-reader, real forced-colours, 200%/400% zoom and print evidence with reviewer, OS and AT versions in [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
+- Filing and following up the upstream ARRM findings in [UPSTREAM-ARRM-FINDINGS.md](UPSTREAM-ARRM-FINDINGS.md).
 - A second-person review of the audit and the task-level ownership presentation.
 
 ## Phase 2: More useful role views

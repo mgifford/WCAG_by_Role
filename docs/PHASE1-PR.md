@@ -22,8 +22,9 @@ Phase 1 in [ROADMAP.md](ROADMAP.md) is about trustworthy production quality, not
 5. **Understanding extraction is faithful.** Any heading level starts the section; `Author task` is displayed with its original label; partial records keep the official link and produce a warning; unknown labels are ignored rather than guessed.
 6. **Task-level ownership stays distinct.** The criterion-level ARRM summary now says explicitly that it is not task ownership. The task list is labelled "Task-level ARRM assignments". A criterion can show a summary flag and still have no task for the selected role; that case is explained rather than hidden.
 7. **Accessibility regression coverage.** Playwright and axe-core tests cover filters, task-view ownership, URL deep links, nested-path serving, keyboard operation, forced-colours focus/borders, 320 px reflow, reduced motion and live-region behaviour.
-8. **GitHub Pages deployment exists.** The workflow runs unit tests and browser tests on pulls and pushes, runs the live production import on `main`, manual triggers and the weekly schedule, deploys only from `main`, and refreshes weekly.
-9. **Docs and tests updated.** See [AUDIT.md](AUDIT.md), [ARCHITECTURE.md](ARCHITECTURE.md), [ACCESSIBILITY-TEST-PLAN.md](ACCESSIBILITY-TEST-PLAN.md) and the expanded unit tests.
+8. **GitHub Pages deployment exists.** The workflow runs unit tests and browser tests on pulls and pushes, runs the live production import on `main`, manual triggers and the weekly schedule, deploys only from `main`, refreshes weekly, and verifies the live artefact with `scripts/smoke_site.py` after deployment.
+9. **Manual evidence and upstream drafts are prepared.** [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md) records checks automation cannot establish; [UPSTREAM-ARRM-FINDINGS.md](UPSTREAM-ARRM-FINDINGS.md) contains ready-to-file ARRM corrections.
+10. **Docs and tests updated.** See [AUDIT.md](AUDIT.md), [ARCHITECTURE.md](ARCHITECTURE.md), [ACCESSIBILITY-TEST-PLAN.md](ACCESSIBILITY-TEST-PLAN.md) and the expanded unit tests.
 
 ## Deliberately out of scope
 
@@ -40,6 +41,7 @@ python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:e2e
+python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
 # Optional live import when W3C is not rate-limiting:
 python3 scripts/pipeline.py --mode production
 ```

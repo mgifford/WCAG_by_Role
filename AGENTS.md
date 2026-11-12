@@ -23,6 +23,7 @@ python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:e2e
+python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/  # post-deploy only
 python3 -m http.server 8000 --directory dist
 ```
 
