@@ -48,6 +48,23 @@ Still open for Phase 1:
 - Add links to official W3C sufficient techniques, failures, and ACT rules where sources support them.
 - Let users export a role/task list as JSON or CSV without suggesting the list alone is a conformance checklist.
 
+### Status
+
+PR 1 (role-specific navigation) implements:
+
+- Visual Design and Front-End Development guides with distinct, data-driven category lists.
+- Shared role cards, DOM helpers and one role template; adding a role is a config entry.
+- Task-level primary/secondary/contributor assignments with collaborating roles kept visible.
+- Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
+- Project handoff guidance explicitly separated from ARRM assignments.
+
+Still to come in Phase 2:
+
+- PR 2: clearer missing-summary distinctions, richer collaboration/handoff presentation, and a separate A/AA/AAA conformance-target control.
+- PR 3: CSV/JSON export, source revision provenance and production-data regression fixtures.
+- PR 4: refinements based on manual accessibility and role-based usability evidence.
+- UX Design and Content Authoring role guides using the same configuration and renderer.
+
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
 
 ## Phase 3: Optional and reviewed AI enrichment

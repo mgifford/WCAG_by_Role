@@ -18,6 +18,9 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Live updates | Result counts are announced without repeatedly interrupting users; no keyboard focus loss |
 | Links | Each criterion has an unambiguous accessible link to the official norm and an Understanding link |
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
+| Role guides | Visual Design and Front-End Development guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
+| Role guides | A task such as INP-017/INP-018 shows both Visual Design and Front-End Development responsibilities, with the selected role highlighted by text |
+| Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
 | Automated | Playwright/axe-core on the demo build in light and dark schemes, task view, keyboard, emulated forced colours, 320 px reflow and reduced motion |
 | Automated limits | axe-core does not test screen-reader output, real Windows High Contrast, zoom quality, link purpose in context or data correctness |
 | Build integrity | Production import rejects missing headers, empty sources and undersized datasets; retired 4.1.1 Parsing stays out of live views |
@@ -41,6 +44,7 @@ The Playwright suite currently covers:
 - Keyboard tab order to the filters, native select typeahead, and focus retention after a filter change.
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
+- Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for both guides.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people
@@ -53,5 +57,16 @@ The Playwright suite currently covers:
 6. **Print:** filters hidden, cards not split badly, links still understandable.
 7. **Content and mapping:** review with Visual Design, Front-End Development, UX and WCAG/ARRM experts. Confirm that task-level ownership, the criterion-level summary and the 3.3.7–3.3.9 gap are represented without implying exemption or exclusive ownership.
 8. **Link context:** listen to and read each normative/Understanding link in context; automated link checks only prove a URL resolves.
+9. **Role guides:** read both guides with a screen reader and keyboard only; confirm the selected role, all collaborating roles, category jumps and task/criterion anchors are understandable.
+
+## Role-based usability scenarios
+
+Record these in the manual test record. Do not coach the participant through the expected path; note where wording, navigation or task-level ownership is misunderstood.
+
+| Scenario | User task | What to observe |
+| --- | --- | --- |
+| Visual Design | "Find the responsibilities for designing keyboard focus indicators, identify the developer's responsibilities, and locate the relevant WCAG guidance." | Can the user find the Visual Design guide, 2.4.7, INP-017 and INP-018; can they see Front-End Development's primary ownership of INP-018 and the WCAG/Understanding links? |
+| Front-End Development | "Find the tasks for implementing accessible form errors, identify related responsibilities belonging to other roles, and locate authoritative implementation guidance." | Can the user reach Form Interactions or search, identify the ARRM tasks, see Visual Design/UX/content collaborators, and distinguish task guidance from the normative criterion? |
+| General user | "Find the criteria relevant to Level AA conformance and explain why the role-specific tasks do not constitute a full conformance checklist." | Does the user understand the difference between the current exact-level filter and a future A/AA/AAA conformance target; do they see the limitations notice? |
 
 Record the browser, OS, AT version, date, findings and reviewer. Do not claim conformance based on this plan, axe-core or Playwright alone.

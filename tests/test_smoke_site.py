@@ -5,7 +5,7 @@ import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scripts'))
-from smoke_site import validate_index, validate_payload
+from smoke_site import validate_index, validate_payload, validate_role_shell
 
 
 def valid_payload():
@@ -101,6 +101,14 @@ class SmokeValidationTests(unittest.TestCase):
         data = copy.deepcopy(self.data)
         data['sourceSHA256']['wcag'] = 'not-a-hash'
         self.assertTrue(any('SHA-256' in error for error in self.errors(data=data)))
+
+    def test_role_shell_markers(self):
+        shell = ('<!doctype html><html lang="en"><head>'
+                 '<link rel="stylesheet" href="./styles.css"><script type="module" src="./role-page.js"></script></head>'
+                 '<body><a href="#main">Skip to main content</a><main id="main">'
+                 '<p id="role-status"></p><div id="role-root"></div></main></body></html>')
+        self.assertEqual(validate_role_shell(shell), [])
+        self.assertTrue(any('role-root' in error for error in validate_role_shell(shell.replace('id="role-root"', ''))))
 
     def test_index_markers_and_relative_assets(self):
         html = ('<!doctype html><html lang="en"><head><meta name="viewport" content="width=device-width">'

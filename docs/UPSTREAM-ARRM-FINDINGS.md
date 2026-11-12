@@ -1,42 +1,48 @@
-# Upstream ARRM findings — ready-to-file issue drafts
+# Upstream ARRM findings and issue drafts
 
-These are drafts for the [w3c/wai-arrm issue tracker](https://github.com/w3c/wai-arrm/issues/new). They are not filed by this project. Do not edit the published CSVs locally in place of an upstream correction.
+This file records one tracked W3C issue and drafts for the remaining findings. The drafts are for the [w3c/wai-arrm issue tracker](https://github.com/w3c/wai-arrm/issues/new) and are not filed by this project. Do not edit the published CSVs locally in place of an upstream correction.
 
-Evidence snapshot: 2026-11-12. CSVs and WCAG JSON hashes are recorded in [AUDIT.md](AUDIT.md).
+Evidence snapshot: 2026-11-12. CSVs and WCAG JSON hashes are recorded in [AUDIT.md](AUDIT.md). The related W3C project threads were checked on 2026-11-12.
 
----
+## Related W3C ARRM work
 
-## 1. Criterion-level responsibility rows are missing for 3.3.7, 3.3.8 and 3.3.9
+| Thread | Status | How this project relates |
+| --- | --- | --- |
+| [Task-based Documentation (#135)](https://github.com/w3c/wai-arrm/issues/135) | Open | The project consumes ARRM tasks; role guides are presentation and navigation, not a parallel task documentation model. |
+| [Expanding Role-specific Pages (#138)](https://github.com/w3c/wai-arrm/issues/138) | Open | Role guides are a small, evidence-based example of consuming ARRM role data. They do not claim to replace W3C role pages. |
+| [3.3.7–3.3.9 numbering (#141)](https://github.com/w3c/wai-arrm/issues/141) | Open | This is the existing issue for the apparent 3.2.7–3.2.9 misnumbering. Do not open a duplicate. |
 
-**Source:** https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-wcag-sc.csv
-
-**Observed:** The CSV jumps from ID 84 (`3.3.6`, AAA) to ID 85 (`4.1.1`, A). There are no rows for `3.3.7`, `3.3.8` or `3.3.9`, although these are active WCAG 2.2 success criteria and the task CSV contains tasks for them.
-
-**Expected:** One criterion-level responsibility row for each active WCAG 2.2 criterion, with the reviewed role assignments, or an explicit note that the rows are intentionally pending.
-
-**Why it matters:** A role-filtered view can show tasks for these criteria but has no criterion-level summary. The site reports the gap and leaves the summary blank; it does not infer assignments. Consumers joining on `WCAG SC` lose the summary for three criteria.
-
-**Evidence:** WCAG JSON has `3.3.7 Redundant Entry` (A), `3.3.8 Accessible Authentication (Minimum)` (AA) and `3.3.9 Accessible Authentication (Enhanced)` (AAA). The task CSV has matching task rows. The responsibility CSV has no matching `WCAG SC` values.
-
-**Proposed change:** Add the three rows after ARRM review, or add a documented placeholder/pending status if the assignments are not ready.
+The project should remain a demonstration of useful ARRM consumption. Any proposal for a new responsibility model belongs in the W3C discussion first.
 
 ---
 
-## 2. Rows for 3.2.7, 3.2.8 and 3.2.9 do not map to WCAG 2.2
+## 1. Tracked upstream: 3.3.7–3.3.9 are missing and 3.2.7–3.2.9 appear instead
 
-**Source:** https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-wcag-sc.csv
+**Do not file a new issue.** Track [w3c/wai-arrm#141](https://github.com/w3c/wai-arrm/issues/141).
 
-**Observed:** IDs 76, 77 and 78 use `WCAG SC` values `3.2.7` (A), `3.2.8` (AA) and `3.2.9` (AAA). These identifiers do not exist in the current WCAG 2.2 JSON.
+**Sources:**
 
-**Expected:** Either these are future/draft criteria and should be clearly marked as such, or they are stale rows and should be removed from the current-data CSV.
+- Responsibility CSV: https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-wcag-sc.csv
+- Task CSV: https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-all-tasks.csv
+- WCAG 2.2 JSON: https://www.w3.org/WAI/WCAG22/wcag.json
 
-**Why it matters:** Consumers that join on criterion number must exclude them. The site records them under `unknownARRMCriteria` and keeps them out of live views. Leaving them unmarked makes the CSV ambiguous for anyone building a WCAG 2.2 view.
+**Observed:**
 
-**Proposed change:** Confirm the intended status and either remove the rows from the current-data file or split them into a clearly versioned draft file.
+- The responsibility CSV has IDs 76, 77 and 78 using `WCAG SC` values `3.2.7` (A), `3.2.8` (AA) and `3.2.9` (AAA). These identifiers do not exist in the current WCAG 2.2 JSON.
+- The responsibility CSV has no rows for `3.3.7` (A), `3.3.8` (AA) or `3.3.9` (AAA), although the task CSV contains tasks for them.
+- Issue #141 proposes that the three rows are the new WCAG 2.2 criteria misnumbered under 3.2. The issue author explicitly did not review the role assignments.
+
+**Expected:** The rows are renamed and moved under Guideline 3.3 with reviewed role assignments, or the ambiguity is documented.
+
+**Why it matters:** Consumers lose the criterion-level summary for three active criteria and must exclude three unknown identifiers. The project records both symptoms, does not renumber the data locally, and does not infer the role assignments.
+
+**Local evidence:** `unknownARRMCriteria: ["3.2.7", "3.2.8", "3.2.9"]` and `criteriaWithoutCriterionSummary: ["3.3.7", "3.3.8", "3.3.9"]` in the import audit.
+
+**Proposed follow-up:** Comment on #141 only with new evidence, or open a PR when the ARRM maintainers invite one. Re-check the issue before changing project documentation.
 
 ---
 
-## 3. Task-level `Level` values disagree with the WCAG criterion level
+## 2. Task-level `Level` values disagree with the WCAG criterion level
 
 **Source:** https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-all-tasks.csv
 
@@ -58,7 +64,7 @@ Evidence snapshot: 2026-11-12. CSVs and WCAG JSON hashes are recorded in [AUDIT.
 
 ---
 
-## 4. Role labels use several spellings, and the responsibility CSV uses a different business label
+## 3. Role labels use several spellings, and the responsibility CSV uses a different business label
 
 **Sources:**
 
@@ -86,7 +92,8 @@ Evidence snapshot: 2026-11-12. CSVs and WCAG JSON hashes are recorded in [AUDIT.
 
 ## Filing checklist
 
-- [ ] Open one issue per finding; cite the exact CSV URL and row/task IDs above.
+- [ ] Check #141 first; do not file a duplicate for the 3.2.7–3.2.9 / 3.3.7–3.3.9 numbering.
+- [ ] Open one issue per remaining finding; cite the exact CSV URL and row/task IDs above.
 - [ ] Include the WCAG 2.2 JSON URL and a short reproduction.
 - [ ] Do not include local-only datasets, screenshots of private projects or personal data.
 - [ ] Link the issues back to the project audit so local normalization can be removed when upstream is fixed.

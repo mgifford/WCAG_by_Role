@@ -6,7 +6,8 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 
 ## Features
 
-- Filter by ARRM role, task-level **primary / secondary / contributor** ownership, exact WCAG level, keyword and view.
+- Role guides for **Visual Design** and **Front-End Development**, with task categories, responsibility summaries, collaborating roles and WCAG references.
+- Filter the full explorer by ARRM role, task-level **primary / secondary / contributor** ownership, exact WCAG level, keyword and view.
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
 - Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
 - Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary.
@@ -25,6 +26,13 @@ python3 -m http.server 8000 --directory dist
 ```
 
 Open http://localhost:8000/ . **Demo data is deliberately incomplete**. The page identifies itself as a sample. Do not deploy it as the full reference.
+
+Role guide examples:
+
+- http://localhost:8000/role.html?role=visual-design
+- http://localhost:8000/role.html?role=front-end-development
+
+The generic explorer remains at `/` and includes all criteria and filters. Role guides are project navigation over the same normalized data; they are not a second dataset or a conformance checklist.
 
 Browser regression tests use Playwright and axe-core. They run against the demo build served from a nested `/dist/` path:
 
@@ -74,14 +82,18 @@ The workflow runs on pushes to `main`, pull requests, manual triggers and a week
 ```text
 .github/workflows/pages.yml   Test, build, deploy, weekly refresh
 web/                          Site HTML, CSS, JavaScript
+web/role.html                 Role-guide shell (Visual Design / Front-End Development)
+web/role-config.js            Role copy, slugs and ARRM task-category map
+web/role-page.js              Shared role-guide renderer
+web/dom.js, role-cards.js     Shared DOM and role-card components
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
 scripts/smoke_site.py         Post-deploy production-artefact smoke checks
 fixtures/                     Clearly labeled offline demonstration data
 tests/test_pipeline.py        Python import and business-rule tests
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
-docs/                         Governance, architecture, audit, roadmap, test plan,
-                              manual-test template and upstream issue drafts
+docs/                         Governance, architecture, role guides, audit, roadmap,
+                              test plan, manual-test template and upstream issue drafts
 NOTICE.md                     W3C attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
@@ -103,6 +115,8 @@ See [NOTICE.md](NOTICE.md) for copyright and attribution. ARRM mappings are advi
 
 The source WCAG JSON contains an obsolete 4.1.1 Parsing record. This importer omits it because it lacks WCAG 2.2 in `versions` and a current conformance level. The audit retains the record and related obsolete ARRM tasks. A role can have primary responsibility for one task and secondary responsibility for another task linked to the same success criterion. Accordingly, **role ownership is assigned at task level** and never inferred solely from the criterion summary.
 
+The role guides group tasks under **project navigation categories** derived from the W3C ARRM tasks page section headings and task ID prefixes. Those categories are not a WCAG taxonomy and do not reassign ownership. The guides show every ARRM assignment on a task, highlight the selected role with text and retain the stable task ID.
+
 The browser uses W3C criterion names and links, plus task wording from ARRM. It does not claim that a task or an Understanding statement is normative. Documentation does not promise a WCAG conformance level or label this prototype as certified accessible. Manual review by disabled users and assistive technology users remains necessary.
 
 The production audit for the 2026-11-12 source snapshot is in [docs/AUDIT.md](docs/AUDIT.md). It records the counts, the 4.1.1 Parsing exclusion, the 3.2.7–3.2.9 unknown ARRM rows, the 3.3.7–3.3.9 missing criterion summaries, five task-level level disagreements and five normalized role labels. No missing data is filled in.
@@ -111,4 +125,4 @@ The production audit for the 2026-11-12 source snapshot is in [docs/AUDIT.md](do
 
 Prefer fixes upstream when the source W3C data is wrong. Do not silently edit a published W3C task or criterion in a local copy. File a GitHub issue with source URL, affected task IDs and proposed evidence; see [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
 
-The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md). Use [docs/MANUAL-TEST-TEMPLATE.md](docs/MANUAL-TEST-TEMPLATE.md) to record the checks that automation cannot establish. Ready-to-file ARRM correction drafts are in [docs/UPSTREAM-ARRM-FINDINGS.md](docs/UPSTREAM-ARRM-FINDINGS.md); these are not filed automatically.
+The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md). Role-guide architecture, category mapping and extension steps are in [docs/ROLE-PAGES.md](docs/ROLE-PAGES.md). Use [docs/MANUAL-TEST-TEMPLATE.md](docs/MANUAL-TEST-TEMPLATE.md) to record the checks that automation cannot establish. Upstream ARRM findings and remaining issue drafts are in [docs/UPSTREAM-ARRM-FINDINGS.md](docs/UPSTREAM-ARRM-FINDINGS.md); they are not filed automatically.

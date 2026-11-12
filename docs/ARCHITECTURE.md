@@ -47,6 +47,28 @@ The value of `criteria[].arrmResponsibilities` is W3C's *criterion-level summary
 
 `inBrief` uses the labels published by W3C. Most pages use `whatToDo`; two pages use `authorTask`, and the UI shows the original `Author task` label rather than renaming it. A partial extract is still shown, with a note that the official Understanding document remains the source.
 
+## Role guides
+
+Role guides are a second presentation of the same `role-data.json`, not a second dataset:
+
+```text
+role-data.json ─────┬── index.html + app.js ── generic explorer
+                    │        └── role-cards.js
+                    └── role.html + role-page.js ── role guide
+                             ├── role-config.js
+                             ├── role-cards.js
+                             └── dom.js
+```
+
+- `role.html?role=visual-design` and `role.html?role=front-end-development` are static pages. The query string selects the role; fragments (`#task-INP-017`, `#sc-2-4-7`, `#category-css-and-presentation`) are resolved after render and focused without a client-side router.
+- `web/role-config.js` holds the role copy, URL slug, explorer query and ARRM task-prefix category map. `web/role-page.js` is the shared renderer; adding a role requires a config entry, not a new HTML page or pipeline change.
+- Categories are project navigation derived from the [W3C ARRM tasks page](https://www.w3.org/WAI/planning/arrm/tasks/) section headings and task ID prefixes. They are not a WCAG taxonomy, a new standard or a re-assignment of responsibility. Unknown prefixes stay visible under **Other ARRM tasks**.
+- Every task card shows the stable ARRM task ID, original task text, all primary/secondary/contributor assignments, and links to the WCAG criterion and Understanding document. The selected role is highlighted with text, not colour alone.
+- The collaboration list is derived from shared ARRM tasks. Handoff bullets are labelled project guidance; they are not W3C requirements or a workflow model.
+- Criterion-level responsibility summaries are not used to decide task ownership on role pages. Missing task-level data is shown as missing, not inferred.
+
+See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and extension steps. Schema version 2 and the pipeline's import semantics are unchanged by this presentation layer.
+
 ## Import semantics
 
 - Accept a WCAG criterion only if `versions` contains `2.2` **and** `level` is `A`, `AA` or `AAA`.
