@@ -59,7 +59,7 @@ The importer does not silently rewrite upstream material. Known ARRM role spelli
 
 `dist/` is generated and ignored by Git. The workflow builds it in the runner and uploads only the production artefact. It runs unit and browser tests before a production import, so a failed import blocks deployment instead of publishing sample fixtures.
 
-The workflow runs on pushes to `main`, pull requests (validation only), manual triggers and a weekly schedule. PRs do not deploy. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
+The workflow runs on pushes to `main`, pull requests, manual triggers and a weekly schedule. Pull requests run the offline unit and browser tests but do not fetch live sources or deploy. The production import runs on `main`, manual triggers and the weekly schedule. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
 
 ## Repository layout
 
