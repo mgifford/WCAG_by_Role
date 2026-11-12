@@ -36,6 +36,14 @@ pnpm test:e2e
 
 These tests are regression evidence, not a WCAG conformance claim. See [docs/ACCESSIBILITY-TEST-PLAN.md](docs/ACCESSIBILITY-TEST-PLAN.md) for the checks that still require people.
 
+After a deployment, verify the live production artefact independently:
+
+```sh
+python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
+```
+
+The smoke test checks that production mode, source hashes, audit counts, retired 4.1.1 exclusion and all main assets are present. It does not test accessibility.
+
 ## Full production build
 
 This downloads the current WCAG JSON, both ARRM CSVs and, unless skipped, short *In Brief* sections from W3C Understanding pages.
@@ -59,7 +67,7 @@ The importer does not silently rewrite upstream material. Known ARRM role spelli
 
 `dist/` is generated and ignored by Git. The workflow builds it in the runner and uploads only the production artefact. It runs unit and browser tests before a production import, so a failed import blocks deployment instead of publishing sample fixtures.
 
-The workflow runs on pushes to `main`, pull requests, manual triggers and a weekly schedule. Pull requests run the offline unit and browser tests but do not fetch live sources or deploy. The production import runs on `main`, manual triggers and the weekly schedule. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
+The workflow runs on pushes to `main`, pull requests, manual triggers and a weekly schedule. Pull requests run the offline unit and browser tests but do not fetch live sources or deploy. The production import runs on `main`, manual triggers and the weekly schedule, followed by a post-deploy smoke test against the live Pages URL. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
 
 ## Repository layout
 
@@ -67,11 +75,13 @@ The workflow runs on pushes to `main`, pull requests, manual triggers and a week
 .github/workflows/pages.yml   Test, build, deploy, weekly refresh
 web/                          Site HTML, CSS, JavaScript
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
+scripts/smoke_site.py         Post-deploy production-artefact smoke checks
 fixtures/                     Clearly labeled offline demonstration data
 tests/test_pipeline.py        Python import and business-rule tests
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
-docs/                         Governance, architecture, audit, roadmap, test plan
+docs/                         Governance, architecture, audit, roadmap, test plan,
+                              manual-test template and upstream issue drafts
 NOTICE.md                     W3C attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
@@ -101,4 +111,4 @@ The production audit for the 2026-11-12 source snapshot is in [docs/AUDIT.md](do
 
 Prefer fixes upstream when the source W3C data is wrong. Do not silently edit a published W3C task or criterion in a local copy. File a GitHub issue with source URL, affected task IDs and proposed evidence; see [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
 
-The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md).
+The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md). Use [docs/MANUAL-TEST-TEMPLATE.md](docs/MANUAL-TEST-TEMPLATE.md) to record the checks that automation cannot establish. Ready-to-file ARRM correction drafts are in [docs/UPSTREAM-ARRM-FINDINGS.md](docs/UPSTREAM-ARRM-FINDINGS.md); these are not filed automatically.

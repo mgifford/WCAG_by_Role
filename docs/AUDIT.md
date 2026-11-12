@@ -129,6 +129,8 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 
 ## Manual checks still required
 
+Record these with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md). Ready-to-file upstream corrections are in [UPSTREAM-ARRM-FINDINGS.md](UPSTREAM-ARRM-FINDINGS.md).
+
 1. VoiceOver + Safari and NVDA + Firefox: filter changes, result count announcements, task/criterion reading order, disclosure state.
 2. Real Windows High Contrast / forced-colors mode: focus visibility on every control, badges, borders and the skip link.
 3. Browser zoom 200% and 400%, plus 320 CSS px: no clipped content, no two-dimensional scrolling for ordinary content.

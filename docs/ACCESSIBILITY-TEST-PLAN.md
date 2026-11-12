@@ -4,6 +4,8 @@ Unit tests validate import rules, not actual accessibility. Playwright and axe-c
 
 **A clean automated run is not a WCAG conformance claim.** axe-core decisions cover only the rules it implements and cannot judge meaningful text, logical focus order, screen-reader output, real forced-colours rendering, zoom quality or whether the ARRM mapping is appropriate for a team.
 
+Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
+
 | Area | Minimum check |
 | --- | --- |
 | Keyboard | Navigate every form control, results link, and disclosure with keyboard only; visible focus everywhere |
@@ -19,6 +21,7 @@ Unit tests validate import rules, not actual accessibility. Playwright and axe-c
 | Automated | Playwright/axe-core on the demo build in light and dark schemes, task view, keyboard, emulated forced colours, 320 px reflow and reduced motion |
 | Automated limits | axe-core does not test screen-reader output, real Windows High Contrast, zoom quality, link purpose in context or data correctness |
 | Build integrity | Production import rejects missing headers, empty sources and undersized datasets; retired 4.1.1 Parsing stays out of live views |
+| Post-deploy | `scripts/smoke_site.py` verifies production mode, audit counts, source hashes, retired 4.1.1 exclusion and main assets on the live URL |
 
 ## Automated commands used in CI
 
@@ -28,6 +31,7 @@ python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
 pnpm exec playwright install --with-deps chromium
 pnpm test:e2e
+python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
 ```
 
 The Playwright suite currently covers:
@@ -37,6 +41,7 @@ The Playwright suite currently covers:
 - Keyboard tab order to the filters, native select typeahead, and focus retention after a filter change.
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
+- The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people
 
