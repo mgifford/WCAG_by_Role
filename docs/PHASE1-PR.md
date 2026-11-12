@@ -22,7 +22,7 @@ Phase 1 in [ROADMAP.md](ROADMAP.md) is about trustworthy production quality, not
 5. **Understanding extraction is faithful.** Any heading level starts the section; `Author task` is displayed with its original label; partial records keep the official link and produce a warning; unknown labels are ignored rather than guessed.
 6. **Task-level ownership stays distinct.** The criterion-level ARRM summary now says explicitly that it is not task ownership. The task list is labelled "Task-level ARRM assignments". A criterion can show a summary flag and still have no task for the selected role; that case is explained rather than hidden.
 7. **Accessibility regression coverage.** Playwright and axe-core tests cover filters, task-view ownership, URL deep links, nested-path serving, keyboard operation, forced-colours focus/borders, 320 px reflow, reduced motion and live-region behaviour.
-8. **GitHub Pages deployment exists.** The workflow runs unit tests, browser tests and a live production import on pushes and pull requests, deploys only from `main`, and refreshes weekly.
+8. **GitHub Pages deployment exists.** The workflow runs unit tests and browser tests on pulls and pushes, runs the live production import on `main`, manual triggers and the weekly schedule, deploys only from `main`, and refreshes weekly.
 9. **Docs and tests updated.** See [AUDIT.md](AUDIT.md), [ARCHITECTURE.md](ARCHITECTURE.md), [ACCESSIBILITY-TEST-PLAN.md](ACCESSIBILITY-TEST-PLAN.md) and the expanded unit tests.
 
 ## Deliberately out of scope
