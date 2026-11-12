@@ -11,7 +11,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,su
 .masthead a {color:#fff}
 .masthead h1 {margin:.25rem 0;font-size:clamp(2.2rem,5.5vw,3.5rem);letter-spacing:-.045em}
 .masthead h1 span {color:#90e6dd}
-.eyebrow {font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;font-weight:750;margin:0;color:#96c8df}
+.eyebrow {font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;font-weight:750;margin:0;color:#3b6478}
+.masthead .eyebrow {color:#96c8df}
 .intro {max-width:49rem;font-size:1.1rem}
 .topnav {display:flex;gap:1.6rem;flex-wrap:wrap;padding:.4rem 0}
 main.shell {padding-top:1.8rem;padding-bottom:3rem}
@@ -53,6 +54,7 @@ button:hover {background:#04364b}
 .brief-grid {display:grid;grid-template-columns:7.5rem 1fr;gap:.4rem 1rem;font-size:.9rem}
 .brief-grid dt {font-weight:700}
 .brief-grid dd {margin:0}
+.brief-note {font-size:.85rem;color:var(--muted);margin:.25rem 0 .7rem}
 .tasks-heading {margin:1.25rem 0 .5rem}
 .task-list {padding:0;list-style:none;display:grid;gap:.65rem;margin:.5rem 0 0}
 .task {border-left:3px solid #85aab9;background:#f4f7f8;padding:.65rem .8rem}
@@ -65,7 +67,7 @@ button:hover {background:#04364b}
 .ownership .ownership-primary {border-color:#256080;color:#134d6a}
 .ownership .ownership-secondary {border-color:#826a27;color:#6d5615}
 .ownership .ownership-contributor {border-color:#63737a;color:#42535a}
-.no-tasks {font-size:.9rem;color:#5b6267;font-style:italic}
+.no-tasks {font-size:.9rem;color:var(--muted);font-style:italic}
 .empty,.error {padding:1.5rem;background:#fff;border:1px solid var(--border)}
 .text-section {max-width:61rem;margin-top:3rem}
 footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
@@ -73,10 +75,22 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
 @media (max-width:37rem) {.filter-grid {grid-template-columns:1fr}.criterion {padding:1rem}.brief-grid {grid-template-columns:1fr}.brief-grid dd {margin-bottom:.5rem}}
 @media (prefers-color-scheme:dark) {
   :root {background:#121b21;color:#edf4f7;--surface:#202d35;--border:#718794;--muted:#b6c7d1;--accent:#b3e5fa;--focus:#ffd27d}
+  .eyebrow {color:#9fc9dc}
   a {color:#a8e2ff}.notice {background:#163745}.demo-notice {background:#48370e;border-color:#d4ac54}
   .criterion,.filter-panel {box-shadow:none}.summary-note,.task,.brief {background:#2a3942}.ownership li {background:#263b46;color:#eef3f5}
   .ownership .ownership-primary,.ownership .ownership-secondary,.ownership .ownership-contributor {color:#eef3f5}
   .level-pill {background:#24435b;color:#fff;border-color:#6790a8}
+  .starter {color:#a8e2ff}
   footer {background:#1b303b}
+}
+@media (forced-colors: active) {
+  .notice,.demo-notice,.filter-panel,.criterion,.task,.brief,.summary-note,.empty,.error,.ownership li,.level-pill {border:1px solid CanvasText}
+  .level-pill,.ownership li {background:Canvas;color:CanvasText}
+  .starter {color:CanvasText}
+  button {border:1px solid ButtonText}
+  a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible {outline:3px solid Highlight;outline-offset:3px}
+}
+@media (prefers-reduced-motion: reduce) {
+  *,*::before,*::after {animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
 @media print {.masthead {background:none;color:#000}.masthead h1 span {color:#000}.topnav,.filter-panel,.filter-help {display:none!important}.criterion {break-inside:avoid}a {color:inherit}.notice {background:none}}

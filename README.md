@@ -8,11 +8,11 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 
 - Filter by ARRM role, task-level **primary / secondary / contributor** ownership, exact WCAG level, keyword and view.
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
-- Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links.
+- Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
 - Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary.
 - Include criteria with no recorded task, using the *Include criteria with no matching task* control.
 - Deep-link to filters via URL parameters. No cookies, third-party browser assets, analytics or AI.
-- Create a provenance/audit JSON showing obsolete or unmapped records, including obsolete WCAG 4.1.1 Parsing.
+- Create a provenance/audit JSON showing obsolete or unmapped records, including obsolete WCAG 4.1.1 Parsing, unknown ARRM criterion numbers, missing criterion summaries, task-level level disagreements and explicitly normalized role labels.
 
 ## Quick start (no network)
 
@@ -26,6 +26,16 @@ python3 -m http.server 8000 --directory dist
 
 Open http://localhost:8000/ . **Demo data is deliberately incomplete**. The page identifies itself as a sample. Do not deploy it as the full reference.
 
+Browser regression tests use Playwright and axe-core. They run against the demo build served from a nested `/dist/` path:
+
+```sh
+pnpm install --frozen-lockfile
+pnpm exec playwright install chromium
+pnpm test:e2e
+```
+
+These tests are regression evidence, not a WCAG conformance claim. See [docs/ACCESSIBILITY-TEST-PLAN.md](docs/ACCESSIBILITY-TEST-PLAN.md) for the checks that still require people.
+
 ## Full production build
 
 This downloads the current WCAG JSON, both ARRM CSVs and, unless skipped, short *In Brief* sections from W3C Understanding pages.
@@ -35,7 +45,9 @@ python3 scripts/pipeline.py --mode production
 python3 -m http.server 8000 --directory dist
 ```
 
-The production command fails if the upstream dataset is unavailable or too small. Source URLs, build timestamps and SHA-256 input hashes are recorded in output JSON. Retrieval of an individual Understanding page is best effort; the audit records missing summaries, while the original W3C link remains. Use `--skip-understanding` for a faster build with the original links only.
+The production command fails if the upstream dataset is unavailable, too small, or missing a required CSV column. Source URLs, build timestamps, source-schema fingerprints and SHA-256 input hashes are recorded in output JSON. Retrieval of an individual Understanding page is best effort; the audit records missing or partial summaries, while the original W3C link remains. Use `--skip-understanding` for a faster build with the original links only.
+
+The importer does not silently rewrite upstream material. Known ARRM role spelling variants are mapped through a small explicit alias manifest, and every mapping is listed under `roleNormalizations` in `import-audit.json`. Task wording and ownership flags are copied unchanged. Task-level `Level` disagreements with WCAG are reported under `taskLevelMismatches`; the UI uses the WCAG criterion level.
 
 ## Publish with GitHub Pages
 
@@ -45,7 +57,9 @@ The production command fails if the upstream dataset is unavailable or too small
 4. In **Actions**, run `Build and deploy WCAG by Role` with `workflow_dispatch` if it has not started automatically.
 5. Check the Pages URL shown in the deployment job. Project pages under `/repository-name/` work because paths in the site are relative.
 
-The workflow runs on pushes to `main`, pull requests (validation only), manual triggers and a weekly schedule. PRs do not deploy. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
+`dist/` is generated and ignored by Git. The workflow builds it in the runner and uploads only the production artefact. It runs unit and browser tests before a production import, so a failed import blocks deployment instead of publishing sample fixtures.
+
+The workflow runs on pushes to `main`, pull requests, manual triggers and a weekly schedule. Pull requests run the offline unit and browser tests but do not fetch live sources or deploy. The production import runs on `main`, manual triggers and the weekly schedule. Production fetch failures block deployment; the Actions workflow never uploads the sample data as a successful production build.
 
 ## Repository layout
 
@@ -54,8 +68,10 @@ The workflow runs on pushes to `main`, pull requests (validation only), manual t
 web/                          Site HTML, CSS, JavaScript
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
 fixtures/                     Clearly labeled offline demonstration data
-tests/                        Python unit tests
-docs/                         Governance, roadmap, AI extension, maintenance
+tests/test_pipeline.py        Python import and business-rule tests
+tests/e2e/                    Playwright and axe-core browser tests
+package.json, pnpm-lock.yaml  Browser-test dependencies
+docs/                         Governance, architecture, audit, roadmap, test plan
 NOTICE.md                     W3C attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
@@ -79,6 +95,10 @@ The source WCAG JSON contains an obsolete 4.1.1 Parsing record. This importer om
 
 The browser uses W3C criterion names and links, plus task wording from ARRM. It does not claim that a task or an Understanding statement is normative. Documentation does not promise a WCAG conformance level or label this prototype as certified accessible. Manual review by disabled users and assistive technology users remains necessary.
 
+The production audit for the 2026-11-12 source snapshot is in [docs/AUDIT.md](docs/AUDIT.md). It records the counts, the 4.1.1 Parsing exclusion, the 3.2.7–3.2.9 unknown ARRM rows, the 3.3.7–3.3.9 missing criterion summaries, five task-level level disagreements and five normalized role labels. No missing data is filled in.
+
 ## Contribution policy
 
 Prefer fixes upstream when the source W3C data is wrong. Do not silently edit a published W3C task or criterion in a local copy. File a GitHub issue with source URL, affected task IDs and proposed evidence; see [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
+
+The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md).

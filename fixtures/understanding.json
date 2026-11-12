@@ -1,3 +1,12 @@
 {
-  "2.4.7": {"goal":"Users know which element has keyboard focus.", "whatToDo":"Ensure each item receiving focus has a visible indicator.", "whyImportant":"Without a focus indicator, sighted keyboard users cannot operate the page."}
+  "2.4.7": {
+    "goal": "Users know which element has keyboard focus.",
+    "whatToDo": "Ensure each item receiving focus has a visible indicator.",
+    "whyImportant": "Without a focus indicator, sighted keyboard users cannot operate the page."
+  },
+  "1.4.12": {
+    "goal": "Users can adjust text spacing to make it easier to read.",
+    "authorTask": "Ensure content adapts to user-defined text settings.",
+    "whyImportant": "Some people need text with different spacing or font characteristics."
+  }
 }

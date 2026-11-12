@@ -14,9 +14,10 @@ function element(tag, className, value) {
   if (value !== undefined) node.textContent = value;
   return node;
 }
-function link(label, url, className) {
+function link(label, url, className, ariaLabel) {
   const a = element('a', className, label);
   a.href = url;
+  if (ariaLabel) a.setAttribute('aria-label', ariaLabel);
   return a;
 }
 function appendParagraph(parent, value, className) {
@@ -49,27 +50,37 @@ function matchingEntries() {
   return dataset.criteria.filter(matchesLevel).map(sc => ({sc, ...tasksFor(sc)}))
     .filter(x => x.found && (!hasRoleFilter() || x.tasks.length || state.showAll));
 }
-function addRoleSummary(parent, sc) {
+function addRoleSummary(parent, sc, hasMatchingTasks) {
   if (!state.role) return;
   const flags = sc.arrmResponsibilities?.[state.role] ?? [];
   const summary = element('p', 'summary-note');
-  summary.append(element('strong', '', 'ARRM criterion summary: '));
-  summary.append(document.createTextNode(flags.length
-    ? flags.map(f => display[f]).join(', ') + '. Task assignments appear below.'
-    : 'No assignment recorded for this role. This does not remove any WCAG requirement.'));
+  summary.append(element('strong', '', 'ARRM criterion-level summary: '));
+  if (flags.length) {
+    summary.append(document.createTextNode(flags.map(f => display[f]).join(', ') + '. '));
+    summary.append(document.createTextNode(hasMatchingTasks
+      ? 'This is a criterion-level overview, not task ownership. Task-level assignments are listed below.'
+      : 'This is a criterion-level overview, not a task assignment. No ARRM task in this view is owned by this role.'));
+  } else {
+    summary.append(document.createTextNode('No criterion-level assignment recorded for this role. This does not remove or change any WCAG requirement.'));
+  }
   parent.append(summary);
 }
 function addBrief(parent, sc) {
   const brief = sc.inBrief || {};
-  if (!Object.keys(brief).length) return;
+  const fields = [['goal', 'Goal'], ['whatToDo', 'What to do'], ['authorTask', 'Author task'], ['whyImportant', "Why it’s important"]];
+  if (!fields.some(([key]) => brief[key])) return;
   const details = element('details', 'brief');
   details.append(element('summary', '', 'Understanding: In Brief (W3C, informative)'));
+  if (!brief.goal || !brief.whyImportant || (!brief.whatToDo && !brief.authorTask)) {
+    details.append(element('p', 'brief-note', 'Only part of the W3C In Brief text could be extracted. The official Understanding document remains the source.'));
+  }
   const dl = element('dl', 'brief-grid');
-  [['goal', 'Goal'], ['whatToDo', 'What to do'], ['whyImportant', "Why it’s important"]].forEach(([key, title]) => {
+  fields.forEach(([key, title]) => {
     if (!brief[key]) return;
     dl.append(element('dt', '', title), element('dd', '', brief[key]));
   });
-  details.append(dl, link('Read the full W3C Understanding document', sc.understandingUrl));
+  details.append(dl, link('Read the full W3C Understanding document', sc.understandingUrl,
+    '', 'Read the full W3C Understanding document for Success Criterion ' + sc.number + ' ' + sc.name));
   parent.append(details);
 }
 function makeTask(task) {
@@ -96,19 +107,21 @@ function makeCriterion({sc, tasks}) {
   card.append(heading);
   appendParagraph(card, sc.principle + ' · ' + sc.guideline, 'subtle');
   const sources = element('p', 'source-links');
-  sources.append(link('Normative criterion', sc.normativeUrl), document.createTextNode(' · '),
-    link('Understanding', sc.understandingUrl));
+  sources.append(link('Normative criterion', sc.normativeUrl, '',
+    'Normative criterion: WCAG 2.2 Success Criterion ' + sc.number + ' ' + sc.name), document.createTextNode(' · '),
+    link('Understanding', sc.understandingUrl, '',
+      'Understanding: W3C document for Success Criterion ' + sc.number + ' ' + sc.name));
   card.append(sources);
-  addRoleSummary(card, sc);
+  addRoleSummary(card, sc, tasks.length > 0);
   addBrief(card, sc);
   if (tasks.length) {
-    const title = element('h5', 'tasks-heading', 'Matching ARRM tasks (' + tasks.length + ')');
+    const title = element('h5', 'tasks-heading', 'Task-level ARRM assignments (' + tasks.length + ')');
     card.append(title);
     const list = element('ul', 'task-list');
     tasks.forEach(task => list.append(makeTask(task)));
     card.append(list);
   } else {
-    appendParagraph(card, 'No matching ARRM task in this view. This does not indicate an exception to WCAG.', 'no-tasks');
+    appendParagraph(card, 'No matching ARRM task in this view. This does not indicate an exception to WCAG or an absence of responsibility.', 'no-tasks');
   }
   return card;
 }
@@ -122,8 +135,9 @@ function makeTaskRow(task) {
   list.append(makeTask(task));
   row.append(h, list);
   const refs = element('p', 'source-links');
-  refs.append(link('Understanding', sc.understandingUrl), document.createTextNode(' · '),
-    link('ARRM tasks', 'https://www.w3.org/WAI/planning/arrm/tasks/'));
+  refs.append(link('Understanding', sc.understandingUrl, '',
+    'Understanding: W3C document for Success Criterion ' + sc.number + ' ' + sc.name), document.createTextNode(' · '),
+    link('ARRM tasks', 'https://www.w3.org/WAI/planning/arrm/tasks/', '', 'ARRM tasks: W3C task inventory'));
   row.append(refs);
   return row;
 }
