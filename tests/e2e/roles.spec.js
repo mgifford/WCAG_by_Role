@@ -42,17 +42,20 @@ test.describe('role guides', () => {
     await expect(page.locator('.role-task')).toHaveCount(8);
 
     const primaryTask = page.locator('#task-INP-017');
-    await expect(primaryTask.getByRole('heading', { name: 'INP-017' })).toBeVisible();
     await expect(primaryTask.locator('.responsibility-flag')).toContainText('Your responsibility: Primary');
-    await expect(primaryTask.locator('.assignment-list dd').nth(0)).toContainText('Visual Design');
-    await expect(primaryTask.locator('.assignment-list dd').nth(0)).toContainText('(this guide)');
-    await expect(primaryTask.locator('.assignment-list dd').nth(1)).toContainText('User Experience (UX) Design');
+    const focusGroup = page.locator('.criterion-task-group').filter({has: primaryTask});
+    await focusGroup.locator('summary').click();
+    const primaryDetail = page.locator('#task-detail-INP-017');
+    await expect(primaryDetail.getByRole('heading', { name: 'INP-017' })).toBeVisible();
+    await expect(primaryDetail.locator('.assignment-list dd').nth(0)).toContainText('Visual Design');
+    await expect(primaryDetail.locator('.assignment-list dd').nth(0)).toContainText('(this guide)');
+    await expect(primaryDetail.locator('.assignment-list dd').nth(1)).toContainText('User Experience (UX) Design');
 
-    const secondaryTask = page.locator('#task-INP-018');
-    await expect(secondaryTask.locator('.responsibility-flag')).toContainText('Your responsibility: Secondary');
-    await expect(secondaryTask.locator('.assignment-list dd').nth(0)).toContainText('Front-End Development');
-    await expect(secondaryTask.locator('.assignment-list dd').nth(1)).toContainText('Visual Design');
-    await expect(secondaryTask.locator('.assignment-list dd').nth(1)).toContainText('(this guide)');
+    const secondaryDetail = page.locator('#task-detail-INP-018');
+    await expect(secondaryDetail.locator('.responsibility-flag')).toContainText('Your responsibility: Secondary');
+    await expect(secondaryDetail.locator('.assignment-list dd').nth(0)).toContainText('Front-End Development');
+    await expect(secondaryDetail.locator('.assignment-list dd').nth(1)).toContainText('Visual Design');
+    await expect(secondaryDetail.locator('.assignment-list dd').nth(1)).toContainText('(this guide)');
 
     await expect(page.locator('.category-nav')).toContainText('CSS and Presentation (4)');
     await expect(page.locator('.category-nav')).toContainText('Input Modalities (3)');
@@ -75,8 +78,11 @@ test.describe('role guides', () => {
 
     const cssTask = page.locator('#task-CSS-022');
     await expect(cssTask.locator('.responsibility-flag')).toContainText('Your responsibility: Primary');
-    await expect(cssTask.locator('.assignment-list dd').nth(0)).toContainText('Front-End Development');
-    await expect(cssTask.locator('.assignment-list dd').nth(1)).toContainText('Visual Design');
+    const cssGroup = page.locator('.criterion-task-group').filter({has: cssTask});
+    await cssGroup.locator('summary').click();
+    const cssDetail = page.locator('#task-detail-CSS-022');
+    await expect(cssDetail.locator('.assignment-list dd').nth(0)).toContainText('Front-End Development');
+    await expect(cssDetail.locator('.assignment-list dd').nth(1)).toContainText('Visual Design');
   });
 
   test('remaining ARRM role guides render their own task and category data', async ({ page }) => {
@@ -108,17 +114,42 @@ test.describe('role guides', () => {
     await expect(page.locator('.category-nav')).toContainText('Semantic Structure (1)');
   });
 
-  test('task cards link to normative and Understanding guidance and preserve the task text', async ({ page }) => {
+  test('criterion groups use task text bullets and keep IDs and sources in the accordion', async ({ page }) => {
     await openRole(page, 'visual-design');
     const task = page.locator('#task-INP-017');
     await expect(task).toContainText('Every element that receives keyboard focus is designed to display a visible focus indicator.');
-    await expect(task.locator('.task-criterion-links a[href="https://www.w3.org/TR/WCAG22/#focus-visible"]')).toHaveCount(1);
-    await expect(task.locator('.task-criterion-links a[href="https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"]')).toHaveCount(1);
-    await expect(task).toContainText('Related tasks and source');
-    await task.getByText('Related tasks and source').click();
-    await expect(task).toContainText('Other ARRM tasks for 2.4.7');
-    await expect(task).toContainText('INP-018');
-    await expect(task).toContainText('CSS-022');
+    const group = page.locator('.criterion-task-group').filter({has: task});
+    await expect(group.locator('.criterion-task-heading a[href="https://www.w3.org/TR/WCAG22/#focus-visible"]')).toHaveCount(1);
+    await expect(group.locator('.criterion-task-heading a[href="https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html"]')).toHaveCount(1);
+    await expect(group.locator('.criterion-task-bullet .task-id')).toHaveCount(0);
+    await expect(group.locator('summary')).toHaveText('Related tasks and source (2)');
+    await expect(group.locator('.task-details')).not.toHaveAttribute('open', '');
+    await group.locator('summary').click();
+    await expect(group.locator('.task-id')).toHaveText(['INP-017', 'INP-018']);
+    await expect(group.locator('.criterion-task-source')).toContainText('ARRM task list');
+    await expect(group.locator('.criterion-task-source')).toContainText('WCAG 2.2');
+  });
+
+  test('a criterion with tasks in two categories is grouped under each category', async ({ page }) => {
+    await openRole(page, 'visual-design');
+    const inputGroup = page.locator('#category-input-modalities .criterion-task-group').filter({hasText: '2.4.7 Focus Visible'});
+    const cssGroup = page.locator('#category-css-and-presentation .criterion-task-group').filter({hasText: '2.4.7 Focus Visible'});
+    await expect(inputGroup).toHaveCount(1);
+    await expect(cssGroup).toHaveCount(1);
+    await expect(inputGroup.locator('.criterion-task-bullet')).toHaveCount(2);
+    await expect(cssGroup.locator('.criterion-task-bullet')).toHaveCount(1);
+    await expect(inputGroup).toContainText('INP-017');
+    await expect(cssGroup).toContainText('CSS-022');
+  });
+
+  test('content authoring groups task text under its success criterion', async ({ page }) => {
+    await openRole(page, 'content-authoring');
+    const group = page.locator('.criterion-task-group').filter({hasText: '1.1.1 Non-text Content'});
+    await expect(group.locator('.criterion-task-bullet')).toHaveCount(2);
+    await expect(group).toContainText('Informative alternate text is provided for images');
+    await expect(group).toContainText('Purely decorative images are provided with null alt attribute values');
+    await expect(group.locator('.criterion-task-details')).not.toHaveAttribute('open', '');
+    await expect(group.locator('.task-id')).toHaveCount(2);
   });
 
   test('criteria list links each criterion back to its task anchors', async ({ page }) => {

@@ -13,6 +13,7 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 - Link to independent plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, plus testing/standards references, without copying their content. External links are labelled and never used to assign ARRM ownership. DigitalA11y search fallbacks are explicit where no dedicated article was found.
 - Use original inline SVG icons for ARRM categories, role cards and a **Who accessibility affects** functional-needs overview. Icons are decorative with visible text.
 - Show the supplied WCAG 2.2 pictogram for each success criterion on explorer cards and role-guide criteria lists. The sprite and mapping cover all 86 active criteria and contain no 4.1.1 entry.
+- In role guides, group task text under its category and success criterion, with responsibility badges visible and task IDs/ownership/sources in a **Related tasks and source** disclosure.
 - Put task-level ARRM assignments in native `<details>` disclosures with a task count. Search opens matching task lists automatically.
 - Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary, including a distinct message when ARRM has no summary, when the summary does not assign the role, and when no task for the role is recorded.
 - Separate a cumulative **conformance target** (A, AA including A, AAA including A/AA) from an **exact criterion level** filter; neither control implies conformance.

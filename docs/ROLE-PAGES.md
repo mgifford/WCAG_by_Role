@@ -13,7 +13,7 @@ The generic explorer remains the complete role/level/task view. Role guides are 
 | Task anchor | `role.html?role=visual-design#task-INP-017` |
 | Criterion anchor | `role.html?role=visual-design#sc-2-4-7` |
 
-The role is query-string state because GitHub Pages serves static files. Categories, tasks and criteria use native fragment identifiers. Deep links are resolved after the data renders; `role-page.js` highlights and focuses the target without adding client-side routing.
+The role is query-string state because GitHub Pages serves static files. Categories, success-criterion groups, tasks and criteria use native fragment identifiers. Deep links are resolved after the data renders; `role-page.js` opens the containing task disclosure, highlights and focuses the target without adding client-side routing.
 
 ## Components
 
@@ -35,16 +35,20 @@ role-data.json ─────┬── index.html + app.js ── generic explo
 
 ## How responsibilities are selected
 
-For each task, `roleTasks` includes the task when the selected role appears in at least one of `ownership.primary`, `ownership.secondary` or `ownership.contributor`. The card:
+For each task, `roleTasks` includes the task when the selected role appears in at least one of `ownership.primary`, `ownership.secondary` or `ownership.contributor`. The guide presents:
 
-- shows the ARRM task ID and the original task text;
-- shows the selected role's level(s) in **Your responsibility**;
-- lists every primary, secondary and contributor role, including collaborators;
-- links to the normative WCAG criterion and Understanding document;
-- links to the ARRM task list and, when present, other tasks for the same criterion;
-- link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external;
+- a category heading, such as **Semantic Structure** or **Form Interactions**;
+- each success criterion that has tasks in that category, with its number, name, level and Understanding link;
+- the original ARRM task text as bullets under the criterion;
+- the selected role's level(s) as visible responsibility badges on each bullet;
+- a **Related tasks and source** disclosure per criterion, containing stable task IDs, every primary/secondary/contributor assignment, and ARRM/WCAG/Understanding source links;
+- link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external, in the criteria list;
 - original category and role icons (decorative, with visible text);
-- the supplied WCAG 2.2 success-criterion pictogram in the criteria list.
+- the supplied WCAG 2.2 success-criterion pictogram in each criterion heading and the criteria list.
+
+A task ID is kept in the disclosure rather than shown as the primary label. Task text and responsibility are visible; the ID, all role assignments and sources remain available without requiring people to decode `SEM-001` in the main list.
+
+If a criterion has tasks with different ARRM task-prefix categories, it appears under each relevant category with only that category's tasks. This preserves the category navigation and avoids moving a task out of the ARRM grouping that produced it.
 
 Task IDs are stable ARRM identifiers. The guide never infers an owner from a criterion-level summary or from another task.
 
@@ -89,8 +93,8 @@ The collaboration section is derived from the same ARRM task assignments:
 
 - it lists roles that share at least one task with the selected role;
 - it reports the number of shared tasks and the levels involved;
-- task cards show all assignments, not only the selected role;
-- the related-task disclosure lists other tasks for the same criterion.
+- task groups show all assignments, not only the selected role;
+- each criterion's related-task disclosure lists every task in that category group and its sources.
 
 The handoff bullets are **project guidance**, explicitly labelled as not a W3C requirement. They do not prescribe a sequence, a workflow engine or a handoff artifact. The guide does not assign ownership where ARRM is silent.
 

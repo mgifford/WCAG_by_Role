@@ -153,39 +153,37 @@ function summarySection(dataset, role, tasks, criteria, groups) {
   }
 
   const help = element('details', 'role-help');
-  help.append(element('summary', '', 'How to read task cards'));
+  help.append(element('summary', '', 'How to read task groups'));
   const list = element('ul');
-  list.append(element('li', '', 'Your responsibility shows the levels ARRM assigns to this role for that task.'));
-  list.append(element('li', '', 'Primary, Secondary and Contributor list every role recorded for the task, including collaborating roles.'));
-  list.append(element('li', '', 'A task ID and the WCAG criterion link are the stable references to use in a handoff.'));
+  list.append(element('li', '', 'The bullets show the ARRM task text and your responsibility badges. Open Related tasks and source for stable task IDs, all role assignments and links.'));
+  list.append(element('li', '', 'Primary, Secondary and Contributor list every role recorded for the task; the task detail keeps the stable ARRM ID.'));
+  list.append(element('li', '', 'Use the task ID from the accordion and the WCAG criterion link when recording a handoff.'));
   list.append(element('li', '', 'A missing task or criterion summary is not evidence that a role has no responsibility.'));
   help.append(list);
   section.append(help);
   return section;
 }
 
-function taskCard(task, config, dataset, criteriaByNumber, roleTaskIds) {
-  const criterion = criteriaByNumber.get(task.criterion);
-  const levels = roleLevels(task, config.role);
-  const card = element('article', 'role-task');
-  card.id = 'task-' + task.id;
-
-  const head = element('div', 'role-task-head');
-  head.append(element('h4', 'task-id', task.id));
-  const flag = element('span', 'responsibility-flag ' + levels.join(' ') + (levels.length > 1 ? ' mixed' : ''),
-    'Your responsibility: ' + listText(levels.map(level => LEVEL_LABELS[level])));
-  head.append(flag);
-  card.append(head, element('p', 'task-description', task.text));
-
-  const criterionLine = element('p', 'task-criterion-links');
-  if (criterion) {
-    criterionLine.append(link(`${criterion.number} ${criterion.name}`, criterion.normativeUrl));
-    criterionLine.append(' ', element('span', 'level-pill', 'Level ' + criterion.level), ' · ',
-      link('Understanding', criterion.understandingUrl));
-  } else {
-    criterionLine.append('Criterion data unavailable. ', link('Open the WCAG 2.2 Recommendation', SOURCES.wcag));
+function responsibilityBadges(task, role) {
+  const levels = roleLevels(task, role);
+  const wrapper = element('span', 'criterion-task-flags');
+  for (const level of levels) {
+    const flag = element('span', 'responsibility-flag ' + level);
+    flag.append(element('span', 'sr-only', 'Your responsibility: '), LEVEL_LABELS[level]);
+    wrapper.append(flag);
   }
-  card.append(criterionLine);
+  return wrapper;
+}
+
+function taskDetail(task, config) {
+  const levels = roleLevels(task, config.role);
+  const detail = element('li', 'criterion-task-detail');
+  detail.id = 'task-detail-' + task.id;
+  const head = element('div', 'task-detail-head');
+  head.append(element('h5', 'task-id', task.id));
+  head.append(element('span', 'responsibility-flag ' + levels.join(' ') + (levels.length > 1 ? ' mixed' : ''),
+    'Your responsibility: ' + listText(levels.map(level => LEVEL_LABELS[level]))));
+  detail.append(head);
 
   const assignments = element('dl', 'assignment-list');
   for (const level of LEVELS) {
@@ -203,32 +201,46 @@ function taskCard(task, config, dataset, criteriaByNumber, roleTaskIds) {
     }
     assignments.append(value);
   }
-  card.append(assignments);
-
-  const details = element('details', 'task-details');
-  details.append(element('summary', '', 'Related tasks and source'));
-  const related = dataset.tasks.filter(other => other.criterion === task.criterion && other.id !== task.id);
-  if (related.length) {
-    const paragraph = element('p');
-    paragraph.append(element('strong', '', `Other ARRM tasks for ${task.criterion}: `));
-    related.forEach((other, index) => {
-      if (index) paragraph.append('; ');
-      const target = roleTaskIds.has(other.id) ? '#task-' + other.id : './index.html?query=' + encodeURIComponent(other.id);
-      paragraph.append(link(other.id, target));
-      paragraph.append(' (Primary: ' + (other.ownership.primary.length ? other.ownership.primary.join(', ') : 'none recorded') + ')');
-    });
-    details.append(paragraph);
-  }
-  const source = element('p');
-  source.append('Source: ', link('ARRM task list', SOURCES.tasks), ' · ',
-    link('WCAG 2.2', criterion?.normativeUrl || SOURCES.wcag), ' · ',
-    link('Understanding', criterion?.understandingUrl || SOURCES.understanding));
-  details.append(source);
-  card.append(details);
-  return card;
+  detail.append(assignments);
+  return detail;
 }
 
-function categoriesSection(config, dataset, tasks, criteriaByNumber, roleTaskIds) {
+function criterionTaskGroup(criterion, tasks, config, category) {
+  const group = element('section', 'criterion-task-group');
+  group.id = 'criterion-' + slugify(category) + '-' + criterion.number.replaceAll('.', '-');
+  const heading = element('h4', 'criterion-task-heading');
+  const criterionIcon = createCriterionIcon(criterion.number, {className: 'sc-icon-criterion', size: 32});
+  if (criterionIcon) heading.append(criterionIcon);
+  heading.append(link(`${criterion.number} ${criterion.name}`, criterion.normativeUrl));
+  heading.append(element('span', 'level-pill', 'Level ' + criterion.level), ' · ',
+    link('Understanding', criterion.understandingUrl, '', `Understanding ${criterion.number} ${criterion.name}`));
+  group.append(heading);
+
+  const list = element('ul', 'criterion-task-list');
+  for (const task of tasks) {
+    const item = element('li', 'criterion-task-bullet role-task');
+    item.id = 'task-' + task.id;
+    item.append(element('span', 'task-description', task.text));
+    item.append(responsibilityBadges(task, config.role));
+    list.append(item);
+  }
+  group.append(list);
+
+  const details = element('details', 'task-details criterion-task-details');
+  details.append(element('summary', '', `Related tasks and source (${tasks.length})`));
+  const detailList = element('ul', 'criterion-task-detail-list');
+  for (const task of tasks) detailList.append(taskDetail(task, config));
+  details.append(detailList);
+  const source = element('p', 'criterion-task-source');
+  source.append('Source: ', link('ARRM task list', SOURCES.tasks), ' · ',
+    link('WCAG 2.2', criterion.normativeUrl), ' · ',
+    link('Understanding', criterion.understandingUrl));
+  details.append(source);
+  group.append(details);
+  return group;
+}
+
+function categoriesSection(config, tasks, criteriaByNumber) {
   const section = element('section');
   section.id = 'categories';
   section.append(element('h2', '', 'Task categories'));
@@ -261,9 +273,18 @@ function categoriesSection(config, dataset, tasks, criteriaByNumber, roleTaskIds
     const categorySource = element('p', 'meta', 'ARRM category. Source: ');
     categorySource.append(link('W3C ARRM tasks', CATEGORY_SOURCE_URL));
     category.append(categorySource);
-    const list = element('div', 'role-task-list');
+    const byCriterion = new Map();
     for (const task of group.tasks) {
-      list.append(taskCard(task, config, dataset, criteriaByNumber, roleTaskIds));
+      if (!byCriterion.has(task.criterion)) byCriterion.set(task.criterion, []);
+      byCriterion.get(task.criterion).push(task);
+    }
+    const criteriaGroups = [...byCriterion.entries()].sort((a, b) =>
+      a[0].localeCompare(b[0], undefined, {numeric: true}));
+    const list = element('div', 'criterion-task-groups');
+    for (const [number, criterionTasks] of criteriaGroups) {
+      const criterion = criteriaByNumber.get(number);
+      if (!criterion) continue;
+      list.append(criterionTaskGroup(criterion, criterionTasks, config, group.category));
     }
     category.append(list);
     section.append(category);
@@ -396,6 +417,8 @@ function applyHash() {
   if (!id) return;
   const target = document.getElementById(id);
   if (!target) return;
+  const disclosure = target.closest('details');
+  if (disclosure) disclosure.open = true;
   target.classList.add('is-target');
   const heading = target.querySelector('h2, h3');
   const focusTarget = target.id === 'main' ? target : (heading || target);
@@ -414,7 +437,6 @@ function renderRolePage(dataset, slug, config) {
     .map(number => criteriaByNumber.get(number))
     .filter(Boolean)
     .sort((a, b) => a.number.localeCompare(b.number, undefined, {numeric: true}));
-  const roleTaskIds = new Set(tasks.map(task => task.id));
 
   if (dataset.mode === 'demo') root.append(demoNotice());
   if (!tasks.length) {
@@ -439,7 +461,7 @@ function renderRolePage(dataset, slug, config) {
   const groups = groupTasks(tasks);
   root.append(
     summarySection(dataset, config.role, tasks, criteria, groups),
-    categoriesSection(config, dataset, tasks, criteriaByNumber, roleTaskIds),
+    categoriesSection(config, tasks, criteriaByNumber),
     criteriaSection(tasks, criteria),
     collaborationSection(tasks, config),
     sourcesSection(dataset, config),
