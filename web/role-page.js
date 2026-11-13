@@ -2,6 +2,7 @@
 
 import { element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
+import { appendCriterionResources, appendGeneralResources } from './resources.js';
 import {
   CATEGORY_BY_PREFIX,
   CATEGORY_ORDER,
@@ -292,6 +293,7 @@ function criteriaSection(tasks, criteria) {
       });
       item.append(taskLinks);
     }
+    appendCriterionResources(item, criterion, {compact: true});
     list.append(item);
   }
   details.append(list);
@@ -340,6 +342,7 @@ function sourcesSection(dataset, config) {
     link('WAI Quick Reference', SOURCES.quickref),
   );
   section.append(sources);
+  appendGeneralResources(section);
 
   section.append(element('h3', '', 'What this guide does not establish'));
   const limits = element('ul');

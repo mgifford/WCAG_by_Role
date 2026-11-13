@@ -57,6 +57,7 @@ PR 1 (role-specific navigation) implements:
 - Task-level primary/secondary/contributor assignments with collaborating roles kept visible.
 - Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
 - Project handoff guidance explicitly separated from ARRM assignments.
+- Link-only external resources: Simple WCAG and AAArdvark per-criterion explanations, plus testing, standards-mapping and impact references. No third-party text or impact dataset is imported.
 
 Still to come in Phase 2:
 

@@ -120,6 +120,15 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
 .collaborators {list-style:none;padding:0;display:grid;gap:.35rem}
 .project-note {font-size:.85rem;color:var(--muted);border-left:3px solid var(--border);padding-left:.7rem}
 .role-guidance {max-width:60rem}
+.criterion-resources {font-size:.88rem;margin:.4rem 0 .8rem}
+.criterion-resources .external-note,.criteria-list .criterion-resources {color:var(--muted);font-size:.82rem}
+.criteria-list .criterion-resources {display:block;margin-top:.2rem}
+.resources-disclosure {margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:.4rem;padding:.8rem 1rem}
+.resources-disclosure summary {cursor:pointer;font-weight:650}
+.resource-group {margin:1rem 0 0}
+.resource-group h3 {font-size:1rem;margin:.5rem 0 .2rem}
+.resource-list {list-style:none;padding:0;display:grid;gap:.25rem;font-size:.88rem}
+
 @media (max-width:55rem) {.filter-grid {grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:37rem) {.filter-grid {grid-template-columns:1fr}.criterion {padding:1rem}.brief-grid {grid-template-columns:1fr}.brief-grid dd {margin-bottom:.5rem}.assignment-list {grid-template-columns:1fr}.role-task-head {align-items:flex-start}.role-summary-grid {grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-color-scheme:dark) {
@@ -130,7 +139,7 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
   .ownership .ownership-primary,.ownership .ownership-secondary,.ownership .ownership-contributor {color:#eef3f5}
   .level-pill {background:#24435b;color:#fff;border-color:#6790a8}
   .starter {color:#a8e2ff}
-  .role-task,.role-help {background:#2a3942}
+  .role-task,.role-help,.resources-disclosure {background:#2a3942}
   .role-help {border-color:#49606c}
   .count-pill {background:#24435b;color:#fff;border-color:#6790a8}
   .responsibility-flag {background:#263b46;color:#eef3f5}
@@ -139,7 +148,7 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
   footer {background:#1b303b}
 }
 @media (forced-colors: active) {
-  .notice,.demo-notice,.filter-panel,.criterion,.task,.brief,.summary-note,.empty,.error,.ownership li,.level-pill,.role-path,.role-stat,.role-task,.category-nav,.criteria-disclosure,.role-help,.responsibility-flag,.count-pill,.criteria-list li {border:1px solid CanvasText}
+  .notice,.demo-notice,.filter-panel,.criterion,.task,.brief,.summary-note,.empty,.error,.ownership li,.level-pill,.role-path,.role-stat,.role-task,.category-nav,.criteria-disclosure,.role-help,.responsibility-flag,.count-pill,.criteria-list li,.resources-disclosure {border:1px solid CanvasText}
   .level-pill,.ownership li,.count-pill,.responsibility-flag {background:Canvas;color:CanvasText}
   .starter {color:CanvasText}
   button {border:1px solid ButtonText}
@@ -148,4 +157,4 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after {animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
-@media print {.masthead {background:none;color:#000}.masthead h1 span {color:#000}.topnav,.filter-panel,.filter-help,.role-page-nav,.category-nav {display:none!important}.criterion,.role-task {break-inside:avoid}a {color:inherit}.notice,.demo-notice,.role-task,.role-help {background:none}}
+@media print {.masthead {background:none;color:#000}.masthead h1 span {color:#000}.topnav,.filter-panel,.filter-help,.role-page-nav,.category-nav {display:none!important}.criterion,.role-task,.resources-disclosure {break-inside:avoid}a {color:inherit}.notice,.demo-notice,.role-task,.role-help {background:none}}

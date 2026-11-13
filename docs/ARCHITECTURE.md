@@ -57,6 +57,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
                     └── role.html + role-page.js ── role guide
                              ├── role-config.js
                              ├── role-cards.js
+                             ├── resources.js
                              └── dom.js
 ```
 
@@ -65,6 +66,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
 - Categories are project navigation derived from the [W3C ARRM tasks page](https://www.w3.org/WAI/planning/arrm/tasks/) section headings and task ID prefixes. They are not a WCAG taxonomy, a new standard or a re-assignment of responsibility. Unknown prefixes stay visible under **Other ARRM tasks**.
 - Every task card shows the stable ARRM task ID, original task text, all primary/secondary/contributor assignments, and links to the WCAG criterion and Understanding document. The selected role is highlighted with text, not colour alone.
 - The collaboration list is derived from shared ARRM tasks. Handoff bullets are labelled project guidance; they are not W3C requirements or a workflow model.
+- `web/resources.js` holds link-only plain-language and general resource links. Criterion URLs are generated from `number` + `slug`; no third-party explanation text or mapping data is imported. External links carry `rel="external"` and no `target`; AAArdvark is labelled commercial.
 - Criterion-level responsibility summaries are not used to decide task ownership on role pages. Missing task-level data is shown as missing, not inferred.
 
 See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and extension steps. Schema version 2 and the pipeline's import semantics are unchanged by this presentation layer.

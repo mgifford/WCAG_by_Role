@@ -21,6 +21,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Role guides | Visual Design and Front-End Development guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
 | Role guides | A task such as INP-017/INP-018 shows both Visual Design and Front-End Development responsibilities, with the selected role highlighted by text |
 | Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
+| External resources | Plain-language links are labelled external, commercial resources are identified, links do not force a new tab, and no resource is presented as W3C-endorsed |
 | Automated | Playwright/axe-core on the demo build in light and dark schemes, task view, keyboard, emulated forced colours, 320 px reflow and reduced motion |
 | Automated limits | axe-core does not test screen-reader output, real Windows High Contrast, zoom quality, link purpose in context or data correctness |
 | Build integrity | Production import rejects missing headers, empty sources and undersized datasets; retired 4.1.1 Parsing stays out of live views |
@@ -45,6 +46,7 @@ The Playwright suite currently covers:
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
 - Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for both guides.
+- External resource links for both plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, and the general resource groups with disclosures open.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people
@@ -58,6 +60,7 @@ The Playwright suite currently covers:
 7. **Content and mapping:** review with Visual Design, Front-End Development, UX and WCAG/ARRM experts. Confirm that task-level ownership, the criterion-level summary and the 3.3.7–3.3.9 gap are represented without implying exemption or exclusive ownership.
 8. **Link context:** listen to and read each normative/Understanding link in context; automated link checks only prove a URL resolves.
 9. **Role guides:** read both guides with a screen reader and keyboard only; confirm the selected role, all collaborating roles, category jumps and task/criterion anchors are understandable.
+10. **External resources:** read each plain-language link in context; confirm the external/commercial labels are understood, no new tab opens unexpectedly, and the resource is not mistaken for W3C guidance. Check that the general resource disclosure is keyboard-operable.
 
 ## Role-based usability scenarios
 

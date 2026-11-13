@@ -2,6 +2,7 @@
 
 import { appendParagraph, element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
+import { appendCriterionResources, appendGeneralResources } from './resources.js';
 
 const $ = (id) => document.getElementById(id);
 const filters = $('filters');
@@ -100,6 +101,7 @@ function makeCriterion({sc, tasks}) {
     link('Understanding', sc.understandingUrl, '',
       'Understanding: W3C document for Success Criterion ' + sc.number + ' ' + sc.name));
   card.append(sources);
+  appendCriterionResources(card, sc);
   addRoleSummary(card, sc, tasks.length > 0);
   addBrief(card, sc);
   if (tasks.length) {
@@ -180,6 +182,7 @@ function renderRoleGuides() {
 
 async function init() {
   renderRoleGuides();
+  appendGeneralResources($('general-resources'));
   try {
     const response = await fetch('./data/role-data.json');
     if (!response.ok) throw new Error('HTTP ' + response.status);
