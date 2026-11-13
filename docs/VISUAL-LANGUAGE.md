@@ -34,6 +34,9 @@ This is a record of the review, not legal advice. Do not add an icon or illustra
 
 | Role | Icon concept |
 | --- | --- |
+| Business Analysis | Clipboard with requirements |
+| Content Authoring | Document and pen |
+| User Experience (UX) Design | Connected flow nodes |
 | Visual Design | Palette |
 | Front-End Development | Code brackets |
 

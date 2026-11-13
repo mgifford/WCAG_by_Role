@@ -12,7 +12,7 @@ test.describe('filter behaviour', () => {
   test('loads the demo data from a nested path and marks it as a sample', async ({ page }) => {
     expect(new URL(page.url()).pathname).toBe('/dist/');
     await expect(page.locator('#result-count')).toContainText('10 of 10 active WCAG 2.2 criteria');
-    await expect(page.locator('#result-count')).toContainText('12 matching ARRM tasks');
+    await expect(page.locator('#result-count')).toContainText('13 matching ARRM tasks');
     await expect(page.locator('#data-status')).toContainText('SAMPLE DATA');
   });
 

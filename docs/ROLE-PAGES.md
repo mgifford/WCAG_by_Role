@@ -1,6 +1,6 @@
 # Role guides
 
-The generic explorer remains the complete role/level/task view. Role guides are a task-oriented entry point for a professional role, built from the same normalized data.
+The generic explorer remains the complete role/level/task view. Role guides are a task-oriented entry point for a professional role, built from the same normalized data. The five guides cover every role that has task-level assignments in the imported ARRM CSVs; other ARRM roles are intentionally not invented.
 
 ## URLs
 
@@ -65,7 +65,7 @@ Categories are a project navigation aid, not a WCAG taxonomy or a new responsibi
 | SCT | Static Content |
 | DYN | Dynamic Interactions |
 
-Unknown prefixes are grouped under **Other ARRM tasks** rather than dropped. The category order follows the order of sections on the ARRM tasks page. Only categories containing a task for the selected role are shown, so Visual Design and Front-End Development receive different navigation lists from the same data.
+Unknown prefixes are grouped under **Other ARRM tasks** rather than dropped. The category order follows the order of sections on the ARRM tasks page. Only categories containing a task for the selected role are shown, so the five roles receive different navigation lists from the same data.
 
 The role-specific "Largest task groups" line is computed from the current snapshot. It is a starting point, not a prioritisation standard.
 
@@ -75,6 +75,9 @@ From the 2026-11-12 live import (86 criteria, 262 tasks):
 
 | Role | Unique tasks | Criteria | Primary | Secondary | Contributor |
 | --- | --- | --- | --- | --- | --- |
+| Business Analysis | 9 | 7 | 1 | 5 | 3 |
+| Content Authoring | 85 | 36 | 42 | 33 | 10 |
+| User Experience (UX) Design | 189 | 71 | 96 | 87 | 7 |
 | Visual Design | 66 | 33 | 30 | 29 | 7 |
 | Front-End Development | 130 | 45 | 93 | 32 | 5 |
 

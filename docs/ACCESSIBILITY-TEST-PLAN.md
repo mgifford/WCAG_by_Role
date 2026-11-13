@@ -20,7 +20,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
 | Level filtering | Conformance target A includes only A; AA includes A+AA; AAA includes A+AA+AAA; exact level remains independent |
 | Missing source | Missing summary, summary not assigning the role, and no task for the role produce different messages |
-| Role guides | Visual Design and Front-End Development guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
+| Role guides | All five data-backed guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
 | Role guides | A task such as INP-017/INP-018 shows both Visual Design and Front-End Development responsibilities, with the selected role highlighted by text |
 | Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
 | External resources | Plain-language links are labelled external, commercial resources are identified, links do not force a new tab, and no resource is presented as W3C-endorsed |
@@ -53,7 +53,7 @@ The Playwright suite currently covers:
 - Keyboard tab order to the filters, native select typeahead, and focus retention after a filter change.
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
-- Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for both guides.
+- Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for all five guides.
 - External resource links for all four plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, DigitalA11y direct/search fallbacks, and the general resource groups with disclosures open.
 - Missing-summary, summary-does-not-assign-role and no-task-for-role messages on the explorer.
 - Original inline icons: decorative SVG semantics, role/category icon counts, functional-needs cards, forced colours, reflow and axe with the visual sections.

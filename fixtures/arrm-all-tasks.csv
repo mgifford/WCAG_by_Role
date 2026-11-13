@@ -12,3 +12,4 @@ DYN-001,2.4.11,AA,Fixed-position content does not fully cover focused elements.,
 SEM-024,4.1.1,A,"Source code is properly nested, according to its specification.",Development,,Front-End Development,none,none
 TXT-001,3.3.2,A,Forms display clear labels and instructions.,Design,,User Experience (UX) Design,Content Authoring,Front-End Development
 SEM-100,4.1.2,A,Custom controls expose name and role.,Development,,Front-End Development,User Experience (UX) Design,none
+IMG-016,1.1.1,A,"Alternate means of accessing CAPTCHA information are provided, such as audio CAPTCHA, logical question, or other equivalent means.",Design,x,Business Analysis,User Experience (UX) Design,none

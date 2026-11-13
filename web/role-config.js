@@ -4,6 +4,51 @@
 // explorer. Adding a supported role requires an entry here plus a matching role
 // in web/data/role-data.json; the explorer and role template share these values.
 export const ROLE_GUIDES = {
+  'business-analysis': {
+    slug: 'business-analysis',
+    role: 'Business Analysis',
+    title: 'WCAG for Business Analysts',
+    navLabel: 'Business analysis guide',
+    cardTitle: 'WCAG for Business Analysts',
+    cardCopy: 'Requirements, acceptance criteria, procurement and cross-team decisions that keep accessibility visible.',
+    intro: 'Business analysts turn organizational goals into requirements, user stories and acceptance criteria. ARRM assigns a small number of tasks primarily to Business Analysis; more often the role supports or contributes to decisions owned by user experience, content or development.',
+    explorerQuery: 'role=Business%20Analysis&all=1',
+    handoff: [
+      'Write accessibility into requirements and acceptance criteria, and link the ARRM task ID and WCAG criterion.',
+      'When a task is owned by another role, name that owner and the evidence expected rather than assigning the work to the business role.',
+      'A business decision, procurement clause or acceptance criterion is not proof that the delivered experience conforms.',
+    ],
+  },
+  'content-authoring': {
+    slug: 'content-authoring',
+    role: 'Content Authoring',
+    title: 'WCAG for Content Authors',
+    navLabel: 'Content authoring guide',
+    cardTitle: 'WCAG for Content Authors',
+    cardCopy: 'Plain language, headings, link text, text alternatives, tables, media descriptions and error guidance.',
+    intro: 'Content authors create and maintain the words, text alternatives, document structure and media descriptions people rely on. ARRM assigns many content and media tasks primarily to Content Authoring, with user experience, visual design and development as collaborators.',
+    explorerQuery: 'role=Content%20Authoring&all=1',
+    handoff: [
+      'Keep the content purpose, audience and accessible alternative with the ARRM task ID when handing off to design or development.',
+      'Write headings, labels, link text and text alternatives for the person using them, not only for the visual layout.',
+      'Check the content in its rendered context after publication; a content spreadsheet is not evidence that the page works.',
+    ],
+  },
+  'user-experience-design': {
+    slug: 'user-experience-design',
+    role: 'User Experience (UX) Design',
+    title: 'WCAG for UX Designers',
+    navLabel: 'UX design guide',
+    cardTitle: 'WCAG for UX Designers',
+    cardCopy: 'Interaction flows, navigation, form structure, feedback, error recovery and design research.',
+    intro: 'UX designers shape flows, navigation, forms, feedback and the overall interaction model. ARRM assigns many tasks primarily to User Experience (UX) Design, with content, visual design and front-end development as frequent collaborators.',
+    explorerQuery: 'role=User%20Experience%20(UX)%20Design&all=1',
+    handoff: [
+      'Record the interaction decision and the ARRM task ID in the flow, prototype or handoff note.',
+      'When a task is owned by content or development, name the owner and the evidence needed at handoff.',
+      'Test the flow with keyboard, screen reader and cognitive-access needs; a clickable prototype can hide implementation barriers.',
+    ],
+  },
   'visual-design': {
     slug: 'visual-design',
     role: 'Visual Design',
@@ -36,7 +81,7 @@ export const ROLE_GUIDES = {
   },
 };
 
-export const ROLE_ORDER = ['visual-design', 'front-end-development'];
+export const ROLE_ORDER = ['business-analysis', 'content-authoring', 'user-experience-design', 'visual-design', 'front-end-development'];
 
 // ARRM task-prefix navigation. The names match the section headings on the
 // W3C ARRM tasks page; this mapping is a project navigation aid, not a WCAG

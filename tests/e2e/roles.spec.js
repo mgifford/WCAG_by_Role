@@ -76,6 +76,35 @@ test.describe('role guides', () => {
     await expect(cssTask.locator('.assignment-list dd').nth(1)).toContainText('Visual Design');
   });
 
+  test('remaining ARRM role guides render their own task and category data', async ({ page }) => {
+    await openRole(page, 'business-analysis');
+    await expect(page).toHaveTitle('WCAG for Business Analysts | WCAG by Role');
+    await expect(page.locator('[data-count="primary"]')).toHaveText('1');
+    await expect(page.locator('[data-count="secondary"]')).toHaveText('0');
+    await expect(page.locator('[data-count="contributor"]')).toHaveText('0');
+    await expect(page.locator('[data-count="tasks"]')).toHaveText('1');
+    await expect(page.locator('.category-nav')).toContainText('Images and Graphs (1)');
+
+    await openRole(page, 'content-authoring');
+    await expect(page).toHaveTitle('WCAG for Content Authors | WCAG by Role');
+    await expect(page.locator('[data-count="primary"]')).toHaveText('1');
+    await expect(page.locator('[data-count="secondary"]')).toHaveText('2');
+    await expect(page.locator('[data-count="contributor"]')).toHaveText('0');
+    await expect(page.locator('[data-count="tasks"]')).toHaveText('3');
+    await expect(page.locator('.category-nav')).toContainText('Images and Graphs (2)');
+    await expect(page.locator('.category-nav')).toContainText('Other ARRM tasks (1)');
+
+    await openRole(page, 'user-experience-design');
+    await expect(page).toHaveTitle('WCAG for UX Designers | WCAG by Role');
+    await expect(page.locator('[data-count="primary"]')).toHaveText('2');
+    await expect(page.locator('[data-count="secondary"]')).toHaveText('4');
+    await expect(page.locator('[data-count="contributor"]')).toHaveText('1');
+    await expect(page.locator('[data-count="tasks"]')).toHaveText('7');
+    await expect(page.locator('.category-nav')).toContainText('Images and Graphs (2)');
+    await expect(page.locator('.category-nav')).toContainText('Input Modalities (2)');
+    await expect(page.locator('.category-nav')).toContainText('Semantic Structure (1)');
+  });
+
   test('task cards link to normative and Understanding guidance and preserve the task text', async ({ page }) => {
     await openRole(page, 'visual-design');
     const task = page.locator('#task-INP-017');
@@ -126,13 +155,13 @@ test.describe('role guides', () => {
   test('unknown role shows a chooser instead of silently defaulting', async ({ page }) => {
     await page.goto('/dist/role.html?role=unknown-role');
     await expect(page.locator('#page-title')).toHaveText('Choose a role guide');
-    await expect(page.locator('.role-path-list .role-path')).toHaveCount(2);
+    await expect(page.locator('.role-path-list .role-path')).toHaveCount(5);
     await expect(page.locator('#role-root')).not.toHaveAttribute('data-role', /.+/);
   });
 
   test('the generic explorer links to both role guides and keeps its filters', async ({ page }) => {
     await page.goto('/dist/');
-    await expect(page.locator('#role-guides-list .role-path')).toHaveCount(2);
+    await expect(page.locator('#role-guides-list .role-path')).toHaveCount(5);
     await page.getByRole('link', { name: /WCAG for Visual Designers/ }).click();
     await expect(page).toHaveURL(/\/dist\/role\.html\?role=visual-design$/);
     await expect(page.locator('#role-root')).toHaveAttribute('data-role', 'visual-design');
@@ -142,7 +171,7 @@ test.describe('role guides', () => {
   });
 
   test('role pages have no axe-core WCAG A/AA violations in light or dark schemes', async ({ page }) => {
-    for (const slug of ['visual-design', 'front-end-development']) {
+    for (const slug of ['business-analysis', 'content-authoring', 'user-experience-design', 'visual-design', 'front-end-development']) {
       await openRole(page, slug);
       expect(await axeViolations(page), `${slug} light`).toEqual([]);
       await page.emulateMedia({ colorScheme: 'dark' });

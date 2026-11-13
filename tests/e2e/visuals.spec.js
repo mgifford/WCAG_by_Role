@@ -17,8 +17,8 @@ test.describe('visual language', () => {
   test('role cards and functional-needs groups have decorative icons and visible text', async ({ page }) => {
     await page.goto('/dist/');
     await expect(page.locator('#data-status')).toContainText('SAMPLE DATA');
-    await expect(page.locator('#role-guides-list .role-path')).toHaveCount(2);
-    await expect(page.locator('#role-guides-list .role-path svg')).toHaveCount(2);
+    await expect(page.locator('#role-guides-list .role-path')).toHaveCount(5);
+    await expect(page.locator('#role-guides-list .role-path svg')).toHaveCount(5);
     await expect(page.locator('.need-card')).toHaveCount(8);
     await expect(page.locator('.need-card svg')).toHaveCount(8);
     await expect(page.locator('.need-card h3')).toHaveText([
