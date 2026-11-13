@@ -1,0 +1,113 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://mgifford.github.io/WCAG_by_Role/schemas/role-data.schema.yaml"
+title: "WCAG by Role normalized source snapshot"
+description: "Schema for the committed production YAML source and the browser JSON generated from it."
+type: object
+required:
+  - schemaVersion
+  - wcagVersion
+  - mode
+  - generatedAt
+  - sources
+  - sourceSHA256
+  - criteria
+  - tasks
+  - roles
+properties:
+  schemaVersion:
+    const: 3
+  wcagVersion:
+    const: "2.2"
+  mode:
+    const: "production"
+  generatedAt:
+    type: string
+    minLength: 10
+  sources:
+    type: object
+    required: [wcag, tasks, responsibilities]
+    properties:
+      wcag: {type: string, pattern: "^https://"}
+      tasks: {type: string, pattern: "^https://"}
+      responsibilities: {type: string, pattern: "^https://"}
+    additionalProperties: true
+  sourceSHA256:
+    type: object
+    required: [wcag, tasks, responsibilities]
+    properties:
+      wcag: {type: string, pattern: "^[0-9a-f]{64}$"}
+      tasks: {type: string, pattern: "^[0-9a-f]{64}$"}
+      responsibilities: {type: string, pattern: "^[0-9a-f]{64}$"}
+    additionalProperties: false
+  criteria:
+    type: array
+    minItems: 80
+    items:
+      type: object
+      required:
+        - number
+        - slug
+        - name
+        - level
+        - normativeUrl
+        - understandingUrl
+        - arrmResponsibilities
+        - criterionSummaryStatus
+        - inBrief
+        - mapped
+      properties:
+        number: {type: string, pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+        slug: {type: string, minLength: 1}
+        name: {type: string, minLength: 1}
+        level: {enum: [A, AA, AAA]}
+        normativeUrl: {type: string, pattern: "^https://"}
+        understandingUrl: {type: string, pattern: "^https://"}
+        principle: {type: string}
+        guideline: {type: string}
+        summary: {type: string}
+        versions:
+          type: array
+          items: {type: string}
+        arrmResponsibilities:
+          type: object
+          additionalProperties:
+            type: array
+            items: {enum: [primary, secondary, contributor]}
+        criterionSummaryStatus: {enum: [recorded, missing]}
+        inBrief:
+          type: object
+          properties:
+            goal: {type: string}
+            whatToDo: {type: string}
+            authorTask: {type: string}
+            whyImportant: {type: string}
+          additionalProperties: true
+        mapped: {type: boolean}
+      additionalProperties: true
+  tasks:
+    type: array
+    minItems: 180
+    items:
+      type: object
+      required: [id, criterion, text, ownership]
+      properties:
+        id: {type: string, minLength: 1}
+        criterion: {type: string, pattern: "^[0-9]+\\.[0-9]+\\.[0-9]+$"}
+        text: {type: string, minLength: 1}
+        stage: {type: string}
+        starter: {type: boolean}
+        ownership:
+          type: object
+          required: [primary, secondary, contributor]
+          properties:
+            primary: {type: array, items: {type: string}}
+            secondary: {type: array, items: {type: string}}
+            contributor: {type: array, items: {type: string}}
+          additionalProperties: false
+      additionalProperties: true
+  roles:
+    type: array
+    minItems: 5
+    uniqueItems: true
+    items: {type: string, minLength: 1}
+additionalProperties: true

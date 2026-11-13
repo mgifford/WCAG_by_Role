@@ -9,7 +9,9 @@ W3C WCAG wcag.json ────────────────┐
 ARRM arrm-all-tasks.csv ───────────┤
 ARRM arrm-wcag-sc.csv ─────────────┤── Python importer + validation
 Understanding page In Brief ──────┘       │
-                                          ├── dist/data/role-data.json
+                                          ├── data/source/role-data.yaml (canonical snapshot)
+                                          │        │  validate + read back
+                                          │        └── dist/data/role-data.json
                                           └── dist/data/import-audit.json
                                                   │
                                      Static HTML + CSS + JavaScript
@@ -17,7 +19,13 @@ Understanding page In Brief ──────┘       │
                                            GitHub Pages
 ```
 
-The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs remain independent and stable. The JSON import also preserves normative and informative source URLs, canonical slug, WCAG level, and ARRM role relationships.
+The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs remain independent and stable. The normalized source also preserves normative and informative source URLs, canonical slug, WCAG level, and ARRM role relationships.
+
+### Canonical YAML source and generated JSON
+
+`data/source/role-data.yaml` is the reviewable production source snapshot. The importer first normalizes W3C/ARRM inputs; `scripts/migrate_source.py` then writes the YAML, validates it with `schemas/role-data.schema.yaml`, reads it back and regenerates `dist/data/role-data.json`. The browser continues to consume JSON during the incremental transition. Do not hand-edit source wording or ownership in YAML: regenerate, review the diff and keep the source hashes with the snapshot.
+
+The YAML build step uses PyYAML from `requirements.txt`; it is not shipped to the browser. The static site has no runtime YAML or Python dependency. Round-trip tests compare the YAML and JSON data exactly, so a serialization change cannot silently drop fields.
 
 ### Record schema (abbreviated)
 
@@ -63,7 +71,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
                              └── dom.js
 ```
 
-- `role.html?role=visual-design` and `role.html?role=front-end-development` are static pages. The query string selects the role; fragments (`#task-INP-017`, `#sc-2-4-7`, `#category-css-and-presentation`) are resolved after render and focused without a client-side router.
+- `role.html?role=<slug>` is a static page for each of the five ARRM roles. The query string selects the role; fragments (`#task-INP-017`, `#sc-2-4-7`, `#category-css-and-presentation`) are resolved after render and focused without a client-side router.
 - `web/role-config.js` holds the role copy, URL slug, explorer query and ARRM task-prefix category map. `web/role-page.js` is the shared renderer; adding a role requires a config entry, not a new HTML page or pipeline change.
 - Categories are project navigation derived from the [W3C ARRM tasks page](https://www.w3.org/WAI/planning/arrm/tasks/) section headings and task ID prefixes. They are not a WCAG taxonomy, a new standard or a re-assignment of responsibility. Unknown prefixes stay visible under **Other ARRM tasks**.
 - Every task card shows the stable ARRM task ID, original task text, all primary/secondary/contributor assignments, and links to the WCAG criterion and Understanding document. The selected role is highlighted with text, not colour alone.
@@ -75,7 +83,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
 - `criterionSummaryStatus` is `recorded` when the ARRM criterion CSV has a row for the criterion, even if that row assigns none of its roles, and `missing` when the CSV has no row. `criteriaWithoutCriterionSummary` contains only `missing` records.
 - The explorer computes level filtering client-side. A conformance target is cumulative (`A` < `AA` < `AAA`); exact-level filtering is independent. Role and ownership filters do not change either meaning. Neither control establishes conformance.
 
-See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and extension steps. Schema version 2 and the pipeline's import semantics are unchanged by this presentation layer.
+See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and extension steps. Schema version 3 and the pipeline's import semantics are unchanged by this presentation layer.
 
 ## Import semantics
 
@@ -107,4 +115,4 @@ See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and exte
 
 ## Planned schema changes
 
-Versioned JSON allows clients beyond GitHub Pages. Any breaking changes require a `schemaVersion` increment and a migration note. Schema 3 is documented here; clients should ignore unknown fields and must not treat a missing task or missing summary as an exemption.
+The versioned YAML source and generated JSON allow clients beyond GitHub Pages. Any breaking changes require a `schemaVersion` increment and a migration note. Schema 3 is documented here; clients should ignore unknown fields and must not treat a missing task or missing summary as an exemption.

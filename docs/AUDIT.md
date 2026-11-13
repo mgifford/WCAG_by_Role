@@ -1,16 +1,19 @@
-# Source and build audit — 2026-11-12
+# Source and build audit — 2026-11-13
 
 This audit records what was imported at a point in time. It is not a WCAG conformance claim and it does not replace reviewing the W3C sources.
 
 ## Commands
 
 ```sh
+python3 -m pip install -r requirements.txt
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:e2e
 python3 scripts/pipeline.py --mode production   # network; may be rate-limited
+python3 scripts/migrate_source.py --input dist/data/role-data.json \
+  --yaml-out data/source/role-data.yaml --json-out dist/data/role-data.json
 ```
 
 ## Offline demo build
@@ -25,15 +28,22 @@ python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 | Criteria with a task | 7 |
 | Criteria with a criterion-level summary | 7 |
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
-| Python tests | 36 passed |
+| Python tests | 41 passed |
 | Playwright / axe-core tests | 54 passed |
 | Link URL unit tests | 4 passed |
+| YAML source tests | 5 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
 
+## Canonical YAML source
+
+`data/source/role-data.yaml` is generated from the production JSON, read back, validated against `schemas/role-data.schema.yaml` and used to regenerate the browser JSON. It contains 86 active criteria, 262 accepted ARRM tasks and 5 roles. Active 4.1.1 is absent; retired records remain in the audit only. Source SHA-256 values match the table below. The YAML snapshot is committed for review and provenance; it is not complete WCAG normative text and does not replace the W3C Recommendation.
+
+PyYAML 6.0.3 is a build/test-only dependency in `requirements.txt`. The deployed site remains static and has no runtime YAML dependency. CI installs it, writes the production YAML and regenerates `dist/data/role-data.json` from that YAML before deployment.
+
 ## Live production import
 
-Sources fetched on 2026-11-12:
+Sources fetched on 2026-11-13:
 
 | Source | URL | SHA-256 |
 | --- | --- | --- |
@@ -133,6 +143,7 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Visual-language tests cover original decorative SVG icons, role/category icon counts, the eight functional-needs groups, no external images, dark/forced-colour visibility, 320 px reflow and axe with the visual sections.
 - Pictogram tests cover all 86 supplied SC symbols, 13 guideline symbols, mapping/symbol agreement, no 4.1.1, criterion-card and role-list rendering, dark/forced-colour tiles and no `<img>` assets.
 - Accordion tests cover collapsed defaults, summary counts, mouse and keyboard opening, search auto-open, and axe with open and closed task lists.
+- YAML source tests cover the committed 86/262/5 snapshot, source hashes, schema, demo round-trip and rejection of retired criteria, unknown task references and duplicate task IDs.
 
 **This is regression evidence, not a conformance claim.** axe-core cannot judge meaningful link text, sensible focus order, screen-reader announcements, real high-contrast rendering, zoom quality or whether the ARRM mapping is appropriate for a team.
 
