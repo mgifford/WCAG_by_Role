@@ -21,6 +21,10 @@ Understanding page In Brief ──────┘       │
 
 The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs remain independent and stable. The normalized source also preserves normative and informative source URLs, canonical slug, WCAG level, and ARRM role relationships.
 
+### Persona layer
+
+`data/personas/*.yaml` is the canonical source for five fictional professional archetypes, one per ARRM role with task data. `scripts/export_personas.py` validates the YAML against `schemas/persona.schema.yaml` and deterministically generates `data/exports/personas.json` and `personas.csv`. `data/role-profiles/*.yaml` links each role to its persona. The five portraits are cached under `web/assets/personas/`, with source URLs and SHA-256 hashes in `data/exports/avatar-manifest.json`; the published site never contacts RoboHash. Persona text is independently authored, marked `unvalidated-draft`, and never changes WCAG/ARRM ownership or requirements.
+
 ### Canonical YAML source and generated JSON
 
 `data/source/role-data.yaml` is the reviewable production source snapshot. The importer first normalizes W3C/ARRM inputs; `scripts/migrate_source.py` then writes the YAML, validates it with `schemas/role-data.schema.yaml`, reads it back and regenerates `dist/data/role-data.json`. The browser continues to consume JSON during the incremental transition. Do not hand-edit source wording or ownership in YAML: regenerate, review the diff and keep the source hashes with the snapshot.

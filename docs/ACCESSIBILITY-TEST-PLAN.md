@@ -17,6 +17,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Landmarks and headings | Correct main, navigation, form search region, article and heading order |
 | Live updates | Result counts are announced without repeatedly interrupting users; no keyboard focus loss |
 | Task disclosures | Task-level assignment lists are native details, summary includes the task count, keyboard operable, and search opens matching lists |
+| Credits | Credits page exposes W3C, ARRM, RoboHash and Zikri Kader attribution, with no runtime image-service dependency |
 | Links | Each criterion has an unambiguous accessible link to the official norm and an Understanding link |
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
 | Level filtering | Conformance target A includes only A; AA includes A+AA; AAA includes A+AA+AAA; exact level remains independent |
@@ -60,6 +61,7 @@ The Playwright suite currently covers:
 - Original inline icons: decorative SVG semantics, role/category icon counts, functional-needs cards, forced colours, reflow and axe with the visual sections.
 - Supplied WCAG 2.2 pictograms: 86/86 mapping coverage, symbol IDs, criterion-card/role-list rendering, dark/forced-colour tiles and no `<img>` assets.
 - Task accordions: collapsed by default, count in the summary, mouse/keyboard open, search auto-open, and axe checks in open and closed states.
+- Credits page: W3C/ARRM/RoboHash attribution, five source links and axe-core WCAG A/AA.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people

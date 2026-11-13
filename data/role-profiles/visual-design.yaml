@@ -1,0 +1,53 @@
+schemaVersion: 1.0.0
+id: visual-design
+language: en
+profileStatus: project-draft
+authority: Independent project communication profile, not W3C guidance.
+arrmRole: Visual Design
+title: Visual designers
+perspective: Information hierarchy, typography, contrast, layout and visible component states.
+voice: Visual and concrete; emphasize states, variants, handoff and responsive behavior without assuming
+  coding expertise.
+preferredTerms:
+- visual hierarchy
+- component state
+- focus indicator
+- contrast
+- spacing
+- typography
+- layout
+- design tokens
+- breakpoint
+avoidUnexplained:
+- DOM mutation
+- aria-live
+- tabindex
+- accessible name computation
+focusQuestions:
+- How does the user perceive this state?
+- How does the design adapt at different sizes and preferences?
+- What must the implementation preserve?
+deliverables:
+- annotated component variant
+- design token
+- state specification
+- responsive design example
+verificationExamples:
+- review actual browser rendering
+- check forced colours and zoom
+- review interaction states
+roleBoundary: A mock-up does not guarantee the rendered result or assign developer tasks to visual
+  design.
+ownershipCommunication:
+  primary: Describe the task the role is normally accountable for, using the source assignment unchanged.
+  secondary: Describe how the role supports the primary owner without taking over responsibility.
+  contributor: Describe consultation and input; do not imply implementation accountability.
+  none: State explicitly that ARRM records no task-level ownership for this role; optional context
+    is not an assignment.
+editorialRules:
+- Do not change WCAG requirements or conformance levels.
+- Do not infer ARRM ownership from criterion-level summaries.
+- Make uncertainty explicit.
+- Prefer platform-neutral examples unless a platform is specifically required.
+- Do not stereotype professional knowledge, disability, or reading ability.
+personaRef: ../personas/visual-val.yaml

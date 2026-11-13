@@ -22,9 +22,10 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 
 ## Quick start (no network)
 
-Requirements: Python 3.11 or later and the build/test dependency in `requirements.txt`. The published site is static and needs no Python, YAML or package runtime.
+Requirements for development: Python 3.11 or later and the build/test dependencies in `requirements-dev.txt`. The published site is static and needs no Python, YAML or package runtime.
 
 ```sh
+python3 -m pip install -r requirements-dev.txt
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
 python3 -m http.server 8000 --directory dist
@@ -39,6 +40,8 @@ Role guide examples:
 - http://localhost:8000/role.html?role=user-experience-design
 - http://localhost:8000/role.html?role=visual-design
 - http://localhost:8000/role.html?role=front-end-development
+
+Five fictional professional personas are maintained in `data/personas/*.yaml`. They are independent, unvalidated archetypes: they never assign ARRM ownership and are not W3C guidance. Their JSON/CSV exports and local RoboHash portraits are documented in [PERSONAS.md](PERSONAS.md) and [web/credits.html](web/credits.html). Persona views are a later PR; this data layer is already usable by other tools.
 
 The generic explorer remains at `/` and includes all criteria and filters. Role guides are project navigation over the same normalized data; they are not a second dataset or a conformance checklist. These five roles are the roles with task-level assignments in the imported ARRM CSVs. Other ARRM roles are not shown because there are no task rows to support a guide without inventing assignments.
 
@@ -111,16 +114,27 @@ scripts/source_schema.py      Stdlib source-snapshot validation rules
 scripts/smoke_site.py         Post-deploy production-artefact smoke checks
 data/source/role-data.yaml    Canonical production source snapshot
 schemas/role-data.schema.yaml Source and generated-JSON contract
-requirements.txt              Build/test-only PyYAML dependency
+requirements.txt              Build-only PyYAML dependency
+requirements-dev.txt          Test-only jsonschema validation dependency
+data/personas/                Five canonical fictional role personas
+data/role-profiles/            Communication profiles linked to personas
+data/exports/                  Generated persona JSON/CSV and avatar manifest
+web/assets/personas/           Five cached RoboHash set1 portraits
+web/credits.html               W3C/ARRM/RoboHash credits and licences
+schemas/persona.schema.yaml    Persona schema
+scripts/export_personas.py     Validate YAML and regenerate persona exports
+scripts/cache_persona_avatars.py  Manual avatar refresh (`--force` to refetch)
 fixtures/                     Clearly labeled offline demonstration data
 tests/test_pipeline.py        Python import and business-rule tests
 tests/test_yaml_source.py     YAML snapshot, schema, round-trip and rejection tests
+tests/test_personas.py        Persona schema, exports, avatars and CSV tests
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
 docs/                         Governance, architecture, role guides, visual language,
                               external resources, audit, roadmap, test plan, manual-test
                               template and upstream issue drafts
-NOTICE.md                     W3C attribution and reuse cautions
+PERSONAS.md                    Human-readable fictional persona descriptions
+NOTICE.md                     W3C/ARRM/RoboHash attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
 

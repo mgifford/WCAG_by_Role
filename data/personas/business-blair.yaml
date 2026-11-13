@@ -1,0 +1,76 @@
+schemaVersion: 1.0.0
+personaType: fictional-professional-archetype
+researchStatus: unvalidated-draft
+id: business-blair
+roleSlug: business-analysis
+arrmRole: Business Analysis
+name: Business Analyst Blair
+shortName: Blair
+summary: Blair turns service needs, policy constraints and accessibility expectations into verifiable requirements
+  and handoffs.
+scenario: Blair supports a government digital-service team replacing a complex application form. The procurement
+  and delivery teams want concise requirements, accountable handoffs and observable acceptance evidence.
+goals:
+- Write accessibility requirements that can be verified rather than relying on generic compliance claims.
+- Map each delivery decision to a responsible role without treating ARRM as an organizational mandate.
+- Find the right W3C source to cite in an acceptance criterion.
+needs:
+- Examples of requirements, acceptance evidence and handoff language.
+- A clear distinction between normative WCAG requirements and advisory ARRM task assignments.
+- Traceability from a requirement to its WCAG criterion and relevant ARRM task.
+thoughts:
+- Who needs to make this decision, and where should it be recorded?
+- What evidence would establish that the delivered interaction works?
+feelings:
+- Concerned when accessibility is reduced to an untestable statement in a contract.
+- More confident when requirements, owners and review evidence are visible together.
+behaviors:
+- Cross-references requirements, issue tickets and design decisions.
+- Reviews procurement or acceptance documents with content, design, QA and development colleagues.
+painPoints:
+- Vague wording such as fully accessible with no observable acceptance criteria.
+- A list of technical failures without a clear consequence for scope, delivery or verification.
+accessContext: May need to review evidence in a managed browser without installing local tools; this is a
+  situational constraint, not a property of all business analysts.
+avatar:
+  provider: RoboHash
+  seed: wcag-role-business-blair
+  set: set1
+  size: 400x400
+  url: https://robohash.org/wcag-role-business-blair.png?set=set1&size=400x400
+  localPath: web/assets/personas/business-blair.png
+  format: png
+  decorative: true
+  altText: ''
+  license: CC BY 4.0
+  attribution: RoboHash (https://robohash.org/), classic robot artwork by Zikri Kader
+  assetStatus: cached
+  sha256: c75016ca365daff948fce44b962733b7ef02ddb353aa58eeebbd01c87d1d7fcc
+  genre: classic-robot
+sourceNotes:
+  inspiredBy: https://accessibility.civicactions.com/personas/
+  roleReferences:
+  - https://www.w3.org/WAI/planning/arrm/roles/
+  claims: Illustrative fictional persona; researchStatus is not a professional or accessibility evaluation.
+    Do not infer disability, expertise, individual preferences, or ARRM task ownership from this persona.
+preferredCommunication:
+  vocabulary:
+  - requirement
+  - acceptance criterion
+  - risk
+  - scope
+  - decision
+  - evidence
+  - traceability
+  framing: Lead with the decision or expected outcome, then show a verifiable example and responsible collaborators.
+  exampleTypes:
+  - acceptance criterion
+  - procurement requirement
+  - handoff decision
+  - risk register entry
+  explainTerms:
+  - ARIA implementation detail
+  - CSS selector
+  - browser accessibility API
+  successSignal: Can explain which requirement is normative, which task is advisory, and what evidence would
+    help check the outcome.

@@ -1,0 +1,52 @@
+schemaVersion: 1.0.0
+id: content-authoring
+language: en
+profileStatus: project-draft
+authority: Independent project communication profile, not W3C guidance.
+arrmRole: Content Authoring
+title: Content authors
+perspective: Meaning, reader comprehension, editorial consistency and accessible alternatives.
+voice: Clear, active, concrete, plain language; emphasize meaning over implementation mechanics.
+preferredTerms:
+- meaning
+- purpose
+- heading
+- label
+- instruction
+- alternative text
+- reading order
+- plain language
+- editorial review
+avoidUnexplained:
+- DOM
+- ARIA
+- CSS selectors
+- accessibility tree
+- WCAG technique ID
+focusQuestions:
+- What information does the audience need?
+- What wording preserves meaning?
+- How will the content work in context?
+deliverables:
+- approved content
+- alternative text
+- editorial guidance
+- content acceptance checklist
+verificationExamples:
+- review published meaning in context
+- check content with users and assistive technology
+roleBoundary: Content decisions may require implementation work by developers and interaction decisions
+  by designers.
+ownershipCommunication:
+  primary: Describe the task the role is normally accountable for, using the source assignment unchanged.
+  secondary: Describe how the role supports the primary owner without taking over responsibility.
+  contributor: Describe consultation and input; do not imply implementation accountability.
+  none: State explicitly that ARRM records no task-level ownership for this role; optional context
+    is not an assignment.
+editorialRules:
+- Do not change WCAG requirements or conformance levels.
+- Do not infer ARRM ownership from criterion-level summaries.
+- Make uncertainty explicit.
+- Prefer platform-neutral examples unless a platform is specifically required.
+- Do not stereotype professional knowledge, disability, or reading ability.
+personaRef: ../personas/content-casey.yaml

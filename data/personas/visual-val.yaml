@@ -1,0 +1,77 @@
+schemaVersion: 1.0.0
+personaType: fictional-professional-archetype
+researchStatus: unvalidated-draft
+id: visual-val
+roleSlug: visual-design
+arrmRole: Visual Design
+name: Visual Designer Val
+shortName: Val
+summary: Val maintains a component library and wants visual accessibility decisions to survive implementation
+  across states and environments.
+scenario: Val designs components used by several teams. They need to specify focus appearance, type, spacing,
+  contrast, responsive variants and adaptations to user preferences.
+goals:
+- Describe accessible visual states and component variants precisely.
+- Make accessibility annotations actionable in design handoffs.
+- Check rendered implementations rather than assuming design files demonstrate conformance.
+needs:
+- Visual comparisons of good and poor states.
+- Design-token, focus, colour, typography and reflow examples.
+- An explicit distinction between the design decision and implementation verification.
+thoughts:
+- Will the state remain clear when colours change or the layout reflows?
+- Have I specified enough for the developer to reproduce the intended behavior?
+feelings:
+- Frustrated when an accessible state is lost between the design and production.
+- Motivated by concrete examples that can be incorporated into the design system.
+behaviors:
+- Annotates component states and responsive variants.
+- Reviews the live interface with developers and compares it against design intent.
+painPoints:
+- Guidance that assumes a contrast check alone resolves all visual accessibility concerns.
+- Ambiguous handoffs for focus, hover, forced-colours and user preferences.
+accessContext: Sometimes reviews designs under variable lighting or altered contrast preferences; these situations
+  do not define the role or a disability identity.
+avatar:
+  provider: RoboHash
+  seed: wcag-role-visual-val
+  set: set1
+  size: 400x400
+  url: https://robohash.org/wcag-role-visual-val.png?set=set1&size=400x400
+  localPath: web/assets/personas/visual-val.png
+  format: png
+  decorative: true
+  altText: ''
+  license: CC BY 4.0
+  attribution: RoboHash (https://robohash.org/), classic robot artwork by Zikri Kader
+  assetStatus: cached
+  sha256: 1b23110115dfd5d583c081557c43498d2ccf7b271ee5b7ffc4ba9b04d4258508
+  genre: classic-robot
+sourceNotes:
+  inspiredBy: https://accessibility.civicactions.com/personas/
+  roleReferences:
+  - https://www.w3.org/WAI/planning/arrm/roles/
+  claims: Illustrative fictional persona; researchStatus is not a professional or accessibility evaluation.
+    Do not infer disability, expertise, individual preferences, or ARRM task ownership from this persona.
+preferredCommunication:
+  vocabulary:
+  - visual hierarchy
+  - component state
+  - focus indicator
+  - contrast
+  - typography
+  - layout
+  - design token
+  framing: Use a visual state and its constraints first, followed by design specifications and what must be
+    verified in the browser.
+  exampleTypes:
+  - component variant
+  - design token
+  - state matrix
+  - responsive annotation
+  explainTerms:
+  - accessible tree computation
+  - event-loop internals
+  - procurement clause
+  successSignal: Can describe the expected visual outcome and coordinate verification with the implementing
+    developer.

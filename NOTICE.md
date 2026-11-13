@@ -11,9 +11,15 @@ Only original application code is covered by this repository's MIT license. That
 
 The WCAG 2.2 pictogram sprite and mapping (`web/wcag22-icons.svg`, `web/wcag22-icons-mapping.json`) were supplied for this project by the repository owner. Their metadata cites the W3C WCAG 2.2 Recommendation as the reference source; the artwork is not a W3C publication and no separate reuse licence was supplied. They are included with the owner's permission and are not relicensed by this repository's MIT licence.
 
-The interface icons in `web/visuals.js` are original project artwork covered by this repository's MIT license. No third-party icon font or illustration is bundled. Oobee's repository uses Font Awesome Free 5.15.4 (icons CC BY 4.0, fonts SIL OFL 1.1) and AAArdvark's plain-English icons were not reused; see `docs/VISUAL-LANGUAGE.md`.
+The interface icons in `web/visuals.js` are original project artwork covered by this repository's MIT license. No third-party icon font or illustration is used for those interface icons; the separately attributed persona portraits are described below. Oobee's repository uses Font Awesome Free 5.15.4 (icons CC BY 4.0, fonts SIL OFL 1.1) and AAArdvark's plain-English icons were not reused; see `docs/VISUAL-LANGUAGE.md`.
 
 The canonical source snapshot (`data/source/role-data.yaml`) preserves W3C WCAG 2.2 metadata and links and ARRM task text/ownership. Those source materials remain subject to their publishers' terms; the snapshot is not a substitute for the W3C Recommendation or the ARRM source.
+
+## Persona avatars
+
+All five persona portraits use RoboHash **set1** classic robots at 400x400, with unique seeds. The set1 artwork is by **Zikri Kader** and is used under **CC BY 4.0**: https://creativecommons.org/licenses/by/4.0/ . RoboHash is at https://robohash.org/ ; the RoboHash software is separately MIT-licensed (https://github.com/e1ven/Robohash), and its artwork licences are distinct. The PNGs are cached under `web/assets/personas/`, with source URLs and SHA-256 hashes in `data/exports/avatar-manifest.json`. The published site never requests RoboHash.
+
+The persona prose is independently authored fictional content marked `unvalidated-draft`; it is not W3C or CivicActions guidance and does not imply endorsement or assign ARRM ownership.
 
 External resources linked from the site (including Simple WCAG, AAArdvark WCAG in Plain English, The WCAG, DigitalA11y, CivicActions accessibility-data-reference, Purple Hats/Oobee, axe-core, Section 508 and EN 301 549 material, and the accessibility-impact knowledge layer) remain the property of their publishers and are governed by their own terms. The project links to them for convenience, does not mirror their content, and does not endorse them or treat them as W3C requirements. See `docs/EXTERNAL-RESOURCES.md`.
 

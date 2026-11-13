@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "set": "set1",
+  "avatars": [
+    {
+      "persona": "business-blair",
+      "path": "web/assets/personas/business-blair.png",
+      "sourceUrl": "https://robohash.org/wcag-role-business-blair.png?set=set1&size=400x400",
+      "sha256": "c75016ca365daff948fce44b962733b7ef02ddb353aa58eeebbd01c87d1d7fcc",
+      "bytes": 44725
+    },
+    {
+      "persona": "content-casey",
+      "path": "web/assets/personas/content-casey.png",
+      "sourceUrl": "https://robohash.org/wcag-role-content-casey.png?set=set1&size=400x400",
+      "sha256": "de361c4fb017fb049bcd12875527464694926ff5170d9c14db625ee86ef89675",
+      "bytes": 60288
+    },
+    {
+      "persona": "front-end-finley",
+      "path": "web/assets/personas/front-end-finley.png",
+      "sourceUrl": "https://robohash.org/wcag-role-developer-finley.png?set=set1&size=400x400",
+      "sha256": "a2d3a370b6485c22692c64664a8e2a3ed19bb41d129356dad2d26865002e3191",
+      "bytes": 59009
+    },
+    {
+      "persona": "ux-uma",
+      "path": "web/assets/personas/ux-uma.png",
+      "sourceUrl": "https://robohash.org/wcag-role-ux-uma.png?set=set1&size=400x400",
+      "sha256": "8537282599dfd7bb6c817b433499c3dd5485632d66e947402c21429b8915e14f",
+      "bytes": 42815
+    },
+    {
+      "persona": "visual-val",
+      "path": "web/assets/personas/visual-val.png",
+      "sourceUrl": "https://robohash.org/wcag-role-visual-val.png?set=set1&size=400x400",
+      "sha256": "1b23110115dfd5d583c081557c43498d2ccf7b271ee5b7ffc4ba9b04d4258508",
+      "bytes": 42195
+    }
+  ]
+}
