@@ -21,6 +21,10 @@ Understanding page In Brief ──────┘       │
 
 The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs remain independent and stable. The normalized source also preserves normative and informative source URLs, canonical slug, WCAG level, and ARRM role relationships.
 
+### Static discovery layer
+
+After the production YAML is validated, `scripts/publish_discovery.py` reads `dist/data/role-data.json` and writes static crawlable role, criterion, task, comparison and data pages under `dist/`, plus CSV/JSON/YAML distributions, a sitemap, JSON-LD, shared icons and `llms.txt`. It does not call the network, an LLM or a Cloudflare Worker. The interactive app remains at `/` and `role.html`; static pages are canonical for search. `role.html` is `noindex,follow`. The `cloudflare-mcp-future/` directory is a tool contract only; no MCP server is shipped.
+
 ### Persona layer
 
 `data/personas/*.yaml` is the canonical source for five fictional professional archetypes, one per ARRM role with task data. `scripts/export_personas.py` validates the YAML against `schemas/persona.schema.yaml` and deterministically generates `data/exports/personas.json` and `personas.csv`. `data/role-profiles/*.yaml` links each role to its persona. The five portraits are cached under `web/assets/personas/`, with source URLs and SHA-256 hashes in `data/exports/avatar-manifest.json`; the published site never contacts RoboHash. Persona text is independently authored, marked `unvalidated-draft`, and never changes WCAG/ARRM ownership or requirements.

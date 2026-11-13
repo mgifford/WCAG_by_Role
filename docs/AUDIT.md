@@ -14,6 +14,9 @@ pnpm test:e2e
 python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 python3 scripts/migrate_source.py --input dist/data/role-data.json \
   --yaml-out data/source/role-data.yaml --json-out dist/data/role-data.json
+python3 scripts/publish_discovery.py --dist dist \
+  --source-yaml data/source/role-data.yaml \
+  --base-url https://mgifford.github.io/WCAG_by_Role/ --repo-root .
 ```
 
 ## Offline demo build
@@ -28,11 +31,12 @@ python3 scripts/migrate_source.py --input dist/data/role-data.json \
 | Criteria with a task | 7 |
 | Criteria with a criterion-level summary | 7 |
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
-| Python tests | 47 passed |
-| Playwright / axe-core tests | 57 passed |
+| Python tests | 55 passed |
+| Playwright / axe-core tests | 58 passed |
 | Link URL unit tests | 4 passed |
 | YAML source tests | 5 passed |
 | Persona data tests | 6 passed |
+| Discovery tests | 8 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
 
@@ -41,6 +45,10 @@ The demo page shows a visible sample-data warning. `dist/` is generated and is n
 `data/source/role-data.yaml` is generated from the production JSON, read back, validated against `schemas/role-data.schema.yaml` and used to regenerate the browser JSON. It contains 86 active criteria, 262 accepted ARRM tasks and 5 roles. Active 4.1.1 is absent; retired records remain in the audit only. Source SHA-256 values match the table below. The YAML snapshot is committed for review and provenance; it is not complete WCAG normative text and does not replace the W3C Recommendation.
 
 PyYAML 6.0.3 is a build/test-only dependency in `requirements.txt`. The deployed site remains static and has no runtime YAML dependency. CI installs it, writes the production YAML and regenerates `dist/data/role-data.json` from that YAML before deployment.
+
+## Static discovery publication
+
+The post-build publisher creates crawlable role, criterion, task, comparison and data pages without contacting the network or an LLM. The production report is **445 HTML pages**: 86 criteria, 262 tasks, 86 comparisons, 5 roles and 4 indexes plus the existing homepage and credits page. `sitemap.xml` contains exactly those pages. It also publishes JSON/YAML/CSV distributions, a manifest with hashes and a `llms.txt` navigation aid. `role.html` is marked `noindex,follow`; static pages are canonical. The Cloudflare MCP folder is a **contract only**, not a server.
 
 ## Persona data and avatars
 
@@ -150,6 +158,8 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Accordion tests cover collapsed defaults, summary counts, mouse and keyboard opening, search auto-open, and axe with open and closed task lists.
 - YAML source tests cover the committed 86/262/5 snapshot, source hashes, schema, demo round-trip and rejection of retired criteria, unknown task references and duplicate task IDs.
 - Persona tests cover 1:1 role mapping, schema, unique seeds, cached PNG dimensions/hashes, deterministic CSV/JSON and formula neutralisation.
+- Discovery tests cover static criterion/task/role/comparison pages, sitemap membership, canonical and JSON-LD metadata, nested-path links, CSV output, source attribution, YAML mismatch rejection and incomplete-production rejection.
+- A production discovery run generated **445 HTML pages** from 86 criteria, 262 tasks and 5 roles; all sampled static pages returned HTTP 200 and axe-core found no WCAG A/AA violations.
 
 **This is regression evidence, not a conformance claim.** axe-core cannot judge meaningful link text, sensible focus order, screen-reader announcements, real high-contrast rendering, zoom quality or whether the ARRM mapping is appropriate for a team.
 

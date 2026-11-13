@@ -49,6 +49,9 @@ jobs:
       - name: Build and audit the offline demo
         run: python3 scripts/pipeline.py --mode demo
 
+      - name: Generate offline static discovery preview
+        run: python3 scripts/publish_discovery.py --dist dist --repo-root .
+
       - name: Set up Node.js
         uses: actions/setup-node@v7
         with:
@@ -111,6 +114,16 @@ jobs:
             --input dist/data/role-data.json \
             --yaml-out data/source/role-data.yaml \
             --json-out dist/data/role-data.json
+
+      - name: Generate indexable reference pages and data exports
+        env:
+          PUBLIC_BASE_URL: ${{ vars.PUBLIC_BASE_URL }}
+        run: |
+          python3 scripts/publish_discovery.py \
+            --dist dist \
+            --source-yaml data/source/role-data.yaml \
+            --base-url "${PUBLIC_BASE_URL:-https://mgifford.github.io/WCAG_by_Role/}" \
+            --repo-root .
 
       - name: Record provenance and audit artefact
         uses: actions/upload-artifact@v7

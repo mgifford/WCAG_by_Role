@@ -1,0 +1,20 @@
+{
+  "status": "planned-not-implemented",
+  "protocol": "MCP Streamable HTTP (validate specification when implementing)",
+  "tools": [
+    {"name": "get_dataset_info", "purpose": "Read manifest, source hashes, citation and export URLs", "arguments": {}},
+    {"name": "search_accessibility", "purpose": "Search published task and criterion references with bounds", "arguments": {"query": "string", "limit": "integer (1-50)", "cursor": "optional string"}},
+    {"name": "get_criterion", "purpose": "Retrieve source reference and related task records", "arguments": {"criterion": "string (e.g. 2.4.7)"}},
+    {"name": "get_arrm_task", "purpose": "Retrieve original ARRM task and recorded ownership", "arguments": {"task_id": "string (e.g. INP-017)"}},
+    {"name": "get_role_guidance", "purpose": "Retrieve reviewed project interpretations if available; do not fabricate", "arguments": {"role": "canonical role slug", "criterion": "optional string", "task_id": "optional string"}},
+    {"name": "compare_roles", "purpose": "Compare recorded role assignments for a criterion or task", "arguments": {"criterion": "optional string", "task_id": "optional string"}}
+  ],
+  "constraints": [
+    "Read-only",
+    "Do not infer responsibility",
+    "W3C source material and project interpretation are distinct",
+    "Hard query/result size limits",
+    "Every response contains source provenance and revision",
+    "No MCP implementation or protocol verification is part of this handoff"
+  ]
+}

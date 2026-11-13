@@ -17,7 +17,7 @@ from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 MINIMUMS = {'criteria': 80, 'tasks': 180, 'roles': 4}
-ASSETS = ('', 'styles.css', 'app.js', 'dom.js', 'role-config.js', 'role-cards.js', 'role-page.js', 'resources.js', 'visuals.js', 'digitala11y-links.js', 'wcag22-icons.svg', 'wcag22-icons-mapping.json', 'role.html', 'credits.html', 'favicon.svg', 'assets/personas/business-blair.png', 'assets/personas/content-casey.png', 'assets/personas/front-end-finley.png', 'assets/personas/ux-uma.png', 'assets/personas/visual-val.png', 'data/role-data.json', 'data/import-audit.json')
+ASSETS = ('', 'styles.css', 'app.js', 'dom.js', 'role-config.js', 'role-cards.js', 'role-page.js', 'resources.js', 'visuals.js', 'digitala11y-links.js', 'wcag22-icons.svg', 'wcag22-icons-mapping.json', 'role.html', 'credits.html', 'favicon.svg', 'favicon-48.png', 'favicon.ico', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'social-card.png', 'site.webmanifest', 'discovery.css', 'llms.txt', 'sitemap.xml', 'roles/index.html', 'criteria/index.html', 'tasks/index.html', 'data/index.html', 'data/manifest.json', 'data/dataset.jsonld', 'data/discovery-build.json', 'data/criteria.csv', 'data/tasks.csv', 'data/role-matrix.csv', 'data/personas.json', 'data/personas.csv', 'assets/personas/business-blair.png', 'assets/personas/content-casey.png', 'assets/personas/front-end-finley.png', 'assets/personas/ux-uma.png', 'assets/personas/visual-val.png', 'data/role-data.json', 'data/import-audit.json')
 REQUIRED_ROLE_MARKERS = (
     'id="role-root"',
     'id="role-status"',

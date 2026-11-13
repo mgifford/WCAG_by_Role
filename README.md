@@ -29,6 +29,7 @@ Requirements for development: Python 3.11 or later and the build/test dependenci
 python3 -m pip install -r requirements-dev.txt
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
+python3 scripts/publish_discovery.py --dist dist --repo-root .
 python3 -m http.server 8000 --directory dist
 ```
 
@@ -76,6 +77,8 @@ python3 scripts/migrate_source.py \
   --input dist/data/role-data.json \
   --yaml-out data/source/role-data.yaml \
   --json-out dist/data/role-data.json
+python3 scripts/publish_discovery.py --dist dist \
+  --source-yaml data/source/role-data.yaml --repo-root .
 python3 -m http.server 8000 --directory dist
 ```
 
@@ -112,6 +115,7 @@ web/digitala11y-links.js      Checked DigitalA11y direct-article map
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
 scripts/migrate_source.py     Validate YAML source and regenerate browser JSON
 scripts/source_schema.py      Stdlib source-snapshot validation rules
+scripts/publish_discovery.py  Static crawlable pages and data exports
 scripts/smoke_site.py         Post-deploy production-artefact smoke checks
 data/source/role-data.yaml    Canonical production source snapshot
 schemas/role-data.schema.yaml Source and generated-JSON contract
@@ -122,6 +126,8 @@ data/role-profiles/            Communication profiles linked to personas
 data/exports/                  Generated persona JSON/CSV and avatar manifest
 web/assets/personas/           Five cached RoboHash set1 portraits
 web/credits.html               W3C/ARRM/RoboHash credits and licences
+web/discovery.css              Generated discovery-page styles
+web/site.webmanifest           Installable-site metadata for discovery pages
 schemas/persona.schema.yaml    Persona schema
 scripts/export_personas.py     Validate YAML and regenerate persona exports
 scripts/cache_persona_avatars.py  Manual avatar refresh (`--force` to refetch)
@@ -129,6 +135,8 @@ fixtures/                     Clearly labeled offline demonstration data
 tests/test_pipeline.py        Python import and business-rule tests
 tests/test_yaml_source.py     YAML snapshot, schema, round-trip and rejection tests
 tests/test_personas.py        Persona schema, exports, avatars and CSV tests
+tests/test_discovery.py       Static discovery publisher and metadata tests
+cloudflare-mcp-future/        Contract only; no MCP server is implemented
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
 docs/                         Governance, architecture, role guides, visual language,
@@ -139,7 +147,7 @@ NOTICE.md                     W3C/ARRM/RoboHash attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
 
-Generated `dist/data/role-data.json` and `dist/data/import-audit.json` are available on the deployed site and suitable for other tools. `dist/` is ignored in Git and generated for every deployment. The canonical `data/source/role-data.yaml` is committed for review; the browser JSON is regenerated from it during the production build.
+Generated `dist/data/role-data.json` and `dist/data/import-audit.json` are available on the deployed site and suitable for other tools. The production build also publishes static role, criterion, task and comparison pages, a sitemap, JSON-LD and CSV/JSON/YAML distributions. `dist/` is ignored in Git and generated for every deployment. The canonical `data/source/role-data.yaml` is committed for review; the browser JSON is regenerated from it during the production build. See [docs/DISCOVERY.md](docs/DISCOVERY.md).
 
 ## Authoritative sources
 
@@ -173,3 +181,11 @@ The production audit for the 2026-11-13 source snapshot is in [docs/AUDIT.md](do
 Prefer fixes upstream when the source W3C data is wrong. Do not silently edit a published W3C task or criterion in a local copy. File a GitHub issue with source URL, affected task IDs and proposed evidence; see [docs/GOVERNANCE.md](docs/GOVERNANCE.md).
 
 The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-PR.md](docs/PHASE1-PR.md). Role-guide architecture, category mapping and extension steps are in [docs/ROLE-PAGES.md](docs/ROLE-PAGES.md). External resource licensing and link policy are in [docs/EXTERNAL-RESOURCES.md](docs/EXTERNAL-RESOURCES.md). Icon meaning, licence and accessibility rules are in [docs/VISUAL-LANGUAGE.md](docs/VISUAL-LANGUAGE.md). Use [docs/MANUAL-TEST-TEMPLATE.md](docs/MANUAL-TEST-TEMPLATE.md) to record the checks that automation cannot establish. Upstream ARRM findings and remaining issue drafts are in [docs/UPSTREAM-ARRM-FINDINGS.md](docs/UPSTREAM-ARRM-FINDINGS.md); they are not filed automatically.
+
+## Search and AI discovery publication
+
+The post-build publisher creates static role, criterion, task and comparison pages; a
+Sitemap, structured metadata and JSON/YAML/CSV datasets. See
+[docs/DISCOVERY.md](docs/DISCOVERY.md) for publishing instructions and
+[docs/CLOUDFLARE_MCP_FUTURE.md](docs/CLOUDFLARE_MCP_FUTURE.md) for the
+optional, unimplemented Cloudflare MCP plan. No MCP endpoint is shipped.
