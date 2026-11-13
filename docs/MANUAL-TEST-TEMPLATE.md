@@ -56,6 +56,19 @@ Use **Pass**, **Fail** or **N/A**. Add evidence paths for failures and non-obvio
 | Content | 4.1.1 Parsing is not presented as a live WCAG 2.2 requirement | | |
 | Data | Role filter does not hide active criteria when "include criteria with no matching task" is on | | |
 | Data | A criterion with tasks owned by different roles shows each task's own assignment | | |
+| Role guide | The Visual Design guide shows INP-017 as primary and INP-018 as secondary, with Front-End Development still visible as INP-018's primary owner | | |
+| Role guide | The Front-End Development guide shows development categories and collaborating Visual Design/UX roles | | |
+| Role guide | Category, task and WCAG criterion anchors can be opened directly; browser back/forward works | | | |
+
+## Role-based usability scenarios
+
+| Scenario | User task | Result | Notes / evidence |
+| --- | --- | --- | --- |
+| Visual Design | Find the responsibilities for designing keyboard focus indicators, identify the developer's responsibilities, and locate the relevant WCAG guidance. | | |
+| Front-End Development | Find the tasks for implementing accessible form errors, identify related responsibilities belonging to other roles, and locate authoritative implementation guidance. | | |
+| General user | Find the criteria relevant to Level AA conformance and explain why the role-specific tasks do not constitute a full conformance checklist. | | |
+
+Record where the participant struggled with wording, navigation, category labels or interpreting task-level ownership. Do not coach them through the expected path.
 
 ## Findings
 

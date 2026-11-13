@@ -1,5 +1,8 @@
 'use strict';
 
+import { appendParagraph, element, link } from './dom.js';
+import { roleCardList } from './role-cards.js';
+
 const $ = (id) => document.getElementById(id);
 const filters = $('filters');
 const resultRoot = $('results');
@@ -8,21 +11,6 @@ const levels = ['primary', 'secondary', 'contributor'];
 const display = {'primary': 'Primary', 'secondary': 'Secondary', 'contributor': 'Contributor'};
 let dataset = null;
 
-function element(tag, className, value) {
-  const node = document.createElement(tag);
-  if (className) node.className = className;
-  if (value !== undefined) node.textContent = value;
-  return node;
-}
-function link(label, url, className, ariaLabel) {
-  const a = element('a', className, label);
-  a.href = url;
-  if (ariaLabel) a.setAttribute('aria-label', ariaLabel);
-  return a;
-}
-function appendParagraph(parent, value, className) {
-  parent.append(element('p', className, value));
-}
 function rolesForTask(task, role) {
   return levels.filter(level => (!state.ownership || level === state.ownership) &&
     (role ? task.ownership[level].includes(role) : task.ownership[level].length > 0));
@@ -184,7 +172,14 @@ function writeURL() {
   if (state.showAll) params.set('all', '1');
   history.replaceState(null, '', location.pathname + (params.size ? '?' + params : '') + location.hash);
 }
+function renderRoleGuides() {
+  const root = $('role-guides-list');
+  if (!root) return;
+  root.replaceChildren(roleCardList());
+}
+
 async function init() {
+  renderRoleGuides();
   try {
     const response = await fetch('./data/role-data.json');
     if (!response.ok) throw new Error('HTTP ' + response.status);

@@ -17,7 +17,14 @@ from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 MINIMUMS = {'criteria': 80, 'tasks': 180, 'roles': 4}
-ASSETS = ('', 'styles.css', 'app.js', 'favicon.svg', 'data/role-data.json', 'data/import-audit.json')
+ASSETS = ('', 'styles.css', 'app.js', 'dom.js', 'role-config.js', 'role-cards.js', 'role-page.js', 'role.html', 'favicon.svg', 'data/role-data.json', 'data/import-audit.json')
+REQUIRED_ROLE_MARKERS = (
+    'id="role-root"',
+    'id="role-status"',
+    'src="./role-page.js"',
+    'href="./styles.css"',
+    'Skip to main content',
+)
 REQUIRED_INDEX_MARKERS = (
     '<html lang="en">',
     'name="viewport"',
@@ -64,6 +71,10 @@ def validate_index(html: str) -> list[str]:
     if re.search(r'<(?:script|link)[^>]+(?:src|href)="/', html):
         errors.append('index.html contains a root-absolute asset path; nested Pages paths will break')
     return errors
+
+
+def validate_role_shell(html: str) -> list[str]:
+    return [f'role.html is missing expected marker: {marker}' for marker in REQUIRED_ROLE_MARKERS if marker not in html]
 
 
 def validate_payload(data: dict, audit: dict, minimums: dict | None = None) -> list[str]:
@@ -241,6 +252,7 @@ def check_once(base_url: str) -> tuple[list[str], dict]:
 
     index = payloads.get('', b'').decode('utf-8', errors='replace')
     errors.extend(validate_index(index))
+    errors.extend(validate_role_shell(payloads.get('role.html', b'').decode('utf-8', errors='replace')))
     data = audit = None
     try:
         data = json.loads(payloads.get('data/role-data.json', b'{}'))
