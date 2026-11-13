@@ -51,7 +51,7 @@ test.describe('WCAG success-criterion pictograms', () => {
   test('task view also carries the criterion symbol', async ({ page }) => {
     await page.goto('/dist/?view=tasks');
     await expect(page.locator('#data-status')).toContainText('SAMPLE DATA');
-    await expect(page.locator('article.criterion .criterion-heading .sc-icon')).toHaveCount(12);
+    await expect(page.locator('article.criterion .criterion-heading .sc-icon')).toHaveCount(13);
     await expect(page.locator('article.criterion .criterion-heading .sc-icon').first()).toHaveAttribute('aria-hidden', 'true');
   });
 

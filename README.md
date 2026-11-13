@@ -6,7 +6,7 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 
 ## Features
 
-- Role guides for **Visual Design** and **Front-End Development**, with task categories, responsibility summaries, collaborating roles and WCAG references.
+- Role guides for **Business Analysis**, **Content Authoring**, **User Experience (UX) Design**, **Visual Design** and **Front-End Development**, with task categories, responsibility summaries, collaborating roles and WCAG references.
 - Filter the full explorer by ARRM role, task-level **primary / secondary / contributor** ownership, cumulative WCAG conformance target, exact WCAG level, keyword and view.
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
 - Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
@@ -33,10 +33,13 @@ Open http://localhost:8000/ . **Demo data is deliberately incomplete**. The page
 
 Role guide examples:
 
+- http://localhost:8000/role.html?role=business-analysis
+- http://localhost:8000/role.html?role=content-authoring
+- http://localhost:8000/role.html?role=user-experience-design
 - http://localhost:8000/role.html?role=visual-design
 - http://localhost:8000/role.html?role=front-end-development
 
-The generic explorer remains at `/` and includes all criteria and filters. Role guides are project navigation over the same normalized data; they are not a second dataset or a conformance checklist.
+The generic explorer remains at `/` and includes all criteria and filters. Role guides are project navigation over the same normalized data; they are not a second dataset or a conformance checklist. These five roles are the roles with task-level assignments in the imported ARRM CSVs. Other ARRM roles are not shown because there are no task rows to support a guide without inventing assignments.
 
 Browser regression tests use Playwright and axe-core. They run against the demo build served from a nested `/dist/` path:
 

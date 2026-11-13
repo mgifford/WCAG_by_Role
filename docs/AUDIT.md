@@ -18,15 +18,15 @@ python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 | Measure | Value |
 | --- | --- |
 | Active criteria | 10 (deliberately partial sample) |
-| Accepted ARRM tasks | 12 |
-| Canonical roles | 4 |
+| Accepted ARRM tasks | 13 |
+| Canonical roles | 5 |
 | Retired criteria retained in audit | 1 (4.1.1 Parsing) |
 | Excluded ARRM records | 2 (task and criterion summary for 4.1.1) |
 | Criteria with a task | 7 |
 | Criteria with a criterion-level summary | 7 |
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
 | Python tests | 36 passed |
-| Playwright / axe-core tests | 49 passed |
+| Playwright / axe-core tests | 50 passed |
 | Link URL unit tests | 4 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
@@ -127,7 +127,7 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Reduced motion: preference matches and the interface remains usable.
 - Result count: polite live region is present and updates.
 - A manual production-data smoke run served the 86-criterion dataset from a nested path: 86 of 86 criteria and 262 tasks rendered, no console errors, no live 4.1.1 link, and axe-core returned no WCAG A/AA violations in the default and Visual Design primary task views.
-- Role-guide tests cover both guides, task-level ownership, collaborating roles, category/task/criterion anchors, invalid-role chooser, keyboard reach, 320 px reflow, forced colours and axe-core in light and dark schemes. The production snapshot renders 66 Visual Design tasks across 33 criteria and 130 Front-End Development tasks across 45 criteria.
+- Role-guide tests cover all five data-backed guides, task-level ownership, collaborating roles, category/task/criterion anchors, invalid-role chooser, keyboard reach, 320 px reflow, forced colours and axe-core in light and dark schemes. The production snapshot renders Business Analysis (9 tasks/7 criteria), Content Authoring (85/36), UX Design (189/71), Visual Design (66/33) and Front-End Development (130/45).
 - Resource-link tests verify all four plain-language URL patterns, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open.
 - A pure filter matrix covers 256 combinations of role, ownership, cumulative conformance target and exact level. Explorer tests cover missing-summary, summary-does-not-assign-role and no-task-for-role messages. A production snapshot renders **344 per-criterion resource links across 86 criteria** (four per criterion, including labelled DigitalA11y search fallbacks).
 - Visual-language tests cover original decorative SVG icons, role/category icon counts, the eight functional-needs groups, no external images, dark/forced-colour visibility, 320 px reflow and axe with the visual sections.

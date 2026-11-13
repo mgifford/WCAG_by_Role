@@ -94,6 +94,21 @@ export const ICONS = {
     ['path', {d: 'M8 10V7a4 4 0 0 1 8 0v3'}],
     ['circle', {cx: 12, cy: 15, r: 1.5}],
   ],
+  business: [
+    ['rect', {x: 5, y: 4, width: 14, height: 17, rx: 2}],
+    ['rect', {x: 9, y: 2, width: 6, height: 4, rx: 1}],
+    ['path', {d: 'M9 10h6M9 14h6M9 18h4'}],
+  ],
+  content: [
+    ['rect', {x: 4, y: 3, width: 16, height: 18, rx: 2}],
+    ['path', {d: 'M8 8h8M8 12h8M8 16h5M16 14l4-4 2 2-4 4-2 .5z'}],
+  ],
+  ux: [
+    ['circle', {cx: 5, cy: 6, r: 2}],
+    ['circle', {cx: 19, cy: 6, r: 2}],
+    ['circle', {cx: 12, cy: 18, r: 2}],
+    ['path', {d: 'M7 6h10M6 8v4a4 4 0 0 0 4 4h1M18 8v4a4 4 0 0 1-4 4h-1'}],
+  ],
   other: [
     ['circle', {cx: 6, cy: 12, r: 1.5}],
     ['circle', {cx: 12, cy: 12, r: 1.5}],
@@ -116,6 +131,9 @@ export const CATEGORY_ICONS = {
 };
 
 export const ROLE_ICONS = {
+  'business-analysis': 'business',
+  'content-authoring': 'content',
+  'user-experience-design': 'ux',
   'visual-design': 'design',
   'front-end-development': 'code',
 };

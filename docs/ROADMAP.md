@@ -42,7 +42,7 @@ Still open for Phase 1:
 
 ## Phase 2: More useful role views
 
-- Add guided role landing pages: Visual Design, Front-End Development, UX Design and Content Authoring.
+- Add guided role landing pages for every role with ARRM task data: Business Analysis, Content Authoring, User Experience (UX) Design, Visual Design and Front-End Development.
 - Introduce categories aligned to ARRM task groupings rather than an invented new standard.
 - Add cross-role handoff descriptions linked to primary task IDs.
 - Add links to official W3C sufficient techniques, failures, and ACT rules where sources support them.
@@ -50,9 +50,9 @@ Still open for Phase 1:
 
 ### Status
 
-PR 1 (role-specific navigation) implements:
+PR 1 (role-specific navigation) and the remaining role guides implement:
 
-- Visual Design and Front-End Development guides with distinct, data-driven category lists.
+- Business Analysis, Content Authoring, User Experience (UX) Design, Visual Design and Front-End Development guides with distinct, data-driven category lists.
 - Shared role cards, DOM helpers and one role template; adding a role is a config entry.
 - Task-level primary/secondary/contributor assignments with collaborating roles kept visible.
 - Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
@@ -71,7 +71,6 @@ Still to come in Phase 2:
 
 - PR 3: CSV/JSON export, source revision provenance and production-data regression fixtures.
 - PR 4: refinements based on manual accessibility and role-based usability evidence.
-- UX Design and Content Authoring role guides using the same configuration and renderer.
 - A reviewed per-criterion impact layer after a data-specific licence decision for the accessibility-impact dataset.
 
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
