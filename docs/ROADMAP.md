@@ -58,7 +58,8 @@ PR 1 (role-specific navigation) implements:
 - Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
 - Project handoff guidance explicitly separated from ARRM assignments.
 - Link-only external resources: Simple WCAG and AAArdvark per-criterion explanations, plus testing, standards-mapping and impact references. No third-party text or impact dataset is imported.
-- Original inline SVG icons for ARRM categories and role cards, plus a **Who accessibility affects** functional-needs overview aligned with Section 508 FPC and EN 301 549 references. No third-party artwork or per-criterion impact mapping is imported.
+- Original inline SVG icons for ARRM categories and role cards, plus a **Who accessibility affects** functional-needs overview aligned with Section 508 FPC and EN 301 549 references.
+- Supplied WCAG 2.2 pictogram sprite (86 success criteria, 13 guidelines) shown with each criterion; no 4.1.1 entry and no per-criterion impact mapping imported.
 
 Current PR 2 work:
 

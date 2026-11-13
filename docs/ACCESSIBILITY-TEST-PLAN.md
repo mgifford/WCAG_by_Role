@@ -25,6 +25,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
 | External resources | Plain-language links are labelled external, commercial resources are identified, links do not force a new tab, and no resource is presented as W3C-endorsed |
 | Icons | Category/role/functional-needs icons are decorative, paired with text, visible in dark and forced colours, and never the only cue |
+| Pictograms | Each criterion card and role criteria list uses the matching SC sprite symbol; no 4.1.1 symbol is live; the icon has no separate accessible name because the criterion title is adjacent |
 | Functional needs | The overview is understood as orientation, not a diagnosis, complete taxonomy or per-criterion impact mapping |
 | Automated | Playwright/axe-core on the demo build in light and dark schemes, task view, keyboard, emulated forced colours, 320 px reflow and reduced motion |
 | Automated limits | axe-core does not test screen-reader output, real Windows High Contrast, zoom quality, link purpose in context or data correctness |
@@ -56,6 +57,7 @@ The Playwright suite currently covers:
 - External resource links for all four plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, DigitalA11y direct/search fallbacks, and the general resource groups with disclosures open.
 - Missing-summary, summary-does-not-assign-role and no-task-for-role messages on the explorer.
 - Original inline icons: decorative SVG semantics, role/category icon counts, functional-needs cards, forced colours, reflow and axe with the visual sections.
+- Supplied WCAG 2.2 pictograms: 86/86 mapping coverage, symbol IDs, criterion-card/role-list rendering, dark/forced-colour tiles and no `<img>` assets.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people

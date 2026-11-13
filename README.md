@@ -11,7 +11,8 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
 - Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
 - Link to independent plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, plus testing/standards references, without copying their content. External links are labelled and never used to assign ARRM ownership. DigitalA11y search fallbacks are explicit where no dedicated article was found.
-- Use original inline SVG icons for ARRM categories, role cards and a **Who accessibility affects** functional-needs overview. Icons are decorative with visible text; no third-party image assets are bundled.
+- Use original inline SVG icons for ARRM categories, role cards and a **Who accessibility affects** functional-needs overview. Icons are decorative with visible text.
+- Show the supplied WCAG 2.2 pictogram for each success criterion on explorer cards and role-guide criteria lists. The sprite and mapping cover all 86 active criteria and contain no 4.1.1 entry.
 - Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary, including a distinct message when ARRM has no summary, when the summary does not assign the role, and when no task for the role is recorded.
 - Separate a cumulative **conformance target** (A, AA including A, AAA including A/AA) from an **exact criterion level** filter; neither control implies conformance.
 - Include criteria with no recorded task, using the *Include criteria with no matching task* control.
@@ -92,6 +93,8 @@ web/role-config.js            Role copy, slugs and ARRM task-category map
 web/role-page.js              Shared role-guide renderer
 web/dom.js, role-cards.js     Shared DOM and role-card components
 web/visuals.js                Original SVG icons and functional-needs groups
+web/wcag22-icons.svg          Supplied 86-SC + 13-guideline pictogram sprite
+web/wcag22-icons-mapping.json Supplied pictogram mapping/provenance
 web/resources.js              Link-only external resource registry
 web/digitala11y-links.js      Checked DigitalA11y direct-article map
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
@@ -125,6 +128,8 @@ See [NOTICE.md](NOTICE.md) for copyright and attribution. ARRM mappings are advi
 The source WCAG JSON contains an obsolete 4.1.1 Parsing record. This importer omits it because it lacks WCAG 2.2 in `versions` and a current conformance level. The audit retains the record and related obsolete ARRM tasks. A role can have primary responsibility for one task and secondary responsibility for another task linked to the same success criterion. Accordingly, **role ownership is assigned at task level** and never inferred solely from the criterion summary.
 
 The role guides group tasks under **project navigation categories** derived from the W3C ARRM tasks page section headings and task ID prefixes. Those categories are not a WCAG taxonomy and do not reassign ownership. The guides show every ARRM assignment on a task, highlight the selected role with text and retain the stable task ID.
+
+Each success criterion card shows its supplied WCAG 2.2 pictogram. The sprite and mapping are documented in [docs/VISUAL-LANGUAGE.md](docs/VISUAL-LANGUAGE.md); the artwork is not W3C-endorsed and is not relicensed by the project's MIT licence.
 
 The **Who accessibility affects** overview uses original functional-needs icons aligned with Section 508 FPC and EN 301 549 references. It is orientation, not a diagnosis, a complete disability taxonomy or a per-criterion impact mapping. The icon and licensing rationale is in [docs/VISUAL-LANGUAGE.md](docs/VISUAL-LANGUAGE.md).
 

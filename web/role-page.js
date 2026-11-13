@@ -3,7 +3,7 @@
 import { element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
 import { appendCriterionResources, appendGeneralResources } from './resources.js';
-import { ROLE_ICONS, categoryIcon, createIcon } from './visuals.js';
+import { ROLE_ICONS, categoryIcon, createCriterionIcon, createIcon } from './visuals.js';
 import {
   CATEGORY_BY_PREFIX,
   CATEGORY_ORDER,
@@ -284,6 +284,8 @@ function criteriaSection(tasks, criteria) {
   for (const criterion of criteria) {
     const item = element('li');
     item.id = 'sc-' + criterion.number.replaceAll('.', '-');
+    const criterionIcon = createCriterionIcon(criterion.number, {className: 'sc-icon-criterion', size: 32});
+    if (criterionIcon) item.append(criterionIcon);
     item.append(element('span', 'level-pill', 'Level ' + criterion.level), ' ',
       link(`${criterion.number} ${criterion.name}`, criterion.normativeUrl), ' · ',
       link('Understanding', criterion.understandingUrl, '', `Understanding ${criterion.number} ${criterion.name}`));

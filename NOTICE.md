@@ -9,6 +9,8 @@ This is an independent project, not an official W3C publication and not endorsed
 
 Only original application code is covered by this repository's MIT license. That license does not apply to the W3C datasets, published ARRM task wording, criteria text, or Understanding excerpts.
 
+The WCAG 2.2 pictogram sprite and mapping (`web/wcag22-icons.svg`, `web/wcag22-icons-mapping.json`) were supplied for this project by the repository owner. Their metadata cites the W3C WCAG 2.2 Recommendation as the reference source; the artwork is not a W3C publication and no separate reuse licence was supplied. They are included with the owner's permission and are not relicensed by this repository's MIT licence.
+
 The interface icons in `web/visuals.js` are original project artwork covered by this repository's MIT license. No third-party icon font or illustration is bundled. Oobee's repository uses Font Awesome Free 5.15.4 (icons CC BY 4.0, fonts SIL OFL 1.1) and AAArdvark's plain-English icons were not reused; see `docs/VISUAL-LANGUAGE.md`.
 
 External resources linked from the site (including Simple WCAG, AAArdvark WCAG in Plain English, The WCAG, DigitalA11y, CivicActions accessibility-data-reference, Purple Hats/Oobee, axe-core, Section 508 and EN 301 549 material, and the accessibility-impact knowledge layer) remain the property of their publishers and are governed by their own terms. The project links to them for convenience, does not mirror their content, and does not endorse them or treat them as W3C requirements. See `docs/EXTERNAL-RESOURCES.md`.

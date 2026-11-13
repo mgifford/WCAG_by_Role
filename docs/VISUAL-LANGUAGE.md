@@ -78,6 +78,27 @@ The accessibility-impact knowledge layer is linked in the resources section as *
 5. Record the source and licence here. Do not paste third-party SVG paths unless the licence explicitly permits reuse and attribution is added.
 6. Update `NOTICE.md` if a third-party asset is ever introduced.
 
+## WCAG 2.2 success-criterion pictograms
+
+The repository includes a supplied pictogram sprite and mapping:
+
+- `web/wcag22-icons.svg` — 86 success-criterion symbols and 13 guideline symbols.
+- `web/wcag22-icons-mapping.json` — mapping version 1.0, including criterion number, level, W3C URL and an `icon_description` for every symbol.
+
+The sprite was supplied for this project by the repository owner on 2026-11-13. Its metadata names the W3C WCAG 2.2 Recommendation as the reference source; the artwork is not a W3C publication and is not W3C-endorsed. No separate reuse licence was supplied with the artwork, so it is included here with the owner's permission and should not be extracted for reuse elsewhere without permission. The mapping is used only to verify coverage and IDs.
+
+The 86 success-criterion drawings are referenced with:
+
+```html
+<svg class="sc-icon" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+  <use href="./wcag22-icons.svg#sc-2-4-7"></use>
+</svg>
+```
+
+They appear next to the visible criterion number and name on explorer cards and role-guide criteria lists. They are decorative: the criterion title is the accessible text, so no duplicate `img` role or alt text is announced. Each icon sits in a white tile so its original palette remains legible in dark mode; forced-colours mode preserves the tile and adds a system border. `tests/test_icons.py` checks 86 SC symbols, 13 guideline symbols, mapping/symbol agreement, no duplicate IDs, no 4.1.1 and no scripts/remote references.
+
+If the sprite or mapping is updated, replace both files together, keep `wcag22-icons-mapping.json` in sync, and rerun `tests/test_icons.py` plus the pictogram Playwright tests.
+
 ## Current limits
 
 - The functional-needs overview is not a filter and does not map criteria to disability groups.
