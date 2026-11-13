@@ -57,6 +57,9 @@ jobs:
       - name: Run filter matrix tests
         run: pnpm test:filters
 
+      - name: Run external-link URL tests
+        run: pnpm test:links
+
       - name: Install Chromium
         run: pnpm exec playwright install --with-deps chromium
 

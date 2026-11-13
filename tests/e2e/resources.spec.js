@@ -14,35 +14,39 @@ async function axeViolations(page) {
 }
 
 test.describe('external resource links', () => {
-  test('criterion cards link to both plain-language explanations with external labels', async ({ page }) => {
+  test('criterion cards link to each plain-language explanation with external labels', async ({ page }) => {
     await page.goto('/dist/?query=2.4.7');
     await expect(page.locator('#data-status')).toContainText('SAMPLE DATA');
     const card = page.locator('article.criterion', { hasText: '2.4.7 Focus Visible' });
     await expect(card).toContainText('Plain-language explanations');
     const simple = card.getByRole('link', { name: 'Simple WCAG (external)' });
     const aaardvark = card.getByRole('link', { name: 'AAArdvark plain English (external)' });
+    const thewcag = card.getByRole('link', { name: 'The WCAG (external)' });
+    const digitala11y = card.getByRole('link', { name: 'DigitalA11y (external)' });
     await expect(simple).toHaveAttribute('href', 'https://simplewcag.org/criteria/2-4-7-focus-visible/');
     await expect(aaardvark).toHaveAttribute('href', 'https://aaardvarkaccessibility.com/wcag-plain-english/2-4-7-focus-visible/');
-    await expect(simple).toHaveAttribute('rel', 'external');
-    await expect(aaardvark).toHaveAttribute('rel', 'external');
-    expect(await simple.getAttribute('target')).toBeNull();
-    expect(await aaardvark.getAttribute('target')).toBeNull();
+    await expect(thewcag).toHaveAttribute('href', 'https://thewcag.com/criteria/2.4.7');
+    await expect(digitala11y).toHaveAttribute('href', 'https://www.digitala11y.com/focus-visible-understanding-sc-2-4-7/');
+    for (const resource of [simple, aaardvark, thewcag, digitala11y]) {
+      await expect(resource).toHaveAttribute('rel', 'external');
+      expect(await resource.getAttribute('target')).toBeNull();
+    }
     await expect(card.locator('.external-note')).toContainText('not W3C-endorsed');
-    await expect(card.locator('.external-note')).toContainText('commercial vendor');
+    await expect(card.locator('.external-note')).toContainText('commercial sites');
   });
 
-  test('every demo criterion has both resource links in the expected URL pattern', async ({ page }) => {
+  test('every demo criterion has four resource links in the expected URL patterns', async ({ page }) => {
     await page.goto('/dist/');
     await expect(page.locator('#data-status')).toContainText('SAMPLE DATA');
     const cards = page.locator('article.criterion');
     await expect(cards).toHaveCount(10);
     const hrefs = await cards.locator('.criterion-resources a').evaluateAll((links) => links.map((link) => link.href));
-    expect(hrefs).toHaveLength(20);
+    expect(hrefs).toHaveLength(40);
     for (const href of hrefs) {
-      expect(href).toMatch(/^https:\/\/(simplewcag\.org\/criteria|aaardvarkaccessibility\.com\/wcag-plain-english)\/\d+-\d+-\d+-[a-z0-9-]+\/$/);
+      expect(href).toMatch(/^(https:\/\/(simplewcag\.org\/criteria|aaardvarkaccessibility\.com\/wcag-plain-english)\/\d+-\d+-\d+-[a-z0-9-]+\/|https:\/\/thewcag\.com\/criteria\/\d+\.\d+\.\d+|https:\/\/www\.digitala11y\.com\/(?:[^?]+|\?s=\d+\.\d+\.\d+))$/);
     }
     const external = await page.locator('a[data-external="true"]').evaluateAll((links) => links.map((link) => ({rel: link.rel, target: link.target})));
-    expect(external.length).toBeGreaterThanOrEqual(20);
+    expect(external.length).toBeGreaterThanOrEqual(40);
     expect(external.every((link) => link.rel === 'external')).toBe(true);
     expect(external.every((link) => link.target === '')).toBe(true);
   });
@@ -55,6 +59,10 @@ test.describe('external resource links', () => {
       'href', 'https://simplewcag.org/criteria/2-4-7-focus-visible/');
     await expect(criterion.getByRole('link', { name: 'AAArdvark plain English (external)' })).toHaveAttribute(
       'href', 'https://aaardvarkaccessibility.com/wcag-plain-english/2-4-7-focus-visible/');
+    await expect(criterion.getByRole('link', { name: 'The WCAG (external)' })).toHaveAttribute(
+      'href', 'https://thewcag.com/criteria/2.4.7');
+    await expect(criterion.getByRole('link', { name: 'DigitalA11y (external)' })).toHaveAttribute(
+      'href', 'https://www.digitala11y.com/focus-visible-understanding-sc-2-4-7/');
   });
 
   test('general resources distinguish W3C, commercial, testing and standards sources', async ({ page }) => {
@@ -65,6 +73,8 @@ test.describe('external resource links', () => {
     await expect(details).toContainText('not used to assign ARRM responsibility');
     await expect(details.getByRole('link', { name: 'Simple WCAG (external)' })).toBeVisible();
     await expect(details.getByRole('link', { name: /AAArdvark WCAG in Plain English \(external, commercial\)/ })).toBeVisible();
+    await expect(details.getByRole('link', { name: /The WCAG \(external, commercial\)/ })).toBeVisible();
+    await expect(details.getByRole('link', { name: /DigitalA11y \(external, commercial\)/ })).toBeVisible();
     await expect(details.getByRole('link', { name: /axe-core rule descriptions \(external\)/ })).toBeVisible();
     await expect(details.getByRole('link', { name: /CivicActions accessibility-data-reference/ })).toBeVisible();
     await expect(details.getByRole('link', { name: /Purple Hats \/ Oobee project/ })).toBeVisible();

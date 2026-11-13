@@ -10,7 +10,7 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 - Filter the full explorer by ARRM role, task-level **primary / secondary / contributor** ownership, cumulative WCAG conformance target, exact WCAG level, keyword and view.
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
 - Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
-- Link to independent plain-language explanations and testing/standards references without copying their content. External links are labelled and never used to assign ARRM ownership.
+- Link to independent plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, plus testing/standards references, without copying their content. External links are labelled and never used to assign ARRM ownership. DigitalA11y search fallbacks are explicit where no dedicated article was found.
 - Use original inline SVG icons for ARRM categories, role cards and a **Who accessibility affects** functional-needs overview. Icons are decorative with visible text; no third-party image assets are bundled.
 - Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary, including a distinct message when ARRM has no summary, when the summary does not assign the role, and when no task for the role is recorded.
 - Separate a cumulative **conformance target** (A, AA including A, AAA including A/AA) from an **exact criterion level** filter; neither control implies conformance.
@@ -43,6 +43,7 @@ Browser regression tests use Playwright and axe-core. They run against the demo 
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:filters
+pnpm test:links
 pnpm test:e2e
 ```
 
@@ -92,6 +93,7 @@ web/role-page.js              Shared role-guide renderer
 web/dom.js, role-cards.js     Shared DOM and role-card components
 web/visuals.js                Original SVG icons and functional-needs groups
 web/resources.js              Link-only external resource registry
+web/digitala11y-links.js      Checked DigitalA11y direct-article map
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
 scripts/smoke_site.py         Post-deploy production-artefact smoke checks
 fixtures/                     Clearly labeled offline demonstration data
@@ -126,7 +128,7 @@ The role guides group tasks under **project navigation categories** derived from
 
 The **Who accessibility affects** overview uses original functional-needs icons aligned with Section 508 FPC and EN 301 549 references. It is orientation, not a diagnosis, a complete disability taxonomy or a per-criterion impact mapping. The icon and licensing rationale is in [docs/VISUAL-LANGUAGE.md](docs/VISUAL-LANGUAGE.md).
 
-Criterion cards and role-guide criteria lists include link-only **plain-language explanations** from Simple WCAG and AAArdvark WCAG in Plain English. AAArdvark is a commercial vendor. The **More accessibility resources** disclosure links to testing, standards-mapping and impact references but does not import their data. See [docs/EXTERNAL-RESOURCES.md](docs/EXTERNAL-RESOURCES.md) for licensing and validation notes.
+Criterion cards and role-guide criteria lists include link-only **plain-language explanations** from Simple WCAG, AAArdvark WCAG in Plain English, The WCAG and DigitalA11y. AAArdvark, The WCAG and DigitalA11y are commercial sites. DigitalA11y links use a labelled site-search fallback for criteria without a dedicated article. The **More accessibility resources** disclosure links to testing, standards-mapping and impact references but does not import their data. See [docs/EXTERNAL-RESOURCES.md](docs/EXTERNAL-RESOURCES.md) for licensing and validation notes.
 
 The browser uses W3C criterion names and links, plus task wording from ARRM. It does not claim that a task or an Understanding statement is normative. Documentation does not promise a WCAG conformance level or label this prototype as certified accessible. Manual review by disabled users and assistive technology users remains necessary.
 

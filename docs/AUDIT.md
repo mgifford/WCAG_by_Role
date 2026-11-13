@@ -27,6 +27,7 @@ python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
 | Python tests | 32 passed |
 | Playwright / axe-core tests | 43 passed |
+| Link URL unit tests | 4 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
 
@@ -111,7 +112,7 @@ These are source-label inconsistencies. The original task text and ARRM ownershi
 - 86 normative URLs use 86 distinct `#fragment` targets. All 86 fragments exist in the current WCAG 2.2 Recommendation page (1,276 `id` values checked).
 - 86 Understanding URLs were fetched with HTTP 200. No broken Understanding links were found.
 - Internal references in the built HTML (`./app.js`, `./styles.css`, `./favicon.svg`, `./data/role-data.json`, `./data/import-audit.json`) all resolve in `dist/`.
-- External plain-language patterns resolved for all 86 active criteria on 2026-11-13: `https://simplewcag.org/criteria/{number-with-dashes}-{slug}/` and `https://aaardvarkaccessibility.com/wcag-plain-english/{number-with-dashes}-{slug}/` each returned HTTP 200 with no redirects. Link-only policy and licensing are in [EXTERNAL-RESOURCES.md](EXTERNAL-RESOURCES.md).
+- External plain-language patterns resolved for all 86 active criteria on 2026-11-13: Simple WCAG and AAArdvark per-criterion URLs, and `https://thewcag.com/criteria/{number}`, each returned HTTP 200. DigitalA11y has 55 direct criterion articles; the other 31 use a labelled site-search fallback. Link-only policy and licensing are in [EXTERNAL-RESOURCES.md](EXTERNAL-RESOURCES.md).
 - Repeated automated requests from the audit machine triggered W3C Cloudflare HTTP 429. The importer retries with backoff and fails closed rather than deploying partial data. The link and extraction evidence above was collected from live curl responses; a later unauthenticated Python `urllib` request was challenged. Treat this as a local rate-limit limitation, not proof that CI will always be allowed through.
 
 ## Automated accessibility evidence
@@ -127,8 +128,8 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Result count: polite live region is present and updates.
 - A manual production-data smoke run served the 86-criterion dataset from a nested path: 86 of 86 criteria and 262 tasks rendered, no console errors, no live 4.1.1 link, and axe-core returned no WCAG A/AA violations in the default and Visual Design primary task views.
 - Role-guide tests cover both guides, task-level ownership, collaborating roles, category/task/criterion anchors, invalid-role chooser, keyboard reach, 320 px reflow, forced colours and axe-core in light and dark schemes. The production snapshot renders 66 Visual Design tasks across 33 criteria and 130 Front-End Development tasks across 45 criteria.
-- Resource-link tests verify both plain-language URLs, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open.
-- A pure filter matrix covers 256 combinations of role, ownership, cumulative conformance target and exact level. Explorer tests cover missing-summary, summary-does-not-assign-role and no-task-for-role messages. A production snapshot rendered 172 per-criterion resource links across 86 criteria, all matching the validated URL patterns.
+- Resource-link tests verify all four plain-language URL patterns, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open.
+- A pure filter matrix covers 256 combinations of role, ownership, cumulative conformance target and exact level. Explorer tests cover missing-summary, summary-does-not-assign-role and no-task-for-role messages. A production snapshot renders **344 per-criterion resource links across 86 criteria** (four per criterion, including labelled DigitalA11y search fallbacks).
 - Visual-language tests cover original decorative SVG icons, role/category icon counts, the eight functional-needs groups, no external images, dark/forced-colour visibility, 320 px reflow and axe with the visual sections.
 
 **This is regression evidence, not a conformance claim.** axe-core cannot judge meaningful link text, sensible focus order, screen-reader announcements, real high-contrast rendering, zoom quality or whether the ARRM mapping is appropriate for a team.

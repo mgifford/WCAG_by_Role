@@ -1,6 +1,7 @@
 'use strict';
 
 import { element, externalLink } from './dom.js';
+import { DIGITALA11Y_LINKS } from './digitala11y-links.js';
 
 export const LAST_CHECKED = '2026-11-13';
 
@@ -17,13 +18,27 @@ const CRITERION_RESOURCE_TEMPLATES = [
     buildUrl: (criterion) => `https://aaardvarkaccessibility.com/wcag-plain-english/${criterion.number.replaceAll('.', '-')}-${criterion.slug}/`,
     note: 'Independent explanation from a commercial accessibility vendor. Not W3C-endorsed.',
   },
+  {
+    id: 'thewcag',
+    label: 'The WCAG',
+    buildUrl: (criterion) => `https://thewcag.com/criteria/${criterion.number}`,
+    note: 'Independent commercial resource. Not W3C-endorsed.',
+  },
+  {
+    id: 'digitala11y',
+    label: 'DigitalA11y',
+    labelFor: (criterion) => DIGITALA11Y_LINKS[criterion.number] ? 'DigitalA11y' : 'Search DigitalA11y',
+    buildUrl: (criterion) => DIGITALA11Y_LINKS[criterion.number] ||
+      `https://www.digitala11y.com/?s=${encodeURIComponent(criterion.number)}`,
+    note: 'Independent commercial resource. A search fallback means no dedicated article was found in the checked sitemap/checklist.',
+  },
 ];
 
 export function criterionResourceLinks(criterion) {
   if (!criterion?.number || !criterion?.slug) return [];
   return CRITERION_RESOURCE_TEMPLATES.map((resource) => ({
     id: resource.id,
-    label: resource.label,
+    label: resource.labelFor ? resource.labelFor(criterion) : resource.label,
     url: resource.buildUrl(criterion),
     note: resource.note,
   }));
@@ -43,7 +58,7 @@ export function appendCriterionResources(parent, criterion, {compact = false} = 
     container.append(externalLink(resource.label + ' (external)', resource.url));
   });
   if (!compact) {
-    container.append(element('span', 'external-note', ' Independent resources; not W3C-endorsed. AAArdvark is a commercial vendor.'));
+    container.append(element('span', 'external-note', ' Independent resources; not W3C-endorsed. AAArdvark, The WCAG and DigitalA11y are commercial sites.'));
   }
   parent.append(container);
 }
@@ -61,10 +76,12 @@ export const GENERAL_RESOURCES = [
   },
   {
     title: 'Plain-language explanations',
-    note: 'Independent resources. AAArdvark is a commercial accessibility vendor. Neither is W3C-endorsed.',
+    note: 'Independent resources. AAArdvark, The WCAG and DigitalA11y are commercial sites. None is W3C-endorsed.',
     links: [
       {label: 'Simple WCAG (external)', url: 'https://simplewcag.org/'},
       {label: 'AAArdvark WCAG in Plain English (external, commercial)', url: 'https://aaardvarkaccessibility.com/wcag-plain-english/'},
+      {label: 'The WCAG (external, commercial)', url: 'https://thewcag.com/'},
+      {label: 'DigitalA11y (external, commercial)', url: 'https://www.digitala11y.com/'},
     ],
   },
   {

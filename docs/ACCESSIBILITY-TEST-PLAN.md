@@ -38,6 +38,7 @@ python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
 pnpm test:filters
+pnpm test:links
 pnpm exec playwright install --with-deps chromium
 pnpm test:e2e
 python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
@@ -52,7 +53,7 @@ The Playwright suite currently covers:
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
 - Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for both guides.
-- External resource links for both plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, and the general resource groups with disclosures open.
+- External resource links for all four plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, DigitalA11y direct/search fallbacks, and the general resource groups with disclosures open.
 - Missing-summary, summary-does-not-assign-role and no-task-for-role messages on the explorer.
 - Original inline icons: decorative SVG semantics, role/category icon counts, functional-needs cards, forced colours, reflow and axe with the visual sections.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
@@ -68,7 +69,7 @@ The Playwright suite currently covers:
 7. **Content and mapping:** review with Visual Design, Front-End Development, UX and WCAG/ARRM experts. Confirm that task-level ownership, the criterion-level summary and the 3.3.7–3.3.9 gap are represented without implying exemption or exclusive ownership.
 8. **Link context:** listen to and read each normative/Understanding link in context; automated link checks only prove a URL resolves.
 9. **Role guides:** read both guides with a screen reader and keyboard only; confirm the selected role, all collaborating roles, category jumps and task/criterion anchors are understandable.
-10. **External resources:** read each plain-language link in context; confirm the external/commercial labels are understood, no new tab opens unexpectedly, and the resource is not mistaken for W3C guidance. Check that the general resource disclosure is keyboard-operable.
+10. **External resources:** read each plain-language link in context; confirm the external/commercial labels are understood, no new tab opens unexpectedly, and the resource is not mistaken for W3C guidance. Check that the DigitalA11y search fallback is clear and that the general resource disclosure is keyboard-operable.
 11. **Icons and functional needs:** confirm each icon is decorative and the adjacent text carries the meaning; check icon visibility in forced colours, dark mode and print; confirm no disability group is presented as a diagnosis or a complete taxonomy.
 
 ## Role-based usability scenarios
