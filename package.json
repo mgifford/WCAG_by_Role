@@ -6,7 +6,8 @@
   "scripts": {
     "test:e2e": "playwright test",
     "test:e2e:list": "playwright test --list",
-    "test:filters": "node --test tests/filtering.test.mjs"
+    "test:filters": "node --test tests/filtering.test.mjs",
+    "test:links": "node --test tests/external-links.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

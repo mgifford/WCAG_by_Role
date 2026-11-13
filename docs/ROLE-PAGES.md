@@ -42,7 +42,7 @@ For each task, `roleTasks` includes the task when the selected role appears in a
 - lists every primary, secondary and contributor role, including collaborators;
 - links to the normative WCAG criterion and Understanding document;
 - links to the ARRM task list and, when present, other tasks for the same criterion;
-- link-only plain-language explanations from Simple WCAG and AAArdvark, labelled external;
+- link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external;
 - original category and role icons (decorative, with visible text).
 
 Task IDs are stable ARRM identifiers. The guide never infers an owner from a criterion-level summary or from another task.
@@ -98,7 +98,7 @@ The explorer's **Who accessibility affects** overview uses eight functional-need
 
 ## External resources
 
-Criterion cards and the role-guide criteria list link to two independent plain-language sites. The role-guide sources section and the explorer include a collapsible list of testing, standards-mapping and impact references. These are link-only: no third-party text or mapping data is copied, and none of it assigns ARRM ownership.
+Criterion cards and the role-guide criteria list link to four independent plain-language sites. DigitalA11y uses a labelled site-search fallback where no dedicated article was found. The role-guide sources section and the explorer include a collapsible list of testing, standards-mapping and impact references. These are link-only: no third-party text or mapping data is copied, and none of it assigns ARRM ownership.
 
 The accessibility-impact data is currently **proposed/unreviewed** and its repository is AGPL-3.0, so it is linked rather than imported. See [EXTERNAL-RESOURCES.md](EXTERNAL-RESOURCES.md) for licence status, validation dates and the policy for adding links.
 

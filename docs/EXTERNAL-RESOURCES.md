@@ -5,7 +5,7 @@ The site links to selected independent resources without copying their text or i
 ## Policy
 
 - **Link only.** No third-party explanation text, axe rule descriptions or disability-impact records are copied into this repository.
-- **No endorsement.** Every resource is labelled external where it is not W3C material. AAArdvark is identified as a commercial vendor.
+- **No endorsement.** Every resource is labelled external where it is not W3C material. AAArdvark, The WCAG and DigitalA11y are identified as commercial sites.
 - **No new tab.** Links do not use `target="_blank"`; they carry `rel="external"` and `data-external="true"`.
 - **No assignment.** External resources are never used to infer ARRM primary, secondary or contributor ownership.
 - **No analytics or tracking parameters.** URLs are used as published.
@@ -13,21 +13,31 @@ The site links to selected independent resources without copying their text or i
 
 ## Per-criterion plain-language links
 
-Two external sites expose a stable per-criterion URL pattern:
+Four external sites provide per-criterion links:
 
 ```text
 https://simplewcag.org/criteria/{number-with-dashes}-{slug}/
 https://aaardvarkaccessibility.com/wcag-plain-english/{number-with-dashes}-{slug}/
+https://thewcag.com/criteria/{number}
+https://www.digitala11y.com/... (explicit map, or ?s={number} search fallback)
 ```
 
 Example for 2.4.7:
 
 - https://simplewcag.org/criteria/2-4-7-focus-visible/
 - https://aaardvarkaccessibility.com/wcag-plain-english/2-4-7-focus-visible/
+- https://thewcag.com/criteria/2.4.7
+- https://www.digitala11y.com/focus-visible-understanding-sc-2-4-7/
 
-On 2026-11-13, both patterns resolved for all **86 active WCAG 2.2 criteria** with HTTP 200 and no redirects. The URL is generated in `web/resources.js` from the criterion `number` and `slug`; no 172-entry link list is stored.
+On 2026-11-13:
 
-`Simple WCAG` describes its explanations as interpretations for educational purposes; no explicit reuse licence was found on the site. `AAArdvark WCAG in Plain English` is an original commercial educational resource. Both are link-only here.
+- Simple WCAG and AAArdvark patterns resolved for all **86 active WCAG 2.2 criteria** with HTTP 200 and no redirects.
+- The WCAG `/criteria/{number}` pattern resolved for all **86** with HTTP 200.
+- DigitalA11y has **55 direct criterion articles** in the checked sitemap/checklist. The other **31** use a labelled `?s={number}` site-search fallback; no direct article was found, and no URL was invented.
+
+URLs are generated in `web/resources.js` from `number`/`slug`; the checked DigitalA11y direct map is in `web/digitala11y-links.js`. No third-party explanation text is stored.
+
+`Simple WCAG` describes its explanations as interpretations for educational purposes; no explicit reuse licence was found. `AAArdvark WCAG in Plain English`, `The WCAG` and `DigitalA11y` are commercial resources. All are link-only here.
 
 ## General resource list
 
@@ -36,11 +46,11 @@ The explorer and role guides include a collapsible **More accessibility resource
 | Group | Resource | Notes |
 | --- | --- | --- |
 | Authoritative | WCAG 2.2, Understanding, ARRM tasks, ARRM roles, WAI Quick Reference | W3C sources |
-| Plain language | Simple WCAG, AAArdvark WCAG in Plain English | Independent; AAArdvark is commercial |
+| Plain language | Simple WCAG, AAArdvark WCAG in Plain English, The WCAG, DigitalA11y | Independent; AAArdvark, The WCAG and DigitalA11y are commercial |
 | Testing and rules | axe-core rule descriptions, CivicActions accessibility-data-reference, Purple Hats/Oobee project | Automated rules are not conformance evidence |
 | Standards and impact | Section 508 FPC, Section 508 WCAG-to-FPC, EN 301 549 v3.2.1, accessibility-impact knowledge layer | Separate from ARRM ownership |
 
-All 14 general resource URLs returned HTTP 200 with a browser-style user agent on 2026-11-13. The ETSI PDF rejects some non-browser clients; it is linked for human readers.
+All 16 general resource URLs returned HTTP 200 with a browser-style user agent on 2026-11-13. The ETSI PDF rejects some non-browser clients; it is linked for human readers.
 
 ## Source files reviewed
 
@@ -72,7 +82,7 @@ Oobee's repository is MIT, but its UI bundles Font Awesome Free 5.15.4 (icons CC
 
 ## Adding a resource
 
-1. Add a per-criterion template to `CRITERION_RESOURCE_TEMPLATES` or a global entry to `GENERAL_RESOURCES` in `web/resources.js`.
+1. Add a per-criterion template to `CRITERION_RESOURCE_TEMPLATES` or a global entry to `GENERAL_RESOURCES` in `web/resources.js`. If the site has irregular per-criterion URLs, add an explicit checked map such as `web/digitala11y-links.js`; do not guess slugs.
 2. Label independent/commercial sources clearly; do not copy their prose.
 3. Add a Playwright assertion in `tests/e2e/resources.spec.js` for the link, label, `rel` and no `target` attribute.
 4. Update this document with the licence/status and validation date.
@@ -81,6 +91,7 @@ Oobee's repository is MIT, but its UI bundles Font Awesome Free 5.15.4 (icons CC
 
 ## Known limits
 
-- Link patterns can change without notice. The last full check is recorded above; a future optional link-audit script can make this repeatable.
+- Link patterns can change without notice. The last full check is recorded above; `pnpm test:links` checks the generated URL shapes, not live availability.
+- DigitalA11y's `Search DigitalA11y` fallback is an honest gap marker, not a dedicated article.
 - External sites may change content, add tracking or change access terms. The project does not mirror or vouch for their current content.
 - A working link is not evidence that the explanation is accurate, complete or appropriate for a given team.
