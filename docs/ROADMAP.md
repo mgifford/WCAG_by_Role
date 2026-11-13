@@ -55,6 +55,7 @@ PR 1 (role-specific navigation) and the remaining role guides implement:
 - Business Analysis, Content Authoring, User Experience (UX) Design, Visual Design and Front-End Development guides with distinct, data-driven category lists.
 - Shared role cards, DOM helpers and one role template; adding a role is a config entry.
 - Task-level primary/secondary/contributor assignments with collaborating roles kept visible.
+- Category → success-criterion grouping with task text as bullets, visible responsibility badges, and task IDs/assignments/sources in a per-criterion disclosure.
 - Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
 - Project handoff guidance explicitly separated from ARRM assignments.
 - Link-only external resources: Simple WCAG and AAArdvark per-criterion explanations, plus testing, standards-mapping and impact references. No third-party text or impact dataset is imported.

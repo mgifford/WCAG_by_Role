@@ -22,7 +22,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
 | Level filtering | Conformance target A includes only A; AA includes A+AA; AAA includes A+AA+AAA; exact level remains independent |
 | Missing source | Missing summary, summary not assigning the role, and no task for the role produce different messages |
-| Role guides | All five data-backed guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
+| Role guides | All five data-backed guides group task text under category and success criterion, show responsibility badges, and put task IDs/assignments/sources in a per-criterion disclosure |
 | Role guides | A task such as INP-017/INP-018 shows both Visual Design and Front-End Development responsibilities, with the selected role highlighted by text |
 | Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
 | External resources | Plain-language links are labelled external, commercial resources are identified, links do not force a new tab, and no resource is presented as W3C-endorsed |
