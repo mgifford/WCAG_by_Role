@@ -114,11 +114,13 @@ function makeCriterion({sc, tasks}) {
   addRoleSummary(card, sc, tasks.length > 0);
   addBrief(card, sc);
   if (tasks.length) {
-    const title = element('h5', 'tasks-heading', 'Task-level ARRM assignments (' + tasks.length + ')');
-    card.append(title);
+    const disclosure = element('details', 'tasks-disclosure');
+    if (state.query.trim()) disclosure.open = true;
+    disclosure.append(element('summary', 'tasks-heading', 'Task-level ARRM assignments (' + tasks.length + ')'));
     const list = element('ul', 'task-list');
     tasks.forEach(task => list.append(makeTask(task)));
-    card.append(list);
+    disclosure.append(list);
+    card.append(disclosure);
   } else {
     const noTasks = state.role
       ? `No ARRM task owned or supported by ${state.role} is recorded in this view. This does not indicate an exception to WCAG or an absence of responsibility.`

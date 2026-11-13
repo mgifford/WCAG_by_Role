@@ -16,6 +16,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Reduced motion | Respect prefers-reduced-motion; no unnecessary animation |
 | Landmarks and headings | Correct main, navigation, form search region, article and heading order |
 | Live updates | Result counts are announced without repeatedly interrupting users; no keyboard focus loss |
+| Task disclosures | Task-level assignment lists are native details, summary includes the task count, keyboard operable, and search opens matching lists |
 | Links | Each criterion has an unambiguous accessible link to the official norm and an Understanding link |
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
 | Level filtering | Conformance target A includes only A; AA includes A+AA; AAA includes A+AA+AAA; exact level remains independent |
@@ -58,6 +59,7 @@ The Playwright suite currently covers:
 - Missing-summary, summary-does-not-assign-role and no-task-for-role messages on the explorer.
 - Original inline icons: decorative SVG semantics, role/category icon counts, functional-needs cards, forced colours, reflow and axe with the visual sections.
 - Supplied WCAG 2.2 pictograms: 86/86 mapping coverage, symbol IDs, criterion-card/role-list rendering, dark/forced-colour tiles and no `<img>` assets.
+- Task accordions: collapsed by default, count in the summary, mouse/keyboard open, search auto-open, and axe checks in open and closed states.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people
@@ -73,6 +75,7 @@ The Playwright suite currently covers:
 9. **Role guides:** read both guides with a screen reader and keyboard only; confirm the selected role, all collaborating roles, category jumps and task/criterion anchors are understandable.
 10. **External resources:** read each plain-language link in context; confirm the external/commercial labels are understood, no new tab opens unexpectedly, and the resource is not mistaken for W3C guidance. Check that the DigitalA11y search fallback is clear and that the general resource disclosure is keyboard-operable.
 11. **Icons and functional needs:** confirm each icon is decorative and the adjacent text carries the meaning; check icon visibility in forced colours, dark mode and print; confirm no disability group is presented as a diagnosis or a complete taxonomy.
+12. **Task disclosures:** screen-reader reading of the summary count, open/closed state and task order; confirm search auto-open does not surprise keyboard users.
 
 ## Role-based usability scenarios
 
