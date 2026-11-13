@@ -31,7 +31,10 @@ test.describe('role guides', () => {
     await openRole(page, 'visual-design');
     await expect(page).toHaveTitle('WCAG for Visual Designers | WCAG by Role');
     await expect(page.locator('#page-title')).toHaveText('WCAG for Visual Designers');
-    await expect(page.locator('#role-switcher a[aria-current="page"]')).toContainText('Visual design guide');
+    await expect(page.locator('#role-switcher a[aria-current="page"]')).toContainText('Visual design');
+    await expect(page.locator('#role-switcher a')).toHaveText([
+      'Full WCAG explorer', 'Business analysis', 'Content authoring', 'UX design', 'Visual design', 'Front-end development',
+    ]);
     await expect(page.locator('[data-count="primary"]')).toHaveText('4');
     await expect(page.locator('[data-count="secondary"]')).toHaveText('3');
     await expect(page.locator('[data-count="contributor"]')).toHaveText('1');
