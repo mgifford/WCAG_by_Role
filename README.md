@@ -22,7 +22,7 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 
 ## Quick start (no network)
 
-Requirements: Python 3.11 or later. No package install or build toolchain needed.
+Requirements: Python 3.11 or later and the build/test dependency in `requirements.txt`. The published site is static and needs no Python, YAML or package runtime.
 
 ```sh
 python3 -m unittest discover -s tests -v
@@ -68,6 +68,10 @@ This downloads the current WCAG JSON, both ARRM CSVs and, unless skipped, short 
 
 ```sh
 python3 scripts/pipeline.py --mode production
+python3 scripts/migrate_source.py \
+  --input dist/data/role-data.json \
+  --yaml-out data/source/role-data.yaml \
+  --json-out dist/data/role-data.json
 python3 -m http.server 8000 --directory dist
 ```
 
@@ -92,7 +96,7 @@ The workflow runs on pushes to `main`, pull requests, manual triggers and a week
 ```text
 .github/workflows/pages.yml   Test, build, deploy, weekly refresh
 web/                          Site HTML, CSS, JavaScript
-web/role.html                 Role-guide shell (Visual Design / Front-End Development)
+web/role.html                 Role-guide shell for the five ARRM roles
 web/role-config.js            Role copy, slugs and ARRM task-category map
 web/role-page.js              Shared role-guide renderer
 web/dom.js, role-cards.js     Shared DOM and role-card components
@@ -102,9 +106,15 @@ web/wcag22-icons-mapping.json Supplied pictogram mapping/provenance
 web/resources.js              Link-only external resource registry
 web/digitala11y-links.js      Checked DigitalA11y direct-article map
 scripts/pipeline.py           Fetch, parse, normalize, audit, build
+scripts/migrate_source.py     Validate YAML source and regenerate browser JSON
+scripts/source_schema.py      Stdlib source-snapshot validation rules
 scripts/smoke_site.py         Post-deploy production-artefact smoke checks
+data/source/role-data.yaml    Canonical production source snapshot
+schemas/role-data.schema.yaml Source and generated-JSON contract
+requirements.txt              Build/test-only PyYAML dependency
 fixtures/                     Clearly labeled offline demonstration data
 tests/test_pipeline.py        Python import and business-rule tests
+tests/test_yaml_source.py     YAML snapshot, schema, round-trip and rejection tests
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
 docs/                         Governance, architecture, role guides, visual language,
@@ -114,7 +124,7 @@ NOTICE.md                     W3C attribution and reuse cautions
 AGENTS.md                     Agent instructions for contributors
 ```
 
-Generated `dist/data/role-data.json` and `dist/data/import-audit.json` are available on the deployed site and suitable for other tools. `dist/` is ignored in Git and generated for every deployment.
+Generated `dist/data/role-data.json` and `dist/data/import-audit.json` are available on the deployed site and suitable for other tools. `dist/` is ignored in Git and generated for every deployment. The canonical `data/source/role-data.yaml` is committed for review; the browser JSON is regenerated from it during the production build.
 
 ## Authoritative sources
 
@@ -141,7 +151,7 @@ Criterion cards and role-guide criteria lists include link-only **plain-language
 
 The browser uses W3C criterion names and links, plus task wording from ARRM. It does not claim that a task or an Understanding statement is normative. Documentation does not promise a WCAG conformance level or label this prototype as certified accessible. Manual review by disabled users and assistive technology users remains necessary.
 
-The production audit for the 2026-11-12 source snapshot is in [docs/AUDIT.md](docs/AUDIT.md). It records the counts, the 4.1.1 Parsing exclusion, the 3.2.7–3.2.9 unknown ARRM rows, the 3.3.7–3.3.9 missing criterion summaries, five task-level level disagreements and five normalized role labels. No missing data is filled in.
+The production audit for the 2026-11-13 source snapshot is in [docs/AUDIT.md](docs/AUDIT.md). It records the counts, the 4.1.1 Parsing exclusion, the 3.2.7–3.2.9 unknown ARRM rows, the 3.3.7–3.3.9 missing criterion summaries, five task-level level disagreements and five normalized role labels. No missing data is filled in.
 
 ## Contribution policy
 

@@ -18,6 +18,7 @@ Maintain an independent role-filtered navigation tool for WCAG 2.2. The authorit
 ## Development checks
 
 ```sh
+python3 -m pip install -r requirements.txt
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
@@ -35,6 +36,9 @@ Production integration requires network: `python3 scripts/pipeline.py --mode pro
 
 - `web/` : UI only, no external frameworks needed for v1.
 - `scripts/pipeline.py` : source retrieval, transformation and audit; Python stdlib only.
+- `scripts/migrate_source.py` : build-only YAML snapshot validation and YAML-to-JSON generation; uses PyYAML from `requirements.txt`.
+- `data/source/role-data.yaml` : canonical normalized production source snapshot; never hand-edit source wording or ownership.
+- `schemas/` : source/JSON contract.
 - `fixtures/` : representative mock records, *never* complete WCAG or ARRM.
 - `tests/` : import normalization and business-rule regression tests.
 - `tests/e2e/` : Playwright and axe-core browser regressions for filtering, keyboard, reflow and forced colours.

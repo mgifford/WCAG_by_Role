@@ -75,6 +75,13 @@ Still to come in Phase 2:
 
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
 
+### Source-data migration status (2026-11-13)
+
+- Added the canonical `data/source/role-data.yaml` production snapshot with all 86 active criteria, 262 accepted tasks, five roles, task-level ownership and source SHA-256 hashes.
+- Added `schemas/role-data.schema.yaml`, stdlib source validation and a YAML round-trip/parity test.
+- Production builds now write, validate and read back the YAML before regenerating the browser JSON. PyYAML is build/test-only.
+- The snapshot is deliberately separate from editorial role profiles and interpretations; those remain a later, reviewed layer.
+
 ## Phase 3: Optional and reviewed AI enrichment
 
 - Evaluate Hugging Face inference only as a CI-side, opt-in drafting utility.

@@ -1,0 +1,3 @@
+# Build/test-only dependency for the canonical YAML source snapshot.
+# The published site has no runtime Python or YAML dependency.
+PyYAML==6.0.3

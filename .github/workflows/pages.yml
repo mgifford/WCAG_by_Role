@@ -35,6 +35,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Python build dependencies
+        run: python3 -m pip install -r requirements.txt
+
       - name: Run Python unit tests
         run: python3 -m unittest discover -s tests -v
 
@@ -91,14 +94,25 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install Python build dependencies
+        run: python3 -m pip install -r requirements.txt
+
       - name: Build from live W3C and ARRM sources
         run: python3 scripts/pipeline.py --mode production
+
+      - name: Write and validate canonical YAML source
+        run: |
+          python3 scripts/migrate_source.py \
+            --input dist/data/role-data.json \
+            --yaml-out data/source/role-data.yaml \
+            --json-out dist/data/role-data.json
 
       - name: Record provenance and audit artefact
         uses: actions/upload-artifact@v7
         with:
           name: import-audit
           path: |
+            data/source/role-data.yaml
             dist/data/role-data.json
             dist/data/import-audit.json
           retention-days: 14
