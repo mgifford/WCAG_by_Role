@@ -4,6 +4,7 @@ import { appendParagraph, element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
 import { appendCriterionResources, appendGeneralResources } from './resources.js';
 import { OWNERSHIP_LEVELS, matchesCriterionLevel, roleLevels } from './filtering.js';
+import { appendFunctionalNeeds } from './visuals.js';
 
 const $ = (id) => document.getElementById(id);
 const filters = $('filters');
@@ -191,6 +192,7 @@ function renderRoleGuides() {
 
 async function init() {
   renderRoleGuides();
+  appendFunctionalNeeds($('functional-needs-list'));
   appendGeneralResources($('general-resources'));
   try {
     const response = await fetch('./data/role-data.json');

@@ -66,6 +66,10 @@ These files were reviewed for possible use. None are copied into this repository
 | `openacr-release-evidence` accessibility-impact | AGPL-3.0; 86 records **proposed**, 0 reviewed; Section 508 mapping reviewed, EN 301 549 pending | Link only for now. Importing it would need a data-specific licence decision and human review. It must never be presented as reviewed fact or used to assign ARRM responsibility. |
 | Section 508 FPC / EN 301 549 mappings | Standards plus third-party crosswalks | Link only. A future separate standards view could present them; they do not belong in the role-ownership model. |
 
+## Artwork and icons
+
+Oobee's repository is MIT, but its UI bundles Font Awesome Free 5.15.4 (icons CC BY 4.0, fonts SIL OFL 1.1). Its current disability categories are text badges, not custom artwork. AAArdvark's plain-English icons are custom inline SVG with no explicit reuse licence found, so they are not copied. The site uses original icons; see [VISUAL-LANGUAGE.md](VISUAL-LANGUAGE.md).
+
 ## Adding a resource
 
 1. Add a per-criterion template to `CRITERION_RESOURCE_TEMPLATES` or a global entry to `GENERAL_RESOURCES` in `web/resources.js`.

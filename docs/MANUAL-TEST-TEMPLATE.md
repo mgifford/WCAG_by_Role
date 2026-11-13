@@ -55,6 +55,9 @@ Use **Pass**, **Fail** or **N/A**. Add evidence paths for failures and non-obvio
 | Content | Normative and Understanding links are unambiguous in context | | |
 | External resources | Plain-language links are labelled external; AAArdvark is understood as commercial; no new tab opens unexpectedly | | |
 | External resources | The "More accessibility resources" disclosure is keyboard-operable and the impact data is understood as proposed/unreviewed | | |
+| Icons | Category, role and functional-needs icons are decorative and the adjacent text carries the meaning | | |
+| Icons | Icons remain visible in forced colours, dark mode, print and at 320 CSS px | | |
+| Functional needs | The overview is understood as orientation, not a diagnosis or complete per-criterion impact mapping | | |
 | Content | 4.1.1 Parsing is not presented as a live WCAG 2.2 requirement | | |
 | Data | Role filter does not hide active criteria when "include criteria with no matching task" is on | | |
 | Data | A criterion with tasks owned by different roles shows each task's own assignment | | |

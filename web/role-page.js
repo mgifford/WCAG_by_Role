@@ -3,6 +3,7 @@
 import { element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
 import { appendCriterionResources, appendGeneralResources } from './resources.js';
+import { ROLE_ICONS, categoryIcon, createIcon } from './visuals.js';
 import {
   CATEGORY_BY_PREFIX,
   CATEGORY_ORDER,
@@ -241,8 +242,10 @@ function categoriesSection(config, dataset, tasks, criteriaByNumber, roleTaskIds
   const navList = element('ul');
   for (const group of groups) {
     const item = element('li');
-    item.append(link(`${group.category} (${group.tasks.length})`, '#category-' + slugify(group.category),
-      '', `Skip to ${group.category}, ${group.tasks.length} tasks`));
+    const anchor = link(`${group.category} (${group.tasks.length})`, '#category-' + slugify(group.category),
+      '', `Skip to ${group.category}, ${group.tasks.length} tasks`);
+    anchor.prepend(createIcon(categoryIcon(group.category), {className: 'category-nav-icon', size: 16}));
+    item.append(anchor);
     navList.append(item);
   }
   nav.append(navList);
@@ -251,8 +254,9 @@ function categoriesSection(config, dataset, tasks, criteriaByNumber, roleTaskIds
   for (const group of groups) {
     const category = element('section', 'category-section');
     category.id = 'category-' + slugify(group.category);
-    const heading = element('h3', '', group.category + ' ');
-    heading.append(element('span', 'count-pill', String(group.tasks.length)));
+    const heading = element('h3');
+    heading.append(createIcon(categoryIcon(group.category), {className: 'category-icon', size: 24}),
+      document.createTextNode(group.category + ' '), element('span', 'count-pill', String(group.tasks.length)));
     category.append(heading);
     const categorySource = element('p', 'meta', 'ARRM category. Source: ');
     categorySource.append(link('W3C ARRM tasks', CATEGORY_SOURCE_URL));
@@ -347,6 +351,9 @@ function sourcesSection(dataset, config) {
     link('WAI Quick Reference', SOURCES.quickref),
   );
   section.append(sources);
+  const needs = element('p', 'source-links');
+  needs.append('Who accessibility affects: ', link('functional-needs overview', './index.html#needs'));
+  section.append(needs);
   appendGeneralResources(section);
 
   section.append(element('h3', '', 'What this guide does not establish'));
@@ -467,7 +474,10 @@ async function init() {
   }
 
   document.title = config.title + ' | WCAG by Role';
-  $('page-title').textContent = config.title;
+  $('page-title').replaceChildren(
+    createIcon(ROLE_ICONS[slug] || 'other', {className: 'role-title-icon', size: 34}),
+    document.createTextNode(config.title),
+  );
   $('page-intro').textContent = config.intro;
   const description = document.querySelector('meta[name="description"]');
   if (description) description.setAttribute('content', config.cardCopy + ' Task-level responsibilities from W3C ARRM, with links to WCAG 2.2 and Understanding.');

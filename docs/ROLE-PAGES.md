@@ -24,6 +24,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
                              ├── role-config.js ── role copy + category map
                              ├── role-cards.js ── chooser cards
                              ├── resources.js ── link-only external resources
+                             ├── visuals.js ── original icons + functional needs
                              └── dom.js ── shared DOM helpers
 ```
 
@@ -41,7 +42,8 @@ For each task, `roleTasks` includes the task when the selected role appears in a
 - lists every primary, secondary and contributor role, including collaborators;
 - links to the normative WCAG criterion and Understanding document;
 - links to the ARRM task list and, when present, other tasks for the same criterion;
-- link-only plain-language explanations from Simple WCAG and AAArdvark, labelled external.
+- link-only plain-language explanations from Simple WCAG and AAArdvark, labelled external;
+- original category and role icons (decorative, with visible text).
 
 Task IDs are stable ARRM identifiers. The guide never infers an owner from a criterion-level summary or from another task.
 
@@ -87,6 +89,12 @@ The collaboration section is derived from the same ARRM task assignments:
 - the related-task disclosure lists other tasks for the same criterion.
 
 The handoff bullets are **project guidance**, explicitly labelled as not a W3C requirement. They do not prescribe a sequence, a workflow engine or a handoff artifact. The guide does not assign ownership where ARRM is silent.
+
+## Visual language
+
+Category headings and category navigation use original inline SVG icons from `web/visuals.js`. The role heading and role cards use a palette/code icon. Icons are decorative, `aria-hidden`, use `currentColor`, and never replace a text label or responsibility level.
+
+The explorer's **Who accessibility affects** overview uses eight functional-needs groups aligned with Section 508 FPC and EN 301 549 references. It is orientation, not a diagnosis, a complete disability taxonomy or a per-criterion mapping. See [VISUAL-LANGUAGE.md](VISUAL-LANGUAGE.md) for the icon inventory, licensing review and accessibility rules. No Oobee or AAArdvark artwork is reused.
 
 ## External resources
 
