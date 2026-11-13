@@ -75,6 +75,14 @@ Still to come in Phase 2:
 
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
 
+### Persona data status (2026-11-13)
+
+- Added five canonical fictional persona YAML files, one per ARRM role with task data.
+- Added a persona schema, deterministic JSON/CSV exports, five cached RoboHash set1 portraits and an avatar hash manifest.
+- Added a credits page with W3C, ARRM, RoboHash and Zikri Kader attribution.
+- Personas remain `unvalidated-draft`; no persona assigns ARRM ownership or changes WCAG/ARRM data.
+- Persona cards, role-guide disclosures and comparison views remain the next persona PR.
+
 ### Source-data migration status (2026-11-13)
 
 - Added the canonical `data/source/role-data.yaml` production snapshot with all 86 active criteria, 262 accepted tasks, five roles, task-level ownership and source SHA-256 hashes.

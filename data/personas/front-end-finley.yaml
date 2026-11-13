@@ -1,0 +1,77 @@
+schemaVersion: 1.0.0
+personaType: fictional-professional-archetype
+researchStatus: unvalidated-draft
+id: front-end-finley
+roleSlug: front-end-development
+arrmRole: Front-End Development
+name: Front-End Developer Finley
+shortName: Finley
+summary: Finley implements accessible components and wants precise, testable guidance tied to browser behavior
+  and W3C references.
+scenario: Finley maintains a reusable component library in an open-source web project. They fix defects in
+  keyboard behavior, names, roles, states, focus and responsive rendering.
+goals:
+- Translate an assigned task into robust semantics and predictable browser behavior.
+- Verify a change using automated checks plus manual keyboard and assistive-technology testing.
+- Preserve design and content decisions while implementing accessible interaction.
+needs:
+- Short technical examples, valid HTML and clear failure cases.
+- Reproducible browser and assistive-technology test steps.
+- Direct links to W3C criteria and the precise ARRM task and collaborator.
+thoughts:
+- What browser behavior must change, and how can I reproduce the failure?
+- Is this problem caused by markup, CSS, scripting, authoring content or interaction design?
+feelings:
+- Frustrated by vague accessibility guidance with no concrete failure mode.
+- More confident when expected behavior and a reproducible test are recorded.
+behaviors:
+- Works from issues and pull requests with repeatable test cases.
+- Checks dynamic states using keyboard, browser tools and assistive technology.
+painPoints:
+- A design handoff without keyboard, focus or error states.
+- Automated test scores being treated as sufficient proof of accessibility.
+accessContext: May work on locked-down or remote development systems and need implementation advice that does
+  not depend on one proprietary tool.
+avatar:
+  provider: RoboHash
+  seed: wcag-role-developer-finley
+  set: set1
+  size: 400x400
+  url: https://robohash.org/wcag-role-developer-finley.png?set=set1&size=400x400
+  localPath: web/assets/personas/front-end-finley.png
+  format: png
+  decorative: true
+  altText: ''
+  license: CC BY 4.0
+  attribution: RoboHash (https://robohash.org/), classic robot artwork by Zikri Kader
+  assetStatus: cached
+  sha256: a2d3a370b6485c22692c64664a8e2a3ed19bb41d129356dad2d26865002e3191
+  genre: classic-robot
+sourceNotes:
+  inspiredBy: https://accessibility.civicactions.com/personas/
+  roleReferences:
+  - https://www.w3.org/WAI/planning/arrm/roles/
+  claims: Illustrative fictional persona; researchStatus is not a professional or accessibility evaluation.
+    Do not infer disability, expertise, individual preferences, or ARRM task ownership from this persona.
+preferredCommunication:
+  vocabulary:
+  - semantic HTML
+  - CSS
+  - JavaScript
+  - keyboard behavior
+  - accessible name
+  - component
+  - test case
+  framing: Start with an observable failure and expected behavior; provide implementation detail, test procedure
+    and the source criterion.
+  exampleTypes:
+  - HTML example
+  - component behavior contract
+  - Playwright fixture
+  - keyboard test case
+  explainTerms:
+  - brand aesthetics
+  - stakeholder narrative without acceptance evidence
+  - legally conclusive compliance claims
+  successSignal: Can implement the change and explain which parts remain subject to manual testing and team
+    review.

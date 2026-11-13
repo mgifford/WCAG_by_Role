@@ -1,0 +1,76 @@
+schemaVersion: 1.0.0
+personaType: fictional-professional-archetype
+researchStatus: unvalidated-draft
+id: content-casey
+roleSlug: content-authoring
+arrmRole: Content Authoring
+name: Content Author Casey
+shortName: Casey
+summary: Casey maintains content across a large site and needs guidance that makes accessible publishing practical
+  and repeatable.
+scenario: Casey edits guidance pages, images, form instructions and documents in a CMS. They coordinate with
+  designers and developers but cannot change underlying component code.
+goals:
+- Write labels, link text, headings and text alternatives that convey their intended meaning.
+- Apply repeatable editorial checks to new and existing content.
+- Know when content needs a design or code change instead of another editorial revision.
+needs:
+- Before-and-after writing examples with context.
+- Plain-language explanations of source criteria and role assignments.
+- A checklist for checking published content, including surrounding context.
+thoughts:
+- What does someone need to understand or do after reading this?
+- Is the problem in the words, the content structure or the component itself?
+feelings:
+- Frustrated by advice that assumes a content editor can edit HTML templates.
+- Reassured by examples that distinguish an authoring decision from a developer handoff.
+behaviors:
+- Uses a CMS preview and checks published pages against source material.
+- Collaborates on alt text, error messages and content patterns.
+painPoints:
+- Guidance that gives only a success-criterion number and no editorial example.
+- A CMS that makes the right authoring choice difficult or impossible.
+accessContext: Sometimes reviews material at high browser zoom when checking readability and content structure;
+  this is an example context, not an assumption about content professionals.
+avatar:
+  provider: RoboHash
+  seed: wcag-role-content-casey
+  set: set1
+  size: 400x400
+  url: https://robohash.org/wcag-role-content-casey.png?set=set1&size=400x400
+  localPath: web/assets/personas/content-casey.png
+  format: png
+  decorative: true
+  altText: ''
+  license: CC BY 4.0
+  attribution: RoboHash (https://robohash.org/), classic robot artwork by Zikri Kader
+  assetStatus: cached
+  sha256: de361c4fb017fb049bcd12875527464694926ff5170d9c14db625ee86ef89675
+  genre: classic-robot
+sourceNotes:
+  inspiredBy: https://accessibility.civicactions.com/personas/
+  roleReferences:
+  - https://www.w3.org/WAI/planning/arrm/roles/
+  claims: Illustrative fictional persona; researchStatus is not a professional or accessibility evaluation.
+    Do not infer disability, expertise, individual preferences, or ARRM task ownership from this persona.
+preferredCommunication:
+  vocabulary:
+  - reader
+  - purpose
+  - meaning
+  - label
+  - heading
+  - alternative text
+  - publishing workflow
+  framing: Start with what the reader needs to understand; show a concrete content example and when to ask
+    others for help.
+  exampleTypes:
+  - link rewrite
+  - image alternative
+  - heading outline
+  - form-instruction edit
+  explainTerms:
+  - accessible-name computation
+  - pseudo-class
+  - DOM mutation
+  successSignal: Can make or request the correct editorial change and inspect it in its published context.

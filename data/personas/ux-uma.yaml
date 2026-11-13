@@ -1,0 +1,77 @@
+schemaVersion: 1.0.0
+personaType: fictional-professional-archetype
+researchStatus: unvalidated-draft
+id: ux-uma
+roleSlug: user-experience-design
+arrmRole: User Experience (UX) Design
+name: UX Designer Uma
+shortName: Uma
+summary: Uma designs user journeys and prototypes, checking whether people can complete important interactions
+  across different access needs.
+scenario: Uma maps an online service journey, including authentication, error recovery and support. Stakeholders
+  frequently mistake a working prototype for evidence that the final experience is accessible.
+goals:
+- Identify barriers in user flows before implementation.
+- Connect interaction decisions to user needs and evaluation scenarios.
+- Make handoffs between research, content, visual design and development explicit.
+needs:
+- User journey and interaction examples linked to criteria.
+- Examples of task failures, alternative paths and recovery states.
+- Questions suitable for moderated and assistive-technology usability research.
+thoughts:
+- What happens when someone cannot complete this step as designed?
+- How do we know the proposed interaction actually supports the task?
+feelings:
+- Concerned when a polished prototype obscures untested interaction states.
+- More confident after hearing evidence from participants with varied access needs.
+behaviors:
+- Develops journey maps, task flows, prototypes and research scripts.
+- Revises designs after observing where people get stuck.
+painPoints:
+- Conformance labels with little description of user impact.
+- Missing states for errors, timeouts, keyboard navigation and interrupted journeys.
+accessContext: Often presents prototypes remotely, where participants may have different devices, connection
+  quality and assistive technologies.
+avatar:
+  provider: RoboHash
+  seed: wcag-role-ux-uma
+  set: set1
+  size: 400x400
+  url: https://robohash.org/wcag-role-ux-uma.png?set=set1&size=400x400
+  localPath: web/assets/personas/ux-uma.png
+  format: png
+  decorative: true
+  altText: ''
+  license: CC BY 4.0
+  attribution: RoboHash (https://robohash.org/), classic robot artwork by Zikri Kader
+  assetStatus: cached
+  sha256: 8537282599dfd7bb6c817b433499c3dd5485632d66e947402c21429b8915e14f
+  genre: classic-robot
+sourceNotes:
+  inspiredBy: https://accessibility.civicactions.com/personas/
+  roleReferences:
+  - https://www.w3.org/WAI/planning/arrm/roles/
+  claims: Illustrative fictional persona; researchStatus is not a professional or accessibility evaluation.
+    Do not infer disability, expertise, individual preferences, or ARRM task ownership from this persona.
+preferredCommunication:
+  vocabulary:
+  - user journey
+  - task completion
+  - interaction
+  - feedback
+  - error recovery
+  - research
+  - prototype
+  framing: Lead with the user scenario and failure mode, then explain the interaction decision and how it
+    can be evaluated.
+  exampleTypes:
+  - journey map
+  - task-flow annotation
+  - prototype state
+  - research scenario
+  explainTerms:
+  - code patch
+  - HTML attribute-level implementation
+  - contract clause
+  successSignal: Can identify an interaction decision, potential barrier, collaborator and research-based
+    validation step.

@@ -1,0 +1,51 @@
+schemaVersion: 1.0.0
+id: business-analysis
+language: en
+profileStatus: project-draft
+authority: Independent project communication profile, not W3C guidance.
+arrmRole: Business Analysis
+title: Business analysts
+perspective: Requirements, risks, acceptance criteria and organizational outcomes.
+voice: Precise, accountable, outcome-oriented; explain technical terms only when needed.
+preferredTerms:
+- requirements
+- acceptance criteria
+- outcomes
+- risk
+- scope
+- stakeholders
+- procurement
+- delivery evidence
+- dependencies
+avoidUnexplained:
+- DOM
+- ARIA
+- tabindex
+- pseudo-class
+- accessibility tree
+focusQuestions:
+- What outcome must the service support?
+- What can be specified or accepted?
+- Who owns implementation and verification?
+deliverables:
+- requirements entry
+- acceptance criteria
+- procurement language
+- decision log
+verificationExamples:
+- review acceptance evidence
+- request test results from implementing roles
+roleBoundary: A requirement is not evidence that the shipped service conforms.
+ownershipCommunication:
+  primary: Describe the task the role is normally accountable for, using the source assignment unchanged.
+  secondary: Describe how the role supports the primary owner without taking over responsibility.
+  contributor: Describe consultation and input; do not imply implementation accountability.
+  none: State explicitly that ARRM records no task-level ownership for this role; optional context
+    is not an assignment.
+editorialRules:
+- Do not change WCAG requirements or conformance levels.
+- Do not infer ARRM ownership from criterion-level summaries.
+- Make uncertainty explicit.
+- Prefer platform-neutral examples unless a platform is specifically required.
+- Do not stereotype professional knowledge, disability, or reading ability.
+personaRef: ../personas/business-blair.yaml

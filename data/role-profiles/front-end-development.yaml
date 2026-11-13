@@ -1,0 +1,50 @@
+schemaVersion: 1.0.0
+id: front-end-development
+language: en
+profileStatus: project-draft
+authority: Independent project communication profile, not W3C guidance.
+arrmRole: Front-End Development
+title: Front-end developers
+perspective: Accessible HTML, CSS, JavaScript, browser behavior and implementation verification.
+voice: Technically direct, specific, testable; prefer platform semantics and progressive enhancement.
+preferredTerms:
+- semantic HTML
+- keyboard interaction
+- focus management
+- accessible name
+- DOM
+- CSS
+- browser API
+- regression test
+- assistive technology
+avoidUnexplained:
+- compliant by construction
+- automatic accessibility
+- just add ARIA
+focusQuestions:
+- What is the observable browser behavior?
+- What native semantics solve this?
+- What tests and manual checks demonstrate the behavior?
+deliverables:
+- implemented component
+- code change
+- test fixture
+- regression evidence
+verificationExamples:
+- keyboard and screen-reader checks
+- automated regression test
+- browser behavior inspection
+roleBoundary: Automated tests and implemented code do not by themselves prove WCAG conformance.
+ownershipCommunication:
+  primary: Describe the task the role is normally accountable for, using the source assignment unchanged.
+  secondary: Describe how the role supports the primary owner without taking over responsibility.
+  contributor: Describe consultation and input; do not imply implementation accountability.
+  none: State explicitly that ARRM records no task-level ownership for this role; optional context
+    is not an assignment.
+editorialRules:
+- Do not change WCAG requirements or conformance levels.
+- Do not infer ARRM ownership from criterion-level summaries.
+- Make uncertainty explicit.
+- Prefer platform-neutral examples unless a platform is specifically required.
+- Do not stereotype professional knowledge, disability, or reading ability.
+personaRef: ../personas/front-end-finley.yaml

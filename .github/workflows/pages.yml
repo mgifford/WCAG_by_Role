@@ -36,7 +36,12 @@ jobs:
           python-version: '3.12'
 
       - name: Install Python build dependencies
-        run: python3 -m pip install -r requirements.txt
+        run: python3 -m pip install -r requirements-dev.txt
+
+      - name: Verify persona exports are current
+        run: |
+          python3 scripts/export_personas.py
+          git diff --exit-code -- data/exports
 
       - name: Run Python unit tests
         run: python3 -m unittest discover -s tests -v
