@@ -9,4 +9,6 @@ This is an independent project, not an official W3C publication and not endorsed
 
 Only original application code is covered by this repository's MIT license. That license does not apply to the W3C datasets, published ARRM task wording, criteria text, or Understanding excerpts.
 
+External resources linked from the site (including Simple WCAG, AAArdvark WCAG in Plain English, CivicActions accessibility-data-reference, Purple Hats/Oobee, axe-core, Section 508 and EN 301 549 material, and the accessibility-impact knowledge layer) remain the property of their publishers and are governed by their own terms. The project links to them for convenience, does not mirror their content, and does not endorse them or treat them as W3C requirements. See `docs/EXTERNAL-RESOURCES.md`.
+
 ARRM task ownership is descriptive guidance, not a legal or normative interpretation of WCAG. A task filtered away does not change an organization's accessibility obligations.

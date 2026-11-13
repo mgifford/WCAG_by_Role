@@ -14,6 +14,13 @@ export function link(label, url, className, ariaLabel) {
   return a;
 }
 
+export function externalLink(label, url, className, ariaLabel) {
+  const a = link(label, url, className, ariaLabel);
+  a.rel = 'external';
+  a.dataset.external = 'true';
+  return a;
+}
+
 export function appendParagraph(parent, value, className) {
   parent.append(element('p', className, value));
 }

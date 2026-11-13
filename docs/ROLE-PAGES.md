@@ -23,6 +23,7 @@ role-data.json ─────┬── index.html + app.js ── generic explo
                     └── role.html + role-page.js ── role guide
                              ├── role-config.js ── role copy + category map
                              ├── role-cards.js ── chooser cards
+                             ├── resources.js ── link-only external resources
                              └── dom.js ── shared DOM helpers
 ```
 
@@ -39,7 +40,8 @@ For each task, `roleTasks` includes the task when the selected role appears in a
 - shows the selected role's level(s) in **Your responsibility**;
 - lists every primary, secondary and contributor role, including collaborators;
 - links to the normative WCAG criterion and Understanding document;
-- links to the ARRM task list and, when present, other tasks for the same criterion.
+- links to the ARRM task list and, when present, other tasks for the same criterion;
+- link-only plain-language explanations from Simple WCAG and AAArdvark, labelled external.
 
 Task IDs are stable ARRM identifiers. The guide never infers an owner from a criterion-level summary or from another task.
 
@@ -86,6 +88,12 @@ The collaboration section is derived from the same ARRM task assignments:
 
 The handoff bullets are **project guidance**, explicitly labelled as not a W3C requirement. They do not prescribe a sequence, a workflow engine or a handoff artifact. The guide does not assign ownership where ARRM is silent.
 
+## External resources
+
+Criterion cards and the role-guide criteria list link to two independent plain-language sites. The role-guide sources section and the explorer include a collapsible list of testing, standards-mapping and impact references. These are link-only: no third-party text or mapping data is copied, and none of it assigns ARRM ownership.
+
+The accessibility-impact data is currently **proposed/unreviewed** and its repository is AGPL-3.0, so it is linked rather than imported. See [EXTERNAL-RESOURCES.md](EXTERNAL-RESOURCES.md) for licence status, validation dates and the policy for adding links.
+
 ## Missing source information
 
 Role guides use task-level ownership, so a missing criterion-level responsibility summary does not remove a task. The guide does not display a criterion summary as if it were task ownership. The generic explorer carries the criterion-level summary and its distinction; the [import audit](AUDIT.md) records missing summaries and unknown or retired ARRM criteria.
@@ -110,4 +118,5 @@ This implementation does not add:
 - CSV/JSON export (a later PR);
 - a workflow engine, task management integration or editable assignments;
 - AI-generated summaries or conformance claims;
+- imported third-party impact, axe or standards-mapping datasets;
 - a backend, client-side routing dependency or new normative model.
