@@ -1,7 +1,8 @@
 'use strict';
 
-import { element, link } from './dom.js';
+import { element } from './dom.js';
 import { ROLE_GUIDES, ROLE_ORDER } from './role-config.js';
+import { ROLE_ICONS, createIcon } from './visuals.js';
 
 export function roleCardList() {
   const list = element('ul', 'role-path-list');
@@ -9,9 +10,14 @@ export function roleCardList() {
     const guide = ROLE_GUIDES[slug];
     if (!guide) continue;
     const item = element('li');
-    const card = link(guide.cardTitle, './role.html?role=' + encodeURIComponent(slug), 'role-path');
+    const card = element('a', 'role-path');
+    card.href = './role.html?role=' + encodeURIComponent(slug);
     card.dataset.role = slug;
-    card.append(element('span', 'role-path-copy', guide.cardCopy));
+    card.append(
+      createIcon(ROLE_ICONS[slug] || 'other', {className: 'role-path-icon', size: 32}),
+      element('span', 'role-path-title', guide.cardTitle),
+      element('span', 'role-path-copy', guide.cardCopy),
+    );
     item.append(card);
     list.append(item);
   }

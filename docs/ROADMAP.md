@@ -58,6 +58,7 @@ PR 1 (role-specific navigation) implements:
 - Direct anchors for categories, tasks and WCAG criteria, plus links to WCAG and Understanding.
 - Project handoff guidance explicitly separated from ARRM assignments.
 - Link-only external resources: Simple WCAG and AAArdvark per-criterion explanations, plus testing, standards-mapping and impact references. No third-party text or impact dataset is imported.
+- Original inline SVG icons for ARRM categories and role cards, plus a **Who accessibility affects** functional-needs overview aligned with Section 508 FPC and EN 301 549 references. No third-party artwork or per-criterion impact mapping is imported.
 
 Current PR 2 work:
 
@@ -70,6 +71,7 @@ Still to come in Phase 2:
 - PR 3: CSV/JSON export, source revision provenance and production-data regression fixtures.
 - PR 4: refinements based on manual accessibility and role-based usability evidence.
 - UX Design and Content Authoring role guides using the same configuration and renderer.
+- A reviewed per-criterion impact layer after a data-specific licence decision for the accessibility-impact dataset.
 
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
 
