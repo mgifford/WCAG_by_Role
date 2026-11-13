@@ -3,6 +3,8 @@
 import { element } from './dom.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
+const XLINK_NS = 'http://www.w3.org/1999/xlink';
+export const CRITERION_ICON_SPRITE = './wcag22-icons.svg';
 
 // Original line icons, MIT-licensed with the rest of the project. They are
 // decorative next to visible text; keep aria-hidden unless a standalone label
@@ -209,6 +211,24 @@ export function createIcon(name, {className = '', size = 24, label = ''} = {}) {
 
 export function categoryIcon(category) {
   return CATEGORY_ICONS[category] || 'other';
+}
+
+export function createCriterionIcon(number, {className = '', size = 56} = {}) {
+  if (!/^\d+\.\d+\.\d+$/.test(String(number))) return null;
+  const svg = document.createElementNS(SVG_NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 100 100');
+  svg.setAttribute('width', String(size));
+  svg.setAttribute('height', String(size));
+  svg.setAttribute('class', ['icon', 'sc-icon', className].filter(Boolean).join(' '));
+  svg.setAttribute('aria-hidden', 'true');
+  svg.setAttribute('focusable', 'false');
+  svg.dataset.criterion = number;
+  const use = document.createElementNS(SVG_NS, 'use');
+  const href = `${CRITERION_ICON_SPRITE}#sc-${number.replaceAll('.', '-')}`;
+  use.setAttribute('href', href);
+  use.setAttributeNS(XLINK_NS, 'xlink:href', href);
+  svg.append(use);
+  return svg;
 }
 
 export function appendFunctionalNeeds(parent) {

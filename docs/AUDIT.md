@@ -25,8 +25,8 @@ python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 | Criteria with a task | 7 |
 | Criteria with a criterion-level summary | 7 |
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
-| Python tests | 32 passed |
-| Playwright / axe-core tests | 43 passed |
+| Python tests | 36 passed |
+| Playwright / axe-core tests | 49 passed |
 | Link URL unit tests | 4 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
@@ -131,6 +131,7 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Resource-link tests verify all four plain-language URL patterns, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open.
 - A pure filter matrix covers 256 combinations of role, ownership, cumulative conformance target and exact level. Explorer tests cover missing-summary, summary-does-not-assign-role and no-task-for-role messages. A production snapshot renders **344 per-criterion resource links across 86 criteria** (four per criterion, including labelled DigitalA11y search fallbacks).
 - Visual-language tests cover original decorative SVG icons, role/category icon counts, the eight functional-needs groups, no external images, dark/forced-colour visibility, 320 px reflow and axe with the visual sections.
+- Pictogram tests cover all 86 supplied SC symbols, 13 guideline symbols, mapping/symbol agreement, no 4.1.1, criterion-card and role-list rendering, dark/forced-colour tiles and no `<img>` assets.
 
 **This is regression evidence, not a conformance claim.** axe-core cannot judge meaningful link text, sensible focus order, screen-reader announcements, real high-contrast rendering, zoom quality or whether the ARRM mapping is appropriate for a team.
 

@@ -43,7 +43,8 @@ For each task, `roleTasks` includes the task when the selected role appears in a
 - links to the normative WCAG criterion and Understanding document;
 - links to the ARRM task list and, when present, other tasks for the same criterion;
 - link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external;
-- original category and role icons (decorative, with visible text).
+- original category and role icons (decorative, with visible text);
+- the supplied WCAG 2.2 success-criterion pictogram in the criteria list.
 
 Task IDs are stable ARRM identifiers. The guide never infers an owner from a criterion-level summary or from another task.
 
@@ -92,7 +93,7 @@ The handoff bullets are **project guidance**, explicitly labelled as not a W3C r
 
 ## Visual language
 
-Category headings and category navigation use original inline SVG icons from `web/visuals.js`. The role heading and role cards use a palette/code icon. Icons are decorative, `aria-hidden`, use `currentColor`, and never replace a text label or responsibility level.
+The criteria list uses the supplied `web/wcag22-icons.svg` symbol for each criterion. Category headings and category navigation use original inline SVG icons from `web/visuals.js`. The role heading and role cards use a palette/code icon. Icons are decorative, `aria-hidden`, use `currentColor`, and never replace a text label or responsibility level.
 
 The explorer's **Who accessibility affects** overview uses eight functional-needs groups aligned with Section 508 FPC and EN 301 549 references. It is orientation, not a diagnosis, a complete disability taxonomy or a per-criterion mapping. See [VISUAL-LANGUAGE.md](VISUAL-LANGUAGE.md) for the icon inventory, licensing review and accessibility rules. No Oobee or AAArdvark artwork is reused.
 

@@ -17,7 +17,7 @@ from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 MINIMUMS = {'criteria': 80, 'tasks': 180, 'roles': 4}
-ASSETS = ('', 'styles.css', 'app.js', 'dom.js', 'role-config.js', 'role-cards.js', 'role-page.js', 'resources.js', 'visuals.js', 'digitala11y-links.js', 'role.html', 'favicon.svg', 'data/role-data.json', 'data/import-audit.json')
+ASSETS = ('', 'styles.css', 'app.js', 'dom.js', 'role-config.js', 'role-cards.js', 'role-page.js', 'resources.js', 'visuals.js', 'digitala11y-links.js', 'wcag22-icons.svg', 'wcag22-icons-mapping.json', 'role.html', 'favicon.svg', 'data/role-data.json', 'data/import-audit.json')
 REQUIRED_ROLE_MARKERS = (
     'id="role-root"',
     'id="role-status"',

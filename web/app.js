@@ -4,7 +4,7 @@ import { appendParagraph, element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
 import { appendCriterionResources, appendGeneralResources } from './resources.js';
 import { OWNERSHIP_LEVELS, matchesCriterionLevel, roleLevels } from './filtering.js';
-import { appendFunctionalNeeds } from './visuals.js';
+import { appendFunctionalNeeds, createCriterionIcon } from './visuals.js';
 
 const $ = (id) => document.getElementById(id);
 const filters = $('filters');
@@ -98,6 +98,8 @@ function makeCriterion({sc, tasks}) {
   const card = element('article', 'criterion');
   card.id = 'sc-' + sc.number.replaceAll('.', '-');
   const heading = element('h4', 'criterion-heading');
+  const criterionIcon = createCriterionIcon(sc.number, {className: 'sc-icon-card', size: 56});
+  if (criterionIcon) heading.append(criterionIcon);
   heading.append(link(sc.number + ' ' + sc.name, sc.normativeUrl));
   heading.append(element('span', 'level-pill', 'Level ' + sc.level));
   card.append(heading);
@@ -129,6 +131,8 @@ function makeTaskRow(task) {
   const row = element('article', 'criterion');
   const h = element('h4', 'criterion-heading');
   const sc = dataset.criteria.find(c => c.number === task.criterion);
+  const criterionIcon = createCriterionIcon(sc.number, {className: 'sc-icon-task', size: 40});
+  if (criterionIcon) h.append(criterionIcon);
   h.append(link(task.id + ' · ' + sc.number + ' ' + sc.name, sc.normativeUrl));
   h.append(element('span', 'level-pill', 'Level ' + sc.level));
   const list = element('ul', 'task-list');
