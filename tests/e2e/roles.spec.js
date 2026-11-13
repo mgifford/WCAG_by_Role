@@ -130,6 +130,29 @@ test.describe('role guides', () => {
     await expect(group.locator('.criterion-task-source')).toContainText('WCAG 2.2');
   });
 
+  test('each role criterion group links to its specific plain-language explanations', async ({ page }) => {
+    await openRole(page, 'content-authoring');
+    const group = page.locator('.criterion-task-group').first();
+    const resources = group.locator('.criterion-resources a');
+    await expect(resources).toHaveCount(4);
+    await expect(group.locator('.criterion-resources')).toContainText('Plain-language explanations:');
+    await expect(group.locator('.criterion-resources')).toContainText('not W3C-endorsed');
+    const links = await resources.evaluateAll((nodes) => nodes.map((node) => ({
+      label: node.textContent, href: node.href, rel: node.rel, target: node.target,
+    })));
+    expect(links.map((entry) => entry.href)).toEqual([
+      'https://simplewcag.org/criteria/1-1-1-non-text-content/',
+      'https://aaardvarkaccessibility.com/wcag-plain-english/1-1-1-non-text-content/',
+      'https://thewcag.com/criteria/1.1.1',
+      'https://www.digitala11y.com/understanding-sc-1-1-1-non-text-content/',
+    ]);
+    for (const entry of links) {
+      expect(entry.label).toContain('(external)');
+      expect(entry.rel).toBe('external');
+      expect(entry.target).toBe('');
+    }
+  });
+
   test('a criterion with tasks in two categories is grouped under each category', async ({ page }) => {
     await openRole(page, 'visual-design');
     const inputGroup = page.locator('#category-input-modalities .criterion-task-group').filter({hasText: '2.4.7 Focus Visible'});

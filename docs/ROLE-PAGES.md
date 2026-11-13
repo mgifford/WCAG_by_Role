@@ -42,7 +42,7 @@ For each task, `roleTasks` includes the task when the selected role appears in a
 - the original ARRM task text as bullets under the criterion;
 - the selected role's level(s) as visible responsibility badges on each bullet;
 - a **Related tasks and source** disclosure per criterion, containing stable task IDs, every primary/secondary/contributor assignment, and ARRM/WCAG/Understanding source links;
-- link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external, in the criteria list;
+- link-only plain-language explanations from Simple WCAG, AAArdvark, The WCAG and DigitalA11y, labelled external and specific to each criterion, in both the criterion groups and the criteria list;
 - original category and role icons (decorative, with visible text);
 - the supplied WCAG 2.2 success-criterion pictogram in each criterion heading and the criteria list.
 
@@ -106,7 +106,7 @@ The explorer's **Who accessibility affects** overview uses eight functional-need
 
 ## External resources
 
-Criterion cards and the role-guide criteria list link to four independent plain-language sites. DigitalA11y uses a labelled site-search fallback where no dedicated article was found. The role-guide sources section and the explorer include a collapsible list of testing, standards-mapping and impact references. These are link-only: no third-party text or mapping data is copied, and none of it assigns ARRM ownership.
+Criterion cards, role-guide criterion groups and the role-guide criteria list link to four independent plain-language sites. DigitalA11y uses a labelled site-search fallback where no dedicated article was found. The role-guide sources section and the explorer include a collapsible list of testing, standards-mapping and impact references. These are link-only: no third-party text or mapping data is copied, and none of it assigns ARRM ownership.
 
 The accessibility-impact data is currently **proposed/unreviewed** and its repository is AGPL-3.0, so it is linked rather than imported. See [EXTERNAL-RESOURCES.md](EXTERNAL-RESOURCES.md) for licence status, validation dates and the policy for adding links.
 

@@ -215,6 +215,7 @@ function criterionTaskGroup(criterion, tasks, config, category) {
   heading.append(element('span', 'level-pill', 'Level ' + criterion.level), ' · ',
     link('Understanding', criterion.understandingUrl, '', `Understanding ${criterion.number} ${criterion.name}`));
   group.append(heading);
+  appendCriterionResources(group, criterion);
 
   const list = element('ul', 'criterion-task-list');
   for (const task of tasks) {
