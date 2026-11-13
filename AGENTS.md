@@ -21,6 +21,7 @@ Maintain an independent role-filtered navigation tool for WCAG 2.2. The authorit
 python3 -m pip install -r requirements-dev.txt
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
+python3 scripts/publish_discovery.py --dist dist --repo-root .
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:filters
@@ -37,10 +38,12 @@ Production integration requires network: `python3 scripts/pipeline.py --mode pro
 - `web/` : UI only, no external frameworks needed for v1.
 - `scripts/pipeline.py` : source retrieval, transformation and audit; Python stdlib only.
 - `scripts/migrate_source.py` : build-only YAML snapshot validation and YAML-to-JSON generation; uses PyYAML from `requirements.txt`.
+- `scripts/publish_discovery.py` : post-build static discovery pages and data exports; no network, AI or MCP runtime.
 - `data/source/role-data.yaml` : canonical normalized production source snapshot; never hand-edit source wording or ownership.
 - `schemas/` : source and persona contracts.
 - `data/personas/`, `data/role-profiles/`, `data/exports/` : canonical fictional personas and deterministic generated exports. Never edit generated exports by hand; regenerate with `scripts/export_personas.py`.
 - `web/assets/personas/` : cached RoboHash set1 portraits; never fetch images at page-view time.
+- `cloudflare-mcp-future/` : contract only. Do not add a Worker, deployment or MCP runtime without explicit approval and current protocol validation.
 - `fixtures/` : representative mock records, *never* complete WCAG or ARRM.
 - `tests/` : import normalization and business-rule regression tests.
 - `tests/e2e/` : Playwright and axe-core browser regressions for filtering, keyboard, reflow and forced colours.

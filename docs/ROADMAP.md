@@ -76,6 +76,13 @@ Still to come in Phase 2:
 
 Acceptance: a user can distinguish assigned work from overall conformance requirements and trace every task to W3C evidence.
 
+### Static discovery status (2026-11-13)
+
+- Added a post-build static publisher for role, criterion, task, comparison and data pages.
+- Added a sitemap, canonical URLs, JSON-LD, manifests, CSV/JSON/YAML distributions, `llms.txt` and local social/favicon assets.
+- Kept the Cloudflare MCP adapter explicitly deferred as a contract only; no server or deployment.
+- Production output is 445 HTML pages from 86 criteria, 262 tasks and five roles.
+
 ### Persona data status (2026-11-13)
 
 - Added five canonical fictional persona YAML files, one per ARRM role with task data.

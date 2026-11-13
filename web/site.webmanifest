@@ -1,0 +1,14 @@
+{
+  "name": "WCAG by Role",
+  "short_name": "WCAG by Role",
+  "description": "Explore WCAG 2.2 and W3C ARRM task responsibilities by professional role.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#12334a",
+  "theme_color": "#12334a",
+  "icons": [
+    {"src": "./icon-192.png", "sizes": "192x192", "type": "image/png"},
+    {"src": "./icon-512.png", "sizes": "512x512", "type": "image/png"}
+  ]
+}
