@@ -59,9 +59,14 @@ PR 1 (role-specific navigation) implements:
 - Project handoff guidance explicitly separated from ARRM assignments.
 - Link-only external resources: Simple WCAG and AAArdvark per-criterion explanations, plus testing, standards-mapping and impact references. No third-party text or impact dataset is imported.
 
+Current PR 2 work:
+
+- Clearer missing-summary distinctions.
+- A separate cumulative A/AA/AAA conformance-target control alongside exact-level filtering.
+- Pure filter logic with a role/ownership/target/exact matrix test.
+
 Still to come in Phase 2:
 
-- PR 2: clearer missing-summary distinctions, richer collaboration/handoff presentation, and a separate A/AA/AAA conformance-target control.
 - PR 3: CSV/JSON export, source revision provenance and production-data regression fixtures.
 - PR 4: refinements based on manual accessibility and role-based usability evidence.
 - UX Design and Content Authoring role guides using the same configuration and renderer.

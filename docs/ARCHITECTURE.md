@@ -21,16 +21,17 @@ The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs rem
 
 ### Record schema (abbreviated)
 
-The current `schemaVersion` is `2`. Schema 2 adds canonical role labels, explicit audit metadata and the `authorTask` Understanding field. See [AUDIT.md](AUDIT.md) for the source snapshot that exercised it.
+The current `schemaVersion` is `3`. Schema 2 added canonical role labels, explicit audit metadata and the `authorTask` Understanding field. Schema 3 adds `criterionSummaryStatus` so a missing ARRM criterion-level summary is distinguishable from a recorded summary that does not assign a role. See [AUDIT.md](AUDIT.md) for the source snapshot that exercised it.
 
 ```json
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "criteria": [{
     "number": "2.4.7", "slug": "focus-visible", "name": "Focus Visible", "level": "AA",
     "normativeUrl": "https://www.w3.org/TR/WCAG22/#focus-visible",
     "understandingUrl": "https://www.w3.org/WAI/WCAG22/Understanding/focus-visible.html",
     "arrmResponsibilities": {"Visual Design": ["primary", "secondary"]},
+    "criterionSummaryStatus": "recorded",
     "inBrief": {"goal": "Users know which element has keyboard focus.",
                 "whatToDo": "Ensure each item receiving focus has a visible indicator.",
                 "whyImportant": "Without a focus indicator, sighted keyboard users cannot operate the page."}
@@ -68,6 +69,8 @@ role-data.json ─────┬── index.html + app.js ── generic explo
 - The collaboration list is derived from shared ARRM tasks. Handoff bullets are labelled project guidance; they are not W3C requirements or a workflow model.
 - `web/resources.js` holds link-only plain-language and general resource links. Criterion URLs are generated from `number` + `slug`; no third-party explanation text or mapping data is imported. External links carry `rel="external"` and no `target`; AAArdvark is labelled commercial.
 - Criterion-level responsibility summaries are not used to decide task ownership on role pages. Missing task-level data is shown as missing, not inferred.
+- `criterionSummaryStatus` is `recorded` when the ARRM criterion CSV has a row for the criterion, even if that row assigns none of its roles, and `missing` when the CSV has no row. `criteriaWithoutCriterionSummary` contains only `missing` records.
+- The explorer computes level filtering client-side. A conformance target is cumulative (`A` < `AA` < `AAA`); exact-level filtering is independent. Role and ownership filters do not change either meaning. Neither control establishes conformance.
 
 See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and extension steps. Schema version 2 and the pipeline's import semantics are unchanged by this presentation layer.
 
@@ -101,4 +104,4 @@ See [ROLE-PAGES.md](ROLE-PAGES.md) for the role model, category mapping and exte
 
 ## Planned schema changes
 
-Versioned JSON allows clients beyond GitHub Pages. Any breaking changes require a `schemaVersion` increment and a migration note. Schema 2 is documented here; clients should ignore unknown fields and must not treat a missing task as an exemption.
+Versioned JSON allows clients beyond GitHub Pages. Any breaking changes require a `schemaVersion` increment and a migration note. Schema 3 is documented here; clients should ignore unknown fields and must not treat a missing task or missing summary as an exemption.

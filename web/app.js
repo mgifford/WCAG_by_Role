@@ -3,18 +3,21 @@
 import { appendParagraph, element, link } from './dom.js';
 import { roleCardList } from './role-cards.js';
 import { appendCriterionResources, appendGeneralResources } from './resources.js';
+import { OWNERSHIP_LEVELS, matchesCriterionLevel, roleLevels } from './filtering.js';
 
 const $ = (id) => document.getElementById(id);
 const filters = $('filters');
 const resultRoot = $('results');
-const state = {role: '', ownership: '', level: '', view: 'criteria', query: '', showAll: false};
-const levels = ['primary', 'secondary', 'contributor'];
+const state = {role: '', ownership: '', target: '', level: '', view: 'criteria', query: '', showAll: false};
+const stateKeys = ['role', 'ownership', 'target', 'level', 'view', 'query'];
+const levels = OWNERSHIP_LEVELS;
+const targets = ['A', 'AA', 'AAA'];
+const ARRM_MAPPINGS = 'https://www.w3.org/WAI/planning/arrm/wcag-sc/';
 const display = {'primary': 'Primary', 'secondary': 'Secondary', 'contributor': 'Contributor'};
 let dataset = null;
 
 function rolesForTask(task, role) {
-  return levels.filter(level => (!state.ownership || level === state.ownership) &&
-    (role ? task.ownership[level].includes(role) : task.ownership[level].length > 0));
+  return roleLevels(task, role, state.ownership);
 }
 function taskMatches(task) {
   return rolesForTask(task, state.role).length > 0;
@@ -32,7 +35,7 @@ function tasksFor(sc) {
   return criterionMatchesSearch(sc, candidates, state.query.trim().toLowerCase());
 }
 function matchesLevel(sc) {
-  return !state.level || sc.level === state.level;
+  return matchesCriterionLevel(sc.level, {target: state.target, exact: state.level});
 }
 function hasRoleFilter() { return Boolean(state.role || state.ownership); }
 function matchingEntries() {
@@ -44,13 +47,16 @@ function addRoleSummary(parent, sc, hasMatchingTasks) {
   const flags = sc.arrmResponsibilities?.[state.role] ?? [];
   const summary = element('p', 'summary-note');
   summary.append(element('strong', '', 'ARRM criterion-level summary: '));
-  if (flags.length) {
-    summary.append(document.createTextNode(flags.map(f => display[f]).join(', ') + '. '));
-    summary.append(document.createTextNode(hasMatchingTasks
-      ? 'This is a criterion-level overview, not task ownership. Task-level assignments are listed below.'
-      : 'This is a criterion-level overview, not a task assignment. No ARRM task in this view is owned by this role.'));
+  if (sc.criterionSummaryStatus === 'missing') {
+    summary.append(document.createTextNode('No criterion-level responsibility summary is recorded for this criterion. Task-level assignments may still exist below. This is not evidence that this role has no responsibility. '));
+    summary.append(link('Check the ARRM criterion mappings', ARRM_MAPPINGS));
+  } else if (!flags.length) {
+    summary.append(document.createTextNode('ARRM records a criterion-level summary, but it does not assign this role. That is not a task-level exemption. Check the task assignments below and the ARRM source. '));
+    summary.append(link('ARRM criterion mappings', ARRM_MAPPINGS));
+  } else if (hasMatchingTasks) {
+    summary.append(document.createTextNode(flags.map(f => display[f]).join(', ') + '. This is a criterion-level overview, not task ownership. Task-level assignments are listed below.'));
   } else {
-    summary.append(document.createTextNode('No criterion-level assignment recorded for this role. This does not remove or change any WCAG requirement.'));
+    summary.append(document.createTextNode(flags.map(f => display[f]).join(', ') + '. This is a criterion-level overview, not a task assignment. No ARRM task for this role is recorded in this view.'));
   }
   parent.append(summary);
 }
@@ -111,7 +117,10 @@ function makeCriterion({sc, tasks}) {
     tasks.forEach(task => list.append(makeTask(task)));
     card.append(list);
   } else {
-    appendParagraph(card, 'No matching ARRM task in this view. This does not indicate an exception to WCAG or an absence of responsibility.', 'no-tasks');
+    const noTasks = state.role
+      ? `No ARRM task owned or supported by ${state.role} is recorded in this view. This does not indicate an exception to WCAG or an absence of responsibility.`
+      : 'No matching ARRM task in this view. This does not indicate an exception to WCAG or an absence of responsibility.';
+    appendParagraph(card, noTasks, 'no-tasks');
   }
   return card;
 }
@@ -153,22 +162,22 @@ function render() {
 }
 function readURL() {
   const params = new URLSearchParams(location.search);
-  for (const key of ['role', 'ownership', 'level', 'view', 'query']) {
+  for (const key of stateKeys) {
     state[key] = params.get(key) || state[key];
   }
   state.showAll = params.get('all') === '1';
 }
 function applyToForm() {
-  ['role', 'ownership', 'level', 'view', 'query'].forEach(key => {$(key).value = state[key];});
+  stateKeys.forEach(key => {$(key).value = state[key];});
   $('show-all').checked = state.showAll;
 }
 function readForm() {
-  ['role', 'ownership', 'level', 'view', 'query'].forEach(key => {state[key] = $(key).value;});
+  stateKeys.forEach(key => {state[key] = $(key).value;});
   state.showAll = $('show-all').checked;
 }
 function writeURL() {
   const params = new URLSearchParams();
-  ['role', 'ownership', 'level', 'view', 'query'].forEach(key => {
+  stateKeys.forEach(key => {
     if (state[key] && !(key === 'view' && state.view === 'criteria')) params.set(key, state[key]);
   });
   if (state.showAll) params.set('all', '1');
@@ -197,6 +206,7 @@ async function init() {
     readURL();
     applyToForm();
     if (!dataset.roles.includes(state.role)) {state.role = ''; $('role').value = '';}
+    if (!targets.includes(state.target)) {state.target = ''; $('target').value = '';}
     if (dataset.mode === 'demo') {
       $('demo-warning').hidden = false;
     }
@@ -205,7 +215,7 @@ async function init() {
     filters.addEventListener('submit', event => event.preventDefault());
     filters.addEventListener('reset', event => {
       event.preventDefault();
-      Object.assign(state, {role: '', ownership: '', level: '', view: 'criteria', query: '', showAll: false});
+      Object.assign(state, {role: '', ownership: '', target: '', level: '', view: 'criteria', query: '', showAll: false});
       applyToForm(); writeURL(); render();
     });
     render();

@@ -5,7 +5,8 @@
   "description": "Browser and accessibility regression tests for the static WCAG by Role site.",
   "scripts": {
     "test:e2e": "playwright test",
-    "test:e2e:list": "playwright test --list"
+    "test:e2e:list": "playwright test --list",
+    "test:filters": "node --test tests/filtering.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

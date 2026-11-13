@@ -7,11 +7,12 @@ An independent, static, role-filtered view of WCAG 2.2 and W3C Accessibility Rol
 ## Features
 
 - Role guides for **Visual Design** and **Front-End Development**, with task categories, responsibility summaries, collaborating roles and WCAG references.
-- Filter the full explorer by ARRM role, task-level **primary / secondary / contributor** ownership, exact WCAG level, keyword and view.
+- Filter the full explorer by ARRM role, task-level **primary / secondary / contributor** ownership, cumulative WCAG conformance target, exact WCAG level, keyword and view.
 - Switch between success criterion and task views, with links to normative WCAG and informative Understanding pages.
 - Show unchanged W3C Understanding *In Brief* excerpts when available, otherwise retain direct links. The W3C `Author task` label is kept when a page uses it instead of `What to do`.
 - Link to independent plain-language explanations and testing/standards references without copying their content. External links are labelled and never used to assign ARRM ownership.
-- Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary.
+- Preserve the difference between task-level assignments and ARRM's criterion-level responsibility summary, including a distinct message when ARRM has no summary, when the summary does not assign the role, and when no task for the role is recorded.
+- Separate a cumulative **conformance target** (A, AA including A, AAA including A/AA) from an **exact criterion level** filter; neither control implies conformance.
 - Include criteria with no recorded task, using the *Include criteria with no matching task* control.
 - Deep-link to filters via URL parameters. No cookies, third-party browser assets, analytics or AI.
 - Create a provenance/audit JSON showing obsolete or unmapped records, including obsolete WCAG 4.1.1 Parsing, unknown ARRM criterion numbers, missing criterion summaries, task-level level disagreements and explicitly normalized role labels.
@@ -40,6 +41,7 @@ Browser regression tests use Playwright and axe-core. They run against the demo 
 ```sh
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
+pnpm test:filters
 pnpm test:e2e
 ```
 

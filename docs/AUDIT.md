@@ -25,8 +25,8 @@ python3 scripts/pipeline.py --mode production   # network; may be rate-limited
 | Criteria with a task | 7 |
 | Criteria with a criterion-level summary | 7 |
 | Understanding *In Brief* records | 2 (includes one `Author task` sample) |
-| Python tests | 30 passed |
-| Playwright / axe-core tests | 33 passed |
+| Python tests | 32 passed |
+| Playwright / axe-core tests | 37 passed |
 
 The demo page shows a visible sample-data warning. `dist/` is generated and is not committed.
 
@@ -62,7 +62,7 @@ WCAG JSON `Last-Modified`: `Fri, 06 Nov 2026 08:56:14 GMT`.
 
 - **4.1.1 Parsing** is present in the WCAG JSON with versions 2.0 and 2.1 and no current conformance level. It is not in `criteria` and not in `tasks`; the audit keeps it under `retiredWCAG` and `excludedARRM`. The UI must never render it as a live WCAG 2.2 requirement.
 - **3.2.7, 3.2.8, 3.2.9** appear in the ARRM criterion-responsibility CSV but do not exist in the WCAG 2.2 JSON. They are excluded and reported as `unknownARRMCriteria`, not invented as new criteria.
-- **3.3.7, 3.3.8, 3.3.9** have tasks but no criterion-level summary. [w3c/wai-arrm#141](https://github.com/w3c/wai-arrm/issues/141) proposes that the 3.2.7–3.2.9 rows above are these criteria misnumbered. The issue was open on 2026-11-12. This project does not renumber the CSV locally and does not infer the role assignments.
+- **3.3.7, 3.3.8, 3.3.9** have tasks but no criterion-level summary (`criterionSummaryStatus: "missing"`). [w3c/wai-arrm#141](https://github.com/w3c/wai-arrm/issues/141) proposes that the 3.2.7–3.2.9 rows above are these criteria misnumbered. The issue was open on 2026-11-12. This project does not renumber the CSV locally and does not infer the role assignments.
 
 ### Mapping gaps
 
@@ -127,7 +127,8 @@ Playwright 1.65 with axe-core 4.14 runs against the demo build served under `/di
 - Result count: polite live region is present and updates.
 - A manual production-data smoke run served the 86-criterion dataset from a nested path: 86 of 86 criteria and 262 tasks rendered, no console errors, no live 4.1.1 link, and axe-core returned no WCAG A/AA violations in the default and Visual Design primary task views.
 - Role-guide tests cover both guides, task-level ownership, collaborating roles, category/task/criterion anchors, invalid-role chooser, keyboard reach, 320 px reflow, forced colours and axe-core in light and dark schemes. The production snapshot renders 66 Visual Design tasks across 33 criteria and 130 Front-End Development tasks across 45 criteria.
-- Resource-link tests verify both plain-language URLs, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open. A production snapshot rendered 172 per-criterion resource links across 86 criteria, all matching the validated URL patterns.
+- Resource-link tests verify both plain-language URLs, external/commercial labels, `rel="external"`, no new-tab target, the general resource groups and axe-core with disclosures open.
+- A pure filter matrix covers 256 combinations of role, ownership, cumulative conformance target and exact level. Explorer tests cover missing-summary, summary-does-not-assign-role and no-task-for-role messages. A production snapshot rendered 172 per-criterion resource links across 86 criteria, all matching the validated URL patterns.
 
 **This is regression evidence, not a conformance claim.** axe-core cannot judge meaningful link text, sensible focus order, screen-reader announcements, real high-contrast rendering, zoom quality or whether the ARRM mapping is appropriate for a team.
 

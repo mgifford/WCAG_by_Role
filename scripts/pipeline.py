@@ -18,7 +18,7 @@ from urllib.request import Request, urlopen
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 ROOT = Path(__file__).resolve().parents[1]
-SCHEMA_VERSION = 2
+SCHEMA_VERSION = 3
 SOURCES = {
     'wcag': 'https://www.w3.org/WAI/WCAG22/wcag.json',
     'tasks': 'https://raw.githubusercontent.com/w3c/wai-arrm/main/_data/arrm/arrm-all-tasks.csv',
@@ -383,7 +383,9 @@ def build(source_wcag: dict, source_tasks: str, source_responsibilities: str, *,
 
     seen = {t['criterion'] for t in tasks}
     for sc in criteria:
+        summary_recorded = sc['number'] in summaries
         sc['arrmResponsibilities'] = summaries.get(sc['number'], {})
+        sc['criterionSummaryStatus'] = 'recorded' if summary_recorded else 'missing'
         sc['inBrief'] = (briefs or {}).get(sc['number'], {})
         sc['mapped'] = sc['number'] in seen
     roles = sorted({r for task in tasks for group in task['ownership'].values() for r in group} |
@@ -397,7 +399,7 @@ def build(source_wcag: dict, source_tasks: str, source_responsibilities: str, *,
             raise ValueError('Incomplete production dataset: no ARRM criterion responsibility records')
 
     unmapped = sorted(active - seen, key=lambda n: tuple(map(int, n.split('.'))))
-    without_summary = sorted({sc['number'] for sc in criteria if not sc['arrmResponsibilities']},
+    without_summary = sorted({sc['number'] for sc in criteria if sc['criterionSummaryStatus'] == 'missing'},
                              key=lambda n: tuple(map(int, n.split('.'))))
     rejected_criteria = sorted({row['criterion'] for row in rejected_tasks + rejected_summaries})
     unknown_arrm_criteria = sorted({criterion for criterion in rejected_criteria

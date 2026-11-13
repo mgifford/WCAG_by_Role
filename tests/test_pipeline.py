@@ -103,12 +103,14 @@ class PipelineTests(unittest.TestCase):
     def test_build_records_provenance_and_unmapped(self):
         data, audit = build(self.wcag, self.tasks, self.summary, mode='demo')
         self.assertEqual(data['mode'], 'demo')
-        self.assertEqual(data['schemaVersion'], 2)
+        self.assertEqual(data['schemaVersion'], 3)
         self.assertIn('2.1.1', audit['unmappedCriteria'])
         self.assertIn('2.1.1', audit['criteriaWithoutCriterionSummary'])
         self.assertEqual(audit['retiredWCAG'][0]['number'], '4.1.1')
         self.assertEqual(len([a for a in audit['excludedARRM'] if a.get('criterion') == '4.1.1']), 2)
         self.assertIn('Front-End Development', data['roles'])
+        self.assertEqual(next(sc for sc in data['criteria'] if sc['number'] == '2.4.7')['criterionSummaryStatus'], 'recorded')
+        self.assertEqual(next(sc for sc in data['criteria'] if sc['number'] == '2.1.1')['criterionSummaryStatus'], 'missing')
         self.assertIn('taskCsvHeaders', audit['sourceSchema'])
         self.assertTrue(any('no ARRM task mapping' in warning for warning in audit['warnings']))
         self.assertNotIn('4.1.1', {task['criterion'] for task in data['tasks']})
@@ -130,6 +132,13 @@ class PipelineTests(unittest.TestCase):
         self.assertIn(('Front End Development', 'Front-End Development'), aliases)
         self.assertIn(('User Experience (UX)', 'User Experience (UX) Design'), aliases)
         self.assertIn(('Business', 'Business Analysis'), aliases)
+
+    def test_recorded_empty_summary_is_not_reported_as_missing(self):
+        data, audit = build(self.wcag, self.tasks, self.summary + '99,2.1.1,A,,,,,\n', mode='demo')
+        criterion = next(sc for sc in data['criteria'] if sc['number'] == '2.1.1')
+        self.assertEqual(criterion['criterionSummaryStatus'], 'recorded')
+        self.assertEqual(criterion['arrmResponsibilities'], {})
+        self.assertNotIn('2.1.1', audit['criteriaWithoutCriterionSummary'])
 
     def test_task_level_mismatch_is_reported_but_wcag_level_wins(self):
         task_row = 'LEVEL-001,1.4.11,AAA,Wrong task level in source.,Design,,Visual Design,none,none\n'
