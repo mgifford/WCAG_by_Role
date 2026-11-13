@@ -29,7 +29,7 @@ h5 {font-size:1rem}
 .meta {font-size:.9rem}
 .demo-notice {background:#fff1cd;border:1px solid #c2a34d;padding:.8rem 1rem;border-radius:.3rem}
 .filter-panel {background:var(--surface);border:1px solid var(--border);padding:1.4rem;border-radius:.55rem;box-shadow:0 1px 8px #00000010}
-.filter-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+.filter-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:1rem}
 .field {display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem}
 .field label {font-weight:650}
 input,select,button {font:inherit}
@@ -123,6 +123,7 @@ footer {background:#e4ebee;padding:1.2rem 0;font-size:.85rem}
 .criterion-resources {font-size:.88rem;margin:.4rem 0 .8rem}
 .criterion-resources .external-note,.criteria-list .criterion-resources {color:var(--muted);font-size:.82rem}
 .criteria-list .criterion-resources {display:block;margin-top:.2rem}
+.summary-gap {display:block;margin-top:.2rem;font-size:.82rem;color:var(--muted)}
 .resources-disclosure {margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:.4rem;padding:.8rem 1rem}
 .resources-disclosure summary {cursor:pointer;font-weight:650}
 .resource-group {margin:1rem 0 0}

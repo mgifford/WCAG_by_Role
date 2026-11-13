@@ -100,6 +100,7 @@ test.describe('filter behaviour', () => {
   test('reset returns every control and the URL to the default state', async ({ page }) => {
     await page.selectOption('#role', 'Visual Design');
     await page.selectOption('#ownership', 'secondary');
+    await page.selectOption('#target', 'AA');
     await page.selectOption('#level', 'AA');
     await page.selectOption('#view', 'tasks');
     await page.fill('#query', 'focus');
@@ -107,6 +108,7 @@ test.describe('filter behaviour', () => {
     await page.getByRole('button', { name: 'Reset filters' }).click();
     await expect(page.locator('#role')).toHaveValue('');
     await expect(page.locator('#ownership')).toHaveValue('');
+    await expect(page.locator('#target')).toHaveValue('');
     await expect(page.locator('#level')).toHaveValue('');
     await expect(page.locator('#view')).toHaveValue('criteria');
     await expect(page.locator('#query')).toHaveValue('');

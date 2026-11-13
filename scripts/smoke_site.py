@@ -90,8 +90,8 @@ def validate_payload(data: dict, audit: dict, minimums: dict | None = None) -> l
     if data.get('wcagVersion') != '2.2':
         errors.append(f"role-data.json wcagVersion is {data.get('wcagVersion')!r}, expected '2.2'")
     schema = data.get('schemaVersion')
-    if not isinstance(schema, int) or schema < 2:
-        errors.append(f'role-data.json schemaVersion is {schema!r}, expected 2 or later')
+    if not isinstance(schema, int) or schema < 3:
+        errors.append(f'role-data.json schemaVersion is {schema!r}, expected 3 or later')
     if audit.get('mode') != 'production':
         errors.append(f"import-audit.json mode is {audit.get('mode')!r}, expected 'production'")
     if audit.get('schemaVersion') != schema:
@@ -138,6 +138,8 @@ def validate_payload(data: dict, audit: dict, minimums: dict | None = None) -> l
                 errors.append(f'criterion {number} has invalid {key}')
         if not isinstance(criterion.get('arrmResponsibilities'), dict):
             errors.append(f'criterion {number} has no arrmResponsibilities object')
+        if criterion.get('criterionSummaryStatus') not in {'recorded', 'missing'}:
+            errors.append(f'criterion {number} has invalid criterionSummaryStatus')
         if not isinstance(criterion.get('inBrief'), dict):
             errors.append(f'criterion {number} has no inBrief object')
         if not isinstance(criterion.get('mapped'), bool):
@@ -201,7 +203,7 @@ def validate_payload(data: dict, audit: dict, minimums: dict | None = None) -> l
         errors.append('audit unmappedCriteria does not match criteria without tasks')
     without_summary = sorted(
         criterion['number'] for criterion in criteria
-        if isinstance(criterion, dict) and not criterion.get('arrmResponsibilities')
+        if isinstance(criterion, dict) and criterion.get('criterionSummaryStatus') == 'missing'
     )
     if sorted(audit.get('criteriaWithoutCriterionSummary') or []) != without_summary:
         errors.append('audit criteriaWithoutCriterionSummary does not match the data')

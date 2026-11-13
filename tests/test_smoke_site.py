@@ -17,6 +17,7 @@ def valid_payload():
         'understandingUrl': 'https://www.w3.org/WAI/WCAG22/Understanding/non-text-content.html',
         'versions': ['2.0', '2.1', '2.2'], 'summary': 'Text alternatives.',
         'arrmResponsibilities': {'Content Authoring': ['primary']},
+        'criterionSummaryStatus': 'recorded',
         'inBrief': {'goal': 'A text alternative is available.'}, 'mapped': True,
     }]
     tasks = [{
@@ -25,7 +26,7 @@ def valid_payload():
         'ownership': {'primary': ['Content Authoring'], 'secondary': [], 'contributor': []},
     }]
     data = {
-        'mode': 'production', 'schemaVersion': 2, 'wcagVersion': '2.2',
+        'mode': 'production', 'schemaVersion': 3, 'wcagVersion': '2.2',
         'criteria': criteria, 'tasks': tasks, 'roles': ['Content Authoring'],
         'sources': {
             'wcag': 'https://www.w3.org/WAI/WCAG22/wcag.json',
@@ -35,7 +36,7 @@ def valid_payload():
         'sourceSHA256': hashes,
     }
     audit = {
-        'mode': 'production', 'schemaVersion': 2,
+        'mode': 'production', 'schemaVersion': 3,
         'counts': {
             'activeCriteria': 1, 'acceptedTasks': 1, 'roles': 1,
             'retiredWCAG': 1, 'excludedARRM': 1, 'taskLevelMismatches': 0,
@@ -96,6 +97,11 @@ class SmokeValidationTests(unittest.TestCase):
         data = copy.deepcopy(self.data)
         data['tasks'][0]['criterion'] = '9.9.9'
         self.assertTrue(any('unknown criterion' in error for error in self.errors(data=data)))
+
+    def test_invalid_summary_status_is_rejected(self):
+        data = copy.deepcopy(self.data)
+        data['criteria'][0]['criterionSummaryStatus'] = 'unknown'
+        self.assertTrue(any('criterionSummaryStatus' in error for error in self.errors(data=data)))
 
     def test_missing_source_hash_is_rejected(self):
         data = copy.deepcopy(self.data)

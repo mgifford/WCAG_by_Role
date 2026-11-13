@@ -18,6 +18,8 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 | Live updates | Result counts are announced without repeatedly interrupting users; no keyboard focus loss |
 | Links | Each criterion has an unambiguous accessible link to the official norm and an Understanding link |
 | Source integrity | Role filters do not hide requirements when all-criteria option is enabled |
+| Level filtering | Conformance target A includes only A; AA includes A+AA; AAA includes A+AA+AAA; exact level remains independent |
+| Missing source | Missing summary, summary not assigning the role, and no task for the role produce different messages |
 | Role guides | Visual Design and Front-End Development guides show task IDs, all role assignments, collaborators, category navigation and WCAG/Understanding links |
 | Role guides | A task such as INP-017/INP-018 shows both Visual Design and Front-End Development responsibilities, with the selected role highlighted by text |
 | Role guides | Category, task and criterion anchors are stable; browser back/forward and direct links work |
@@ -33,6 +35,7 @@ Record manual evidence with [MANUAL-TEST-TEMPLATE.md](MANUAL-TEST-TEMPLATE.md).
 python3 -m unittest discover -s tests -v
 python3 scripts/pipeline.py --mode demo
 pnpm install --frozen-lockfile
+pnpm test:filters
 pnpm exec playwright install --with-deps chromium
 pnpm test:e2e
 python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
@@ -41,12 +44,14 @@ python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/
 The Playwright suite currently covers:
 
 - Filter combinations, task view, search, reset and URL round-trips at the nested `/dist/` path.
+- A pure filter matrix over role, ownership, cumulative target and exact level (256 combinations).
 - axe-core WCAG A/AA tags in light and dark schemes and in the task view.
 - Keyboard tab order to the filters, native select typeahead, and focus retention after a filter change.
 - Emulated `forced-colors: active` focus outline and component borders.
 - 320 CSS-pixel reflow, reduced motion, and the polite result-count live region.
 - Role guide rendering, category navigation, task-level ownership, collaborating roles, deep links, invalid-role chooser, keyboard reachability, forced-colours focus and axe-core scans for both guides.
 - External resource links for both plain-language sites, external/commercial labels, `rel="external"`, no new-tab target, and the general resource groups with disclosures open.
+- Missing-summary, summary-does-not-assign-role and no-task-for-role messages on the explorer.
 - The post-deploy smoke test checks the live production artefact against the same audit contract; it does not test accessibility.
 
 ## Evidence still required from people
@@ -70,6 +75,6 @@ Record these in the manual test record. Do not coach the participant through the
 | --- | --- | --- |
 | Visual Design | "Find the responsibilities for designing keyboard focus indicators, identify the developer's responsibilities, and locate the relevant WCAG guidance." | Can the user find the Visual Design guide, 2.4.7, INP-017 and INP-018; can they see Front-End Development's primary ownership of INP-018 and the WCAG/Understanding links? |
 | Front-End Development | "Find the tasks for implementing accessible form errors, identify related responsibilities belonging to other roles, and locate authoritative implementation guidance." | Can the user reach Form Interactions or search, identify the ARRM tasks, see Visual Design/UX/content collaborators, and distinguish task guidance from the normative criterion? |
-| General user | "Find the criteria relevant to Level AA conformance and explain why the role-specific tasks do not constitute a full conformance checklist." | Does the user understand the difference between the current exact-level filter and a future A/AA/AAA conformance target; do they see the limitations notice? |
+| General user | "Find the criteria relevant to Level AA conformance and explain why the role-specific tasks do not constitute a full conformance checklist." | Does the user understand the difference between the cumulative A/AA/AAA conformance target and the exact criterion level; do they see the limitations notice? |
 
 Record the browser, OS, AT version, date, findings and reviewer. Do not claim conformance based on this plan, axe-core or Playwright alone.

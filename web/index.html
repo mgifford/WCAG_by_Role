@@ -58,9 +58,11 @@
           <div class="field"><label for="ownership">Responsibility</label><select id="ownership" name="ownership">
             <option value="">All responsibilities</option><option value="primary">Primary</option><option value="secondary">Secondary</option><option value="contributor">Contributor</option>
           </select></div>
-          <div class="field"><label for="level">WCAG level (exact)</label><select id="level" name="level"><option value="">A, AA and AAA</option><option value="A">A only</option><option value="AA">AA only</option><option value="AAA">AAA only</option></select></div>
+          <div class="field"><label for="target">WCAG conformance target</label><select id="target" name="target" aria-describedby="level-help"><option value="">Any target</option><option value="A">Level A</option><option value="AA">Level AA (includes A)</option><option value="AAA">Level AAA (includes A and AA)</option></select></div>
+          <div class="field"><label for="level">Exact criterion level</label><select id="level" name="level" aria-describedby="level-help"><option value="">All levels</option><option value="A">A only</option><option value="AA">AA only</option><option value="AAA">AAA only</option></select></div>
           <div class="field"><label for="view">Organize by</label><select id="view" name="view"><option value="criteria">Success criterion</option><option value="tasks">ARRM task</option></select></div>
         </div>
+        <p id="level-help" class="filter-help">A conformance target includes lower levels: Level AA includes A and AA. Exact criterion level filters only that level. Neither control establishes WCAG conformance.</p>
         <div class="field"><label for="query">Search criteria and task descriptions</label><input type="search" id="query" name="query" placeholder="e.g. keyboard, target size, focus, images" autocomplete="off"></div>
         <label class="checkbox"><input id="show-all" name="show-all" type="checkbox"> Include criteria with no matching task (show the full WCAG context)</label>
         <div class="filter-actions"><button type="reset">Reset filters</button><a href="https://www.w3.org/TR/WCAG22/">Read normative WCAG 2.2</a></div>

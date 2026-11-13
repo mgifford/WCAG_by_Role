@@ -294,6 +294,11 @@ function criteriaSection(tasks, criteria) {
       item.append(taskLinks);
     }
     appendCriterionResources(item, criterion, {compact: true});
+    if (criterion.criterionSummaryStatus === 'missing') {
+      const gap = element('span', 'summary-gap', 'ARRM criterion-level summary missing; task-level assignments are still shown. ');
+      gap.append(link('ARRM criterion mappings', 'https://www.w3.org/WAI/planning/arrm/wcag-sc/'));
+      item.append(gap);
+    }
     list.append(item);
   }
   details.append(list);

@@ -114,7 +114,6 @@ No HTML shell, Python pipeline change or new data file is needed. The chooser an
 
 This implementation does not add:
 
-- a conformance target control (the next PR);
 - CSV/JSON export (a later PR);
 - a workflow engine, task management integration or editable assignments;
 - AI-generated summaries or conformance claims;
