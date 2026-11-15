@@ -1,0 +1,7 @@
+# Generated from data/source/role-data.yaml by scripts/build_dataset.py.
+# Never edit generated output by hand.
+src/generated/
+
+node_modules/
+.wrangler/
+.wrangler-config/

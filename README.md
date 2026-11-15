@@ -136,7 +136,7 @@ tests/test_pipeline.py        Python import and business-rule tests
 tests/test_yaml_source.py     YAML snapshot, schema, round-trip and rejection tests
 tests/test_personas.py        Persona schema, exports, avatars and CSV tests
 tests/test_discovery.py       Static discovery publisher and metadata tests
-cloudflare-mcp-future/        Contract only; no MCP server is implemented
+cloudflare-mcp/               Read-only MCP Worker, protocol tests and contract
 tests/e2e/                    Playwright and axe-core browser tests
 package.json, pnpm-lock.yaml  Browser-test dependencies
 docs/                         Governance, architecture, role guides, visual language,
@@ -186,6 +186,15 @@ The Phase 1 change set and its review checklist are summarized in [docs/PHASE1-P
 
 The post-build publisher creates static role, criterion, task and comparison pages; a
 Sitemap, structured metadata and JSON/YAML/CSV datasets. See
-[docs/DISCOVERY.md](docs/DISCOVERY.md) for publishing instructions and
-[docs/CLOUDFLARE_MCP_FUTURE.md](docs/CLOUDFLARE_MCP_FUTURE.md) for the
-optional, unimplemented Cloudflare MCP plan. No MCP endpoint is shipped.
+[docs/DISCOVERY.md](docs/DISCOVERY.md) for publishing instructions.
+
+## MCP server
+
+A read-only Model Context Protocol endpoint is live at
+<https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp>. It exposes the same published
+criteria, ARRM tasks and recorded ownership, with provenance on every dataset result.
+
+The MCP server is a separate Cloudflare Worker. It is **not** hosted on GitHub Pages and
+is not deployed by the Pages workflow. See
+[docs/CLOUDFLARE_MCP.md](docs/CLOUDFLARE_MCP.md) for the tool contract, security model and
+deployment details.

@@ -1,0 +1,28 @@
+{
+  "name": "@wcag-by-role/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only MCP server for the WCAG by Role dataset.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build:data": "python3 scripts/build_dataset.py",
+    "dev": "python3 scripts/build_dataset.py && wrangler dev",
+    "deploy": "python3 scripts/build_dataset.py && wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "python3 scripts/build_dataset.py && node --test --test-concurrency=1 test/*.test.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.4.0",
+    "agents": "0.33.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261113.1",
+    "@modelcontextprotocol/client": "2.4.0",
+    "typescript": "5.9.3",
+    "wrangler": "^4.162.0"
+  }
+}

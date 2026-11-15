@@ -7,7 +7,7 @@ This is an independent project, not an official W3C publication and not endorsed
 - **Accessibility Roles and Responsibilities Mapping (ARRM):** W3C WAI ARRM: https://www.w3.org/WAI/planning/arrm/ . Underlying source repository: https://github.com/w3c/wai-arrm . Maintainers and contributors: https://www.w3.org/WAI/planning/arrm/acknowledgements/ .
 - **WAI reuse guidance:** https://www.w3.org/WAI/about/using-wai-material/ . Do not assume all WAI publications carry a Creative Commons license; follow the terms attached to each source.
 
-Only original application code is covered by this repository's MIT license. That license does not apply to the W3C datasets, published ARRM task wording, criteria text, or Understanding excerpts.
+Only original application code is covered by this repository's MIT license. That license does not apply to the W3C datasets, published ARRM task wording, criteria text, or Understanding excerpts. The read-only MCP server in `cloudflare-mcp/` serves a normalized snapshot of those sources over HTTP; it does not relicense them, alter their ownership records, or imply W3C endorsement.
 
 The WCAG 2.2 pictogram sprite and mapping (`web/wcag22-icons.svg`, `web/wcag22-icons-mapping.json`) were supplied for this project by the repository owner. Their metadata cites the W3C WCAG 2.2 Recommendation as the reference source; the artwork is not a W3C publication and no separate reuse licence was supplied. They are included with the owner's permission and are not relicensed by this repository's MIT licence.
 

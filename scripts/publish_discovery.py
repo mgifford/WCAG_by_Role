@@ -48,6 +48,8 @@ CATEGORY_ORDER = tuple(CATEGORY_BY_PREFIX.values()) + ('Other ARRM tasks',)
 def category_for(task_id):
     return CATEGORY_BY_PREFIX.get(str(task_id).split('-')[0].upper(), 'Other ARRM tasks')
 REPO_URL = 'https://github.com/mgifford/WCAG_by_Role'
+MCP_SERVER_URL = 'https://wcag-by-role-mcp.mike-gifford.workers.dev/'
+MCP_ENDPOINT = MCP_SERVER_URL + 'mcp'
 WCAG_URL = 'https://www.w3.org/TR/WCAG22/'
 ARRM_URL = 'https://www.w3.org/WAI/planning/arrm/tasks/'
 SC_RE = re.compile(r'^\d+\.\d+\.\d+$')
@@ -591,6 +593,9 @@ def render_indexes(dest, data, manifest, *, base, snapshot):
     content = f'''<h1>Download and cite WCAG by Role data</h1>
 <p>Normalized source records are imported from WCAG 2.2 and W3C ARRM. This project is an independent navigation and interpretation tool, not a W3C publication.</p>
 <p><strong>Snapshot:</strong> {e(snapshot)} · <strong>Mode:</strong> {e(manifest['mode'])} · <strong>Criteria:</strong> {len(data['criteria'])} · <strong>Tasks:</strong> {len(data['tasks'])}</p>
+<h2>MCP endpoint</h2>
+<p>A read-only Model Context Protocol server exposes the same criteria and recorded ARRM ownership. Connect an MCP client to <code>{e(MCP_ENDPOINT)}</code>.</p>
+<p>The MCP server is a separate deployment, not part of this static site, and does not run on GitHub Pages. It never infers responsibility or determines conformance. See the <a href="{e(MCP_SERVER_URL)}">MCP server overview and tool list</a>.</p>
 <h2>Download formats</h2><ul>{dls}</ul>
 <h3>Role-specific CSV exports</h3><ul>{role_exports}</ul>
 <h2>Source provenance</h2><ul>
@@ -696,6 +701,9 @@ def llms_text(base, data):
 - [Dataset manifest and source hashes]({url(base, 'data/manifest.json')})
 - [Task-level role comparison (CSV)]({url(base, 'data/role-matrix.csv')})
 - [Sitemap]({url(base, 'sitemap.xml')})
+
+## MCP endpoint
+- [Read-only MCP server for this dataset]({MCP_ENDPOINT}) — Streamable HTTP; no inferred ownership or conformance claims.
 
 ## Authoritative sources
 - [WCAG 2.2]({WCAG_URL})

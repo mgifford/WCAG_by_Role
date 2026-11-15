@@ -2,8 +2,9 @@
 
 This is a static, source-traceable publishing layer for WCAG by Role. It adds
 crawlable HTML, machine-readable distributions and discoverability metadata.
-It is **not** a new WCAG standard, AI-generated interpretation, conformance
-assessment or remote MCP server.
+It is **not** a new WCAG standard, AI-generated interpretation or conformance
+assessment. The read-only MCP server is a separate, opt-in adapter documented in
+[CLOUDFLARE_MCP.md](CLOUDFLARE_MCP.md); this static publisher does not run it.
 
 ## Install
 
@@ -45,6 +46,10 @@ The publisher only reads the normalized `dist/data/role-data.json`, optional
 exact-match canonical `data/source/role-data.yaml`, existing role profiles,
 and shipped static files. HTML is generated with escaped text. There are no
 network requests or generative AI in this step.
+
+The data landing page and `llms.txt` link to the separately deployed read-only MCP
+endpoint at <https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp>. The publisher only
+writes that link; it does not run, proxy or validate the MCP server or call the network.
 
 **Original task descriptions and ownership levels are imported unchanged from
 ARRM.** In the static matrix, a role with no recorded assignment is shown as
