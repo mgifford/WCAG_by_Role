@@ -1,0 +1,24 @@
+{
+  "status": "deployed-read-only",
+  "endpoint": "https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp",
+  "protocol": "MCP Streamable HTTP, stateless (2026-07-28) with a 2025-11-25 legacy lane",
+  "implementation": "src/tools.ts",
+  "protocolValidation": "test/mcp.test.mjs",
+  "tools": [
+    {"name": "get_dataset_info", "purpose": "Read manifest, source hashes, citation and export URLs", "arguments": {}},
+    {"name": "search_accessibility", "purpose": "Search published task and criterion references with bounds", "arguments": {"query": "string (2-200 characters)", "limit": "integer (1-50, default 10)", "cursor": "optional opaque string"}},
+    {"name": "get_criterion", "purpose": "Retrieve source reference and related task records", "arguments": {"criterion": "string (e.g. 2.4.7)"}},
+    {"name": "get_arrm_task", "purpose": "Retrieve original ARRM task and recorded ownership", "arguments": {"task_id": "string (e.g. INP-017)"}},
+    {"name": "get_role_guidance", "purpose": "Retrieve reviewed project interpretations if available; otherwise explicit missing-review status and original task records. Never fabricate.", "arguments": {"role": "canonical role slug", "criterion": "optional string", "task_id": "optional string"}},
+    {"name": "compare_roles", "purpose": "Compare recorded role assignments for a criterion or task", "arguments": {"criterion": "optional string", "task_id": "optional string"}}
+  ],
+  "constraints": [
+    "Read-only",
+    "Do not infer responsibility",
+    "W3C source material and project interpretation are distinct",
+    "Hard query/result size limits",
+    "Every response contains source provenance and revision",
+    "No fabricated role guidance is published",
+    "Deployment is opt-in and not wired to the Pages workflow"
+  ]
+}

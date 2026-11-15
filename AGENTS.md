@@ -29,6 +29,8 @@ pnpm test:links
 pnpm test:e2e
 python3 scripts/smoke_site.py --url https://mgifford.github.io/WCAG_by_Role/  # post-deploy only
 python3 -m http.server 8000 --directory dist
+# MCP server (read-only, not deployed by CI)
+cd cloudflare-mcp && pnpm install && pnpm typecheck && pnpm test && cd ..
 ```
 
 Production integration requires network: `python3 scripts/pipeline.py --mode production`. Automated browser tests are regression evidence, not a conformance claim.
@@ -43,7 +45,7 @@ Production integration requires network: `python3 scripts/pipeline.py --mode pro
 - `schemas/` : source and persona contracts.
 - `data/personas/`, `data/role-profiles/`, `data/exports/` : canonical fictional personas and deterministic generated exports. Never edit generated exports by hand; regenerate with `scripts/export_personas.py`.
 - `web/assets/personas/` : cached RoboHash set1 portraits; never fetch images at page-view time.
-- `cloudflare-mcp-future/` : contract only. Do not add a Worker, deployment or MCP runtime without explicit approval and current protocol validation.
+- `cloudflare-mcp/` : read-only MCP Worker. The server and local protocol tests are implemented; deployment stays opt-in and is not wired to the Pages workflow. Rebuild `src/generated/` from `data/source/role-data.yaml` via `pnpm build:data`; never hand-edit generated output. Validate the then-current MCP protocol before material runtime or deployment changes.
 - `fixtures/` : representative mock records, *never* complete WCAG or ARRM.
 - `tests/` : import normalization and business-rule regression tests.
 - `tests/e2e/` : Playwright and axe-core browser regressions for filtering, keyboard, reflow and forced colours.
@@ -51,4 +53,4 @@ Production integration requires network: `python3 scripts/pipeline.py --mode pro
 
 ## Quality bar
 
-When changing data shape, update browser code, fixtures, tests, schemaVersion and docs. For source changes, review the published ARRM CSV headers and WCAG JSON schema and create a specific regression test. Role spelling normalization must go through the explicit `ROLE_ALIASES` manifest and be reported in `roleNormalizations`; never fuzzy-match an ARRM assignment. Do not claim browser or assistive technology testing unless you performed it. If live external verification is unavailable, document that limitation.
+When changing data shape, update browser code, fixtures, tests, schemaVersion and docs. For source changes, review the published ARRM CSV headers and WCAG JSON schema and create a specific regression test. The MCP server must stay read-only and source-traceable; every dataset response keeps provenance, and the build must refuse non-production snapshots. Role spelling normalization must go through the explicit `ROLE_ALIASES` manifest and be reported in `roleNormalizations`; never fuzzy-match an ARRM assignment. Do not claim browser or assistive technology testing unless you performed it. If live external verification is unavailable, document that limitation.

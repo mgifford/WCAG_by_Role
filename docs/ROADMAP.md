@@ -83,6 +83,14 @@ Acceptance: a user can distinguish assigned work from overall conformance requir
 - Kept the Cloudflare MCP adapter explicitly deferred as a contract only; no server or deployment.
 - Production output is 445 HTML pages from 86 criteria, 262 tasks and five roles.
 
+### Read-only MCP server status (2026-11-14)
+
+- Implemented the previously deferred contract as a stateless Streamable HTTP Worker in `cloudflare-mcp/`.
+- Validated MCP `2026-07-28` and the legacy `2025-11-25` lane with the official client against a real Wrangler server.
+- Bundled the canonical production snapshot at build time; the build refuses demo fixtures and the Worker never fetches data at request time.
+- Added six bounded read-only tools with provenance, a strict no-inference policy, request/result caps and a Cloudflare rate limit.
+- Deployed manually at `https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp`; deployment remains opt-in and is not wired to the Pages workflow.
+
 ### Persona data status (2026-11-13)
 
 - Added five canonical fictional persona YAML files, one per ARRM role with task data.

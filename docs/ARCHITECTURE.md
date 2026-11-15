@@ -23,7 +23,11 @@ The primary join key is the WCAG criterion number, such as `2.4.7`. Task IDs rem
 
 ### Static discovery layer
 
-After the production YAML is validated, `scripts/publish_discovery.py` reads `dist/data/role-data.json` and writes static crawlable role, criterion, task, comparison and data pages under `dist/`, plus CSV/JSON/YAML distributions, a sitemap, JSON-LD, shared icons and `llms.txt`. It does not call the network, an LLM or a Cloudflare Worker. The interactive app remains at `/` and `role.html`; static pages are canonical for search. `role.html` is `noindex,follow`. The `cloudflare-mcp-future/` directory is a tool contract only; no MCP server is shipped.
+After the production YAML is validated, `scripts/publish_discovery.py` reads `dist/data/role-data.json` and writes static crawlable role, criterion, task, comparison and data pages under `dist/`, plus CSV/JSON/YAML distributions, a sitemap, JSON-LD, shared icons and `llms.txt`. It does not call the network, an LLM or a Cloudflare Worker. The interactive app remains at `/` and `role.html`; static pages are canonical for search. `role.html` is `noindex,follow`.
+
+### MCP adapter
+
+`cloudflare-mcp/` is a separate, opt-in read-only MCP Worker. At build time, `cloudflare-mcp/scripts/build_dataset.py` validates the same canonical YAML and writes a bundle consumed by the Worker. The Worker serves that bundle over stateless Streamable HTTP; it does not fetch the published site, call an LLM, or share the Pages deployment. The build refuses non-production snapshots, so demo fixtures cannot reach the MCP endpoint. The server is deployed manually at <https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp>; the Pages workflow does not deploy it. See [CLOUDFLARE_MCP.md](CLOUDFLARE_MCP.md).
 
 ### Persona layer
 

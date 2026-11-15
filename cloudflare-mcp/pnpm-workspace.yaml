@@ -1,0 +1,5 @@
+# pnpm 11 dependency build policy. wrangler needs the esbuild and workerd binaries.
+allowBuilds:
+  core-js-pure: true
+  esbuild: true
+  workerd: true

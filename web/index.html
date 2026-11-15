@@ -22,6 +22,7 @@
         <a href="#needs">Who it affects</a>
         <a href="#explore">Explore responsibilities</a>
         <a href="#method">How this works</a>
+        <a href="#mcp">MCP</a>
         <a href="#sources">Sources</a>
       </nav>
     </div>
@@ -85,6 +86,11 @@
       <p><strong>Task-level ownership</strong> comes from the ARRM task CSV. Primary, secondary and contributor labels describe each role's relationship to a specific task. A separate summary of roles per criterion comes from ARRM's success-criterion responsibility CSV. These are related but not interchangeable: one criterion can have different tasks owned by different roles.</p>
       <p>Understanding documents are informative. When available, the unchanged W3C “In Brief” text is included with an explicit source link. The complete Understanding document stays at W3C. Links to WCAG 2.2 point to the normative W3C Recommendation. An unmapped criterion is not an exemption. ARRM's task inventory is not exhaustive.</p>
       <p>Known legacy records for the removed success criterion 4.1.1 Parsing are omitted from current results and listed in a downloadable <a href="./data/import-audit.json">import audit</a>. New or unrecognized criterion IDs are also reported, not silently assigned.</p>
+    </section>
+    <section id="mcp" class="text-section" aria-labelledby="mcp-heading">
+      <h2 id="mcp-heading">Use the data with an MCP client</h2>
+      <p>A read-only Model Context Protocol server exposes the same WCAG 2.2 criteria, W3C ARRM tasks and recorded ownership. Connect an MCP client to <code>https://wcag-by-role-mcp.mike-gifford.workers.dev/mcp</code>.</p>
+      <p class="meta">The server is separate from this static site and does not run on GitHub Pages. It is read-only and never infers responsibility or determines conformance. See the <a href="https://wcag-by-role-mcp.mike-gifford.workers.dev/">MCP server overview and tool list</a>.</p>
     </section>
     <section id="sources" class="text-section" aria-labelledby="sources-heading">
       <h2 id="sources-heading">Sources and attribution</h2>

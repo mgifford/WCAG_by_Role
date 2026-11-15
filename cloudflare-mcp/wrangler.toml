@@ -1,0 +1,24 @@
+name = "wcag-by-role-mcp"
+main = "src/index.ts"
+compatibility_date = "2026-11-14"
+# Serve on the free <worker>.<account>.workers.dev subdomain. No custom domain
+# is required; adding one is optional and needs MCP_ALLOWED_HOSTS below.
+workers_dev = true
+
+# For a custom domain, uncomment and list every hostname clients use (no scheme
+# or port). This is also the browser Origin allowlist.
+# [vars]
+# MCP_ALLOWED_HOSTS = "mcp.example.com"
+
+# Approximate, per-Cloudflare-location protection for a public read-only
+# endpoint. The Worker also enforces a request-body cap. See README.md.
+[[ratelimits]]
+name = "MCP_RATE_LIMITER"
+namespace_id = "4147"
+
+  [ratelimits.simple]
+  limit = 120
+  period = 60
+
+[observability]
+enabled = true
